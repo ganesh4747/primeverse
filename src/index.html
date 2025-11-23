@@ -22,52 +22,220 @@
       display: flex;
       justify-content: space-between;
       align-items: center;
-      padding: 20px 60px;
-      background: white;
+      padding: 12px 40px;
+      background: #000717;
       box-shadow: 0 1px 3px rgba(0,0,0,0.05);
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+      animation: navSlideDown 0.6s ease-out;
     }
+
+    @keyframes navSlideDown {
+      from {
+        transform: translateY(-100%);
+        opacity: 0;
+      }
+      to {
+        transform: translateY(0);
+        opacity: 1;
+      }
+    }
+
     .logo {
-      font-size: 24px;
+      font-size: 18px;
       font-weight: 700;
-      color: #000;
+      color: #FFD700;
       display: flex;
       align-items: center;
-      gap: 10px;
+      gap: 8px;
       text-decoration: none;
+      background: rgba(255, 215, 0, 0.1);
+      padding: 8px 16px;
+      border-radius: 12px;
+      border: 1px solid rgba(255, 215, 0, 0.2);
+      transition: all 0.4s ease;
     }
+
+    .logo:hover {
+      background: rgba(255, 215, 0, 0.15);
+      border-color: rgba(255, 215, 0, 0.4);
+      transform: translateY(-2px);
+      box-shadow: 0 8px 20px rgba(255, 215, 0, 0.15);
+    }
+
     .logo img {
-      height: 70px;
+      height: 40px;
       width: auto;
       object-fit: contain;
     }
     .logo-text {
-      font-size: 20px;
+      font-size: 16px;
       font-weight: 700;
-      color: #000;
+      color: #FFD700;
     }
     .nav-links {
       display: flex;
-      gap: 40px;
+      gap: 32px;
       list-style: none;
       align-items: center;
     }
     .nav-links a {
       text-decoration: none;
-      color: #333;
-      font-weight: 500;
-      font-size: 15px;
-      transition: color 0.3s;
+      color: #FFD700;
+      font-weight: 600;
+      font-size: 13px;
+      transition: all 0.3s ease;
+      position: relative;
     }
+
+    .nav-links a::after {
+      content: '';
+      position: absolute;
+      bottom: -5px;
+      left: 0;
+      width: 0;
+      height: 2px;
+      background: #FFD700;
+      transition: width 0.3s ease;
+    }
+
+    .nav-links a:hover::after {
+      width: 100%;
+    }
+
     .nav-links a:hover {
-      color: #000;
+      color: #f0c000;
+    }
+
+    /* --- Scroll Animation Setup --- */
+    html {
+      scroll-behavior: smooth;
+    }
+
+    /* Fade-in on scroll animations */
+    @keyframes fadeInUp {
+      from {
+        opacity: 0;
+        transform: translateY(30px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    @keyframes fadeInDown {
+      from {
+        opacity: 0;
+        transform: translateY(-30px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    @keyframes fadeInLeft {
+      from {
+        opacity: 0;
+        transform: translateX(-40px);
+      }
+      to {
+        opacity: 1;
+        transform: translateX(0);
+      }
+    }
+
+    @keyframes fadeInRight {
+      from {
+        opacity: 0;
+        transform: translateX(40px);
+      }
+      to {
+        opacity: 1;
+        transform: translateX(0);
+      }
+    }
+
+    @keyframes dissolveIn {
+      from {
+        opacity: 0;
+        filter: blur(10px);
+      }
+      to {
+        opacity: 1;
+        filter: blur(0);
+      }
+    }
+
+    /* Scroll-triggered animations */
+    section {
+      animation: fadeInUp 0.8s ease-out;
+    }
+
+    h1, h2, h3 {
+      animation: fadeInDown 0.7s ease-out;
+    }
+
+    .pricing-card {
+      animation: fadeInUp 0.8s ease-out;
+    }
+
+    .about-content {
+      animation: fadeInUp 0.8s ease-out;
+    }
+
+    .testimonials-section {
+      animation: fadeInUp 0.8s ease-out;
+    }
+
+    /* Stagger animations for grid items */
+    .pricing-card:nth-child(1) { animation-delay: 0.1s; }
+    .pricing-card:nth-child(2) { animation-delay: 0.3s; }
+    .pricing-card:nth-child(3) { animation-delay: 0.5s; }
+    .pricing-card:nth-child(4) { animation-delay: 0.7s; }
+
+    .trader-problem-card {
+      animation: fadeInUp 0.8s ease-out;
+    }
+
+    .trader-problem-card:nth-child(1) { animation-delay: 0.1s; }
+    .trader-problem-card:nth-child(2) { animation-delay: 0.3s; }
+    .trader-problem-card:nth-child(3) { animation-delay: 0.5s; }
+
+    .testimonial-card {
+      animation: fadeInUp 0.8s ease-out;
+    }
+
+    .testimonial-card:nth-child(1) { animation-delay: 0.1s; }
+    .testimonial-card:nth-child(2) { animation-delay: 0.3s; }
+    .testimonial-card:nth-child(3) { animation-delay: 0.5s; }
+
+    /* Smooth dissolve effect on scroll */
+    @supports (scrollbar-width: thin) {
+      ::-webkit-scrollbar {
+        width: 10px;
+      }
+      ::-webkit-scrollbar-track {
+        background: rgba(0, 0, 0, 0.05);
+      }
+      ::-webkit-scrollbar-thumb {
+        background: #FFD700;
+        border-radius: 5px;
+        transition: background 0.3s;
+      }
+      ::-webkit-scrollbar-thumb:hover {
+        background: #f0c000;
+      }
     }
     .btn-signin {
-      padding: 12px 28px;
+      padding: 8px 20px;
       border: 2px solid #FFD700;
       background: transparent;
-      border-radius: 12px;
+      border-radius: 8px;
       font-weight: 600;
-      font-size: 15px;
+      font-size: 12px;
       cursor: pointer;
       transition: all 0.3s;
     }
@@ -75,12 +243,12 @@
       background: #f0f0f0;
     }
     .btn-signup {
-      padding: 12px 28px;
+      padding: 8px 20px;
       background: #FFD700;
       border: 2px solid #FFD700;
-      border-radius: 12px;
+      border-radius: 8px;
       font-weight: 600;
-      font-size: 15px;
+      font-size: 12px;
       cursor: pointer;
       transition: all 0.3s;
     }
@@ -173,7 +341,7 @@
       --lime-green: #FFD700; /* Royal Gold */
       --dark-black: #000c29; /* Navy Blue */
       --arrow-color: #ffffff; /* White for contrast */
-      --text-color: #5c5c5c;
+      --text-color: #bdbdbd;
       --dot-size: 5px; /* Increased dot size */
       --dot-spacing: 5px; /* Tighter spacing */
       --chevron-width: 10px; /* Width of the entire chevron pattern in one instance */
@@ -1577,7 +1745,7 @@
     /* --- PRICING SECTION STYLES --- */
     .pricing-section {
       background: linear-gradient(to bottom, #f5f5f7 0%, #e8e8ed 100%);
-      padding: 30px 20px;
+      padding: 60px 20px;
     }
 
     .pricing-container {
@@ -1585,180 +1753,224 @@
       margin: 0 auto;
     }
 
-    .pricing-flex {
+    /* Pyramid Layout */
+    .pricing-pyramid {
       display: flex;
       flex-direction: column;
       align-items: center;
-      justify-content: center;
-      gap: 2rem;
+      gap: 40px;
+      margin-top: 60px;
     }
 
-    @media (min-width: 1024px) {
-      .pricing-flex {
-        flex-direction: row;
-        gap: 4rem;
+    .pricing-card-wrapper {
+      animation: fadeInUp 0.8s ease-out;
+      width: 100%;
+      max-width: 420px;
+    }
+
+    .pricing-card-wrapper.top {
+      animation-delay: 0.2s;
+    }
+
+    .pricing-bottom-row {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 30px;
+      width: 100%;
+      max-width: 900px;
+      margin: 0 auto;
+      justify-items: center;
+    }
+
+    .pricing-card-wrapper.bottom {
+      animation-delay: 0.4s;
+    }
+
+    .pricing-card-wrapper.bottom:nth-child(2) {
+      animation-delay: 0.6s;
+    }
+
+    @media (max-width: 768px) {
+      .pricing-bottom-row {
+        grid-template-columns: 1fr;
       }
     }
 
     .pricing-card {
       width: 100%;
       border-radius: 24px;
-      padding: 1.5rem;
+      padding: 40px 30px;
       color: white;
-      box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
-      transform: transition;
+      box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
       display: flex;
       flex-direction: column;
       position: relative;
       overflow: hidden;
-    }
-
-    @media (min-width: 1024px) {
-      .pricing-card {
-        width: 350px;
-        padding: 2rem;
-      }
+      transition: all 0.4s ease;
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      min-height: 600px;
+      height: 100%;
     }
 
     .pricing-card:hover {
-      transform: scale(1.02);
+      transform: translateY(-10px);
+      box-shadow: 0 30px 60px rgba(0, 0, 0, 0.15);
     }
 
-    .pricing-card.purple {
+    .card-badge {
+      position: absolute;
+      top: 20px;
+      right: 20px;
+      background: rgba(255, 255, 255, 0.2);
+      color: white;
+      padding: 6px 14px;
+      border-radius: 20px;
+      font-size: 12px;
+      font-weight: 700;
+      letter-spacing: 1px;
+      animation: slideInRight 0.8s ease-out;
+    }
+
+    .card-badge.elite-badge {
+      background: rgba(255, 255, 255, 0.2);
+    }
+
+    .discord-card {
       background: linear-gradient(to bottom, #6372ff, #5ca0ff);
     }
 
-    .pricing-card.green {
+    .advance-card {
       background: linear-gradient(to bottom, #000c29, #1E3A8A);
-      transform: scale(1.1);
-      z-index: 10;
-      border: 4px solid rgba(255, 255, 255, 0.1);
     }
 
-    @media (max-width: 1023px) {
-      .pricing-card.green {
-        transform: none;
-      }
-    }
-
-    .pricing-card.gold {
+    .elite-card {
       background: linear-gradient(to bottom, #eab308, #d97706);
+      border: none;
+      box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
     }
 
-    .pricing-card.gold:hover {
-      background: linear-gradient(to bottom, #facc15, #854d0e);
+    .elite-card:hover {
+      box-shadow: 0 30px 60px rgba(0, 0, 0, 0.15);
     }
 
     .pricing-header {
       display: flex;
       align-items: center;
-      gap: 0.75rem;
-      margin-bottom: 1rem;
+      gap: 12px;
+      margin-bottom: 20px;
       position: relative;
       z-index: 10;
     }
 
     .pricing-icon {
       background: rgba(255, 255, 255, 0.2);
-      padding: 0.5rem;
-      border-radius: 0.5rem;
+      padding: 12px;
+      border-radius: 12px;
+      font-size: 24px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
     }
 
     .pricing-title {
       font-weight: 700;
-      font-size: 0.875rem;
-      letter-spacing: 0.05em;
-      text-transform: uppercase;
+      font-size: 20px;
+      letter-spacing: 0.5px;
     }
 
     .pricing-price {
-      margin-bottom: 1.5rem;
+      margin-bottom: 20px;
       position: relative;
       z-index: 10;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .price-original {
+      font-size: 20px;
+      font-weight: 600;
+      text-decoration: line-through;
+      text-decoration-color: #ff0000;
+      opacity: 0.7;
+      display: block;
+      color: #fdfdfd;
     }
 
     .price-amount {
-      font-size: 2.25rem;
+      font-size: 32px;
       font-weight: 800;
-      color: #FFD700;
-      text-shadow: 0 0 10px rgba(255, 215, 0, 0.5);
+      display: block;
     }
 
     .price-period {
-      font-size: 0.875rem;
+      font-size: 14px;
       font-weight: 500;
       opacity: 0.9;
       margin-left: 0.25rem;
     }
 
     .pricing-description {
-      font-size: 0.875rem;
-      line-height: 1.6;
-      margin-bottom: 2rem;
+      font-size: 15px;
+      line-height: 1.7;
+      margin-bottom: 24px;
       opacity: 0.95;
       position: relative;
       z-index: 10;
+      flex-grow: 1;
     }
 
     .pricing-button {
       position: relative;
       z-index: 10;
-      background: white;
-      color: black;
+      background: linear-gradient(135deg, #FFD700 0%, #f0c000 100%);
+      color: #000717;
       font-weight: 700;
-      padding: 0.75rem 1.25rem;
-      border-radius: 9999px;
+      padding: 12px 24px;
+      border-radius: 25px;
       display: flex;
       align-items: center;
-      justify-content: space-between;
-      width: 100%;
-      margin-bottom: 2rem;
+      justify-content: center;
+      gap: 8px;
+      width: fit-content;
+      margin: 0 auto 24px auto;
       border: none;
-      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+      box-shadow: 0 8px 20px rgba(255, 215, 0, 0.3);
       overflow: hidden;
       cursor: pointer;
+      transition: all 0.3s ease;
     }
 
-    .fill-layer {
-      position: absolute;
-      inset: 0;
-      width: 0;
-      background: #aaff00;
-      right: 0;
-      transition: width 0.2s ease-out;
-    }
-
-    .pricing-button:hover .fill-layer {
-      width: 100%;
+    .pricing-button:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 12px 30px rgba(255, 215, 0, 0.4);
+      background: linear-gradient(135deg, #f0c000 0%, #FFD700 100%);
     }
 
     .button-text {
       position: relative;
       z-index: 10;
-      transition: color 0.2s;
-    }
-
-    .pricing-button:hover .button-text {
-      color: black;
+      font-size: 14px;
+      font-weight: 700;
     }
 
     .button-icon {
       position: relative;
       z-index: 10;
-      width: 2rem;
-      height: 2rem;
-      background: #ccff00;
-      border-radius: 50%;
-      display: flex;
-      align-items: center;
-      justify-content: center;
+      font-size: 16px;
+      font-weight: 700;
+      transition: transform 0.3s ease;
+    }
+
+    .pricing-button:hover .button-icon {
+      transform: translateX(3px);
     }
 
     .pricing-features {
       display: flex;
       flex-direction: column;
-      gap: 0.75rem;
-      font-size: 0.875rem;
+      gap: 12px;
+      font-size: 14px;
       font-weight: 500;
       position: relative;
       z-index: 10;
@@ -1767,52 +1979,29 @@
     .feature-item {
       display: flex;
       align-items: flex-start;
-      gap: 0.75rem;
-    }
-
-    .feature-icon {
-      color: black;
-      margin-top: 0.25rem;
-    }
-
-    /* Continuous Scanning Animation for Card Hover */
-    @keyframes scan-loop {
-      0% { transform: translateX(-100%) skewX(-12deg); }
-      50% { transform: translateX(100%) skewX(-12deg); }
-      100% { transform: translateX(-100%) skewX(-12deg); }
-    }
-
-    .pricing-card:hover .animate-scanner {
-      animation: scan-loop 2.5s ease-in-out infinite;
-    }
-
-    .animate-scanner {
-      position: absolute;
-      inset: 0;
-      pointer-events: none;
-      background: linear-gradient(to right, transparent, rgba(255, 255, 255, 0.2), transparent);
-      transform: translateX(-100%) skewX(-12deg);
+      gap: 10px;
+      line-height: 1.5;
     }
 
     /* --- PLAN SELECTION HEADER --- */
     .plan-selection-header {
       text-align: center;
-      padding: 60px 20px 40px;
+      padding: 40px 20px;
       max-width: 800px;
       margin: 0 auto;
     }
 
     .plan-selection-header h2 {
-      font-size: 2.5rem;
+      font-size: 42px;
       font-weight: 800;
-      color: #1f2937;
-      margin-bottom: 20px;
+      color: #000717;
+      margin-bottom: 16px;
       line-height: 1.2;
     }
 
     .plan-selection-header p {
-      font-size: 1.125rem;
-      color: #6b7280;
+      font-size: 16px;
+      color: #666;
       line-height: 1.6;
     }
 
@@ -2945,8 +3134,444 @@
         transition: color 0.3s ease;
     }
 
-    .propfirms-footer-column ul li a:hover {
-        color: #c8ff00; /* Use the brand color */
+    /* --- TRADING PROOF GALLERY STYLES --- */
+    .trading-gallery-card {
+      position: relative;
+      overflow: hidden;
+      border-radius: 16px;
+      aspect-ratio: 1/1.2;
+      box-shadow: 0 20px 50px rgba(0, 0, 0, 0.1);
+      transition: all 0.4s cubic-bezier(0.23, 1, 0.320, 1);
+      cursor: pointer;
+    }
+
+    .trading-gallery-card img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: transform 0.5s ease;
+    }
+
+    .trading-gallery-card:hover img {
+      transform: scale(1.08) rotate(1deg);
+    }
+
+    .trading-gallery-overlay {
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(135deg, rgba(255, 215, 0, 0.8) 0%, rgba(0, 7, 23, 0.8) 100%);
+      opacity: 0;
+      transition: opacity 0.4s ease;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .trading-gallery-card:hover .trading-gallery-overlay {
+      opacity: 1;
+    }
+
+    .trading-gallery-overlay-text {
+      text-align: center;
+      color: white;
+    }
+
+    .trading-gallery-overlay-text p:first-child {
+      font-size: 14px;
+      font-weight: 600;
+      margin-bottom: 4px;
+    }
+
+    .trading-gallery-overlay-text p:last-child {
+      font-size: 12px;
+      opacity: 0.9;
+    }
+
+    /* Animated sliding gallery */
+    .trading-gallery-wrapper {
+      position: relative;
+      background: linear-gradient(135deg, rgba(255, 215, 0, 0.03) 0%, rgba(0, 7, 23, 0.03) 100%);
+      border-radius: 24px;
+      padding: 40px 20px;
+      overflow: hidden;
+      border: 1px solid rgba(255, 215, 0, 0.1);
+    }
+
+    /* Animated gradient background */
+    .trading-gallery-wrapper::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: linear-gradient(
+        45deg,
+        rgba(255, 215, 0, 0.02) 0%,
+        rgba(0, 7, 23, 0.02) 25%,
+        rgba(255, 215, 0, 0.01) 50%,
+        rgba(0, 7, 23, 0.02) 75%,
+        rgba(255, 215, 0, 0.02) 100%
+      );
+      background-size: 200% 200%;
+      animation: gradientShift 8s ease infinite;
+      pointer-events: none;
+    }
+
+    @keyframes gradientShift {
+      0% { background-position: 0% 50%; }
+      50% { background-position: 100% 50%; }
+      100% { background-position: 0% 50%; }
+    }
+
+    /* Floating particles */
+    .trading-gallery-particles {
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      pointer-events: none;
+      overflow: hidden;
+    }
+
+    .particle {
+      position: absolute;
+      width: 4px;
+      height: 4px;
+      background: radial-gradient(circle, rgba(255, 215, 0, 0.8) 0%, rgba(255, 215, 0, 0) 70%);
+      border-radius: 50%;
+      animation: floatParticle linear infinite;
+    }
+
+    .particle:nth-child(1) {
+      left: 10%;
+      top: 20%;
+      width: 6px;
+      height: 6px;
+      animation-duration: 6s;
+      animation-delay: 0s;
+    }
+
+    .particle:nth-child(2) {
+      left: 20%;
+      top: 60%;
+      animation-duration: 8s;
+      animation-delay: 1s;
+    }
+
+    .particle:nth-child(3) {
+      right: 15%;
+      top: 30%;
+      width: 5px;
+      height: 5px;
+      animation-duration: 7s;
+      animation-delay: 2s;
+    }
+
+    .particle:nth-child(4) {
+      right: 5%;
+      bottom: 20%;
+      animation-duration: 9s;
+      animation-delay: 1.5s;
+    }
+
+    .particle:nth-child(5) {
+      left: 50%;
+      top: 10%;
+      width: 3px;
+      height: 3px;
+      animation-duration: 10s;
+      animation-delay: 3s;
+    }
+
+    @keyframes floatParticle {
+      0% {
+        transform: translateY(0px) translateX(0px);
+        opacity: 0;
+      }
+      10% {
+        opacity: 1;
+      }
+      90% {
+        opacity: 1;
+      }
+      100% {
+        transform: translateY(-300px) translateX(50px);
+        opacity: 0;
+      }
+    }
+
+    /* Animated border glow */
+    .trading-gallery-wrapper::after {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      border-radius: 24px;
+      padding: 1px;
+      background: linear-gradient(135deg, rgba(255, 215, 0, 0.3), rgba(0, 7, 23, 0.1));
+      -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+      mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+      -webkit-mask-composite: xor;
+      mask-composite: exclude;
+      pointer-events: none;
+      animation: borderPulse 3s ease-in-out infinite;
+    }
+
+    @keyframes borderPulse {
+      0%, 100% {
+        opacity: 0.3;
+      }
+      50% {
+        opacity: 0.8;
+      }
+    }
+
+    .trading-gallery-container {
+      display: flex;
+      gap: 24px;
+      overflow-x: auto;
+      overflow-y: hidden;
+      padding: 20px 0;
+      scroll-behavior: smooth;
+      scrollbar-width: thin;
+      scrollbar-color: #FFD700 #f5f5f7;
+      position: relative;
+      z-index: 1;
+    }
+
+    .trading-gallery-container::-webkit-scrollbar {
+      height: 8px;
+    }
+
+    .trading-gallery-container::-webkit-scrollbar-track {
+      background: #f5f5f7;
+      border-radius: 10px;
+    }
+
+    .trading-gallery-container::-webkit-scrollbar-thumb {
+      background: #FFD700;
+      border-radius: 10px;
+      transition: background 0.3s ease;
+    }
+
+    .trading-gallery-container::-webkit-scrollbar-thumb:hover {
+      background: #f0c000;
+    }
+
+    .trading-gallery-card {
+      position: relative;
+      overflow: hidden;
+      border-radius: 16px;
+      aspect-ratio: 1/1.2;
+      width: 280px;
+      min-width: 280px;
+      box-shadow: 0 20px 50px rgba(0, 0, 0, 0.1);
+      transition: all 0.4s cubic-bezier(0.23, 1, 0.320, 1);
+      cursor: pointer;
+    }
+
+    /* Trader's Loop Section */
+    .traders-loop-container {
+      margin: 80px 0;
+      text-align: center;
+    }
+
+    .traders-loop-title {
+      font-size: 48px;
+      font-weight: 800;
+      color: #000717;
+      margin-bottom: 60px;
+      letter-spacing: -1px;
+    }
+
+    .traders-loop-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+      gap: 30px;
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+
+    .trader-problem-card {
+      position: relative;
+      padding: 40px 30px;
+      border: 2px solid rgba(255, 215, 0, 0.2);
+      border-radius: 20px;
+      background: linear-gradient(135deg, rgba(255, 215, 0, 0.02) 0%, rgba(0, 7, 23, 0.02) 100%);
+      backdrop-filter: blur(10px);
+      transition: all 0.4s ease;
+      overflow: hidden;
+    }
+
+    .trader-problem-card::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 2px;
+      background: linear-gradient(90deg, transparent, #FFD700, transparent);
+      animation: shimmer 3s infinite;
+    }
+
+    @keyframes shimmer {
+      0%, 100% { opacity: 0; transform: translateX(-100%); }
+      50% { opacity: 1; transform: translateX(100%); }
+    }
+
+    .trader-problem-card:hover {
+      border-color: rgba(255, 215, 0, 0.4);
+      background: linear-gradient(135deg, rgba(255, 215, 0, 0.05) 0%, rgba(0, 7, 23, 0.05) 100%);
+      transform: translateY(-8px);
+      box-shadow: 0 20px 40px rgba(255, 215, 0, 0.1);
+    }
+
+    .problem-icon {
+      font-size: 48px;
+      margin-bottom: 20px;
+      display: inline-block;
+      animation: float 3s ease-in-out infinite;
+    }
+
+    .trader-problem-card:nth-child(1) .problem-icon {
+      animation-delay: 0s;
+    }
+
+    .trader-problem-card:nth-child(2) .problem-icon {
+      animation-delay: 0.5s;
+    }
+
+    .trader-problem-card:nth-child(3) .problem-icon {
+      animation-delay: 1s;
+    }
+
+    .problem-title {
+      font-size: 24px;
+      font-weight: 700;
+      color: #FFD700;
+      margin-bottom: 14px;
+      letter-spacing: 0.5px;
+    }
+
+    .problem-description {
+      font-size: 15px;
+      color: #666;
+      line-height: 1.7;
+      margin: 0;
+    }
+
+    /* Alternating slide animations */
+    .trading-gallery-card:nth-child(odd) {
+      animation: slideInLeft 0.8s ease-out forwards;
+    }
+
+    .trading-gallery-card:nth-child(even) {
+      animation: slideInRight 0.8s ease-out forwards;
+    }
+
+    /* Staggered animation delays */
+    .trading-gallery-card:nth-child(1) { animation-delay: 0.1s; }
+    .trading-gallery-card:nth-child(2) { animation-delay: 0.2s; }
+    .trading-gallery-card:nth-child(3) { animation-delay: 0.3s; }
+    .trading-gallery-card:nth-child(4) { animation-delay: 0.4s; }
+    .trading-gallery-card:nth-child(5) { animation-delay: 0.5s; }
+    .trading-gallery-card:nth-child(6) { animation-delay: 0.6s; }
+    .trading-gallery-card:nth-child(7) { animation-delay: 0.7s; }
+    .trading-gallery-card:nth-child(8) { animation-delay: 0.8s; }
+    .trading-gallery-card:nth-child(9) { animation-delay: 0.9s; }
+    .trading-gallery-card:nth-child(10) { animation-delay: 1s; }
+    .trading-gallery-card:nth-child(11) { animation-delay: 1.1s; }
+
+    @keyframes slideInLeft {
+      from {
+        opacity: 0;
+        transform: translateX(-100px) rotateY(-20deg);
+      }
+      to {
+        opacity: 1;
+        transform: translateX(0) rotateY(0);
+      }
+    }
+
+    @keyframes slideInRight {
+      from {
+        opacity: 0;
+        transform: translateX(100px) rotateY(20deg);
+      }
+      to {
+        opacity: 1;
+        transform: translateX(0) rotateY(0);
+      }
+    }
+
+    /* Hover effect for carousel cards */
+    .trading-gallery-card:hover {
+      transform: translateY(-10px);
+      box-shadow: 0 30px 70px rgba(255, 215, 0, 0.2);
+    }
+
+    /* Animated background box for gallery */
+    .trading-gallery-bg-box {
+      position: absolute;
+      opacity: 0;
+    }
+
+    .trading-gallery-bg-box:nth-child(1) {
+      width: 150px;
+      height: 150px;
+      background: rgba(255, 215, 0, 0.15);
+      top: 10%;
+      left: 5%;
+      border-radius: 50%;
+      animation: float 6s ease-in-out infinite;
+    }
+
+    .trading-gallery-bg-box:nth-child(2) {
+      width: 200px;
+      height: 200px;
+      background: rgba(0, 7, 23, 0.08);
+      bottom: 15%;
+      right: 5%;
+      border-radius: 50%;
+      animation: floatReverse 8s ease-in-out infinite;
+      animation-delay: 1s;
+    }
+
+    .trading-gallery-bg-box:nth-child(3) {
+      width: 100px;
+      height: 100px;
+      background: rgba(255, 215, 0, 0.1);
+      top: 50%;
+      right: 20%;
+      border-radius: 50%;
+      animation: float 7s ease-in-out infinite;
+      animation-delay: 2s;
+    }
+
+    @keyframes float {
+      0%, 100% {
+        transform: translateY(0px);
+        opacity: 0.3;
+      }
+      50% {
+        transform: translateY(-30px);
+        opacity: 0.6;
+      }
+    }
+
+    @keyframes floatReverse {
+      0%, 100% {
+        transform: translateY(0px);
+        opacity: 0.3;
+      }
+      50% {
+        transform: translateY(30px);
+        opacity: 0.6;
+      }
     }
 
     @media (max-width: 1024px) {
@@ -3037,28 +3662,13 @@
     <ul class="nav-links">
       <li><a href="#home">Home</a></li>
       <li><a href="#services">Service</a></li>
-      <li><a href="#about">About Us</a></li>
-      <li><a href="#testimonials">Testimonials</a></li>
-      <li><a href="#faq">FAQ</a></li>
+      <li><a href="#about">Tradings</a></li>
+      <li><a href="#testimonials">About Us</a></li>
     </ul>
   </nav>
-  <section class="hero">
-    <div class="social-proof">
-      <div class="avatars">
-        <!-- Replace these placeholder images with your actual avatar images -->
-        <div class="avatar" style="background-image: url('./assets/man.png')"></div>
-        <div class="avatar" style="background-image: url('./assets/girl.png')"></div>
-        <div class="avatar" style="background-image: url('./assets/man2.png')"></div>
-        <div class="avatar" style="background-image: url('./assets/girl2.png')"></div>
-      </div>
-      <span class="social-text">Not Motivated Traders. Disciplined Ones.</span>
-      <div class="join-badge">
-        Join Us 🎉 →
-      </div>
-    </div>
-    <h1>Build Real Trading Skill.
-Not Just Strategies.</h1>
-    <p class="subtitle">Clear lessons. Real guidance. Learn to trade independently</p>
+  <section class="hero" id="home">
+    <h1>Trade Smarter. Grow Faster. <br>Pass Every Challenge.</h1>
+    <h1></h1>
     <!-- NEW BUTTON -->
     <button class="dot-arrow-button">
       <!-- LAYER 1: The Green Sliding Background and Stepped Arrow Stream -->
@@ -3075,315 +3685,123 @@ Not Just Strategies.</h1>
         </div>
       </div>
     </button>
-  </section>
-  <!-- Stats Section -->
-  <div class="stats-wrap" aria-label="statistics">
-    <div class="stats-row">
-      <!-- 1: Traders with overlapping avatars -->
-      <div class="stat">
-        <div class="stats-avatars" aria-hidden="true">
-          <!-- Using placeholder avatars -->
-          <div class="stats-avatar" style="background-image: url('./assets/girl.png')"></div>
-          <div class="stats-avatar" style="background-image: url('./assets/man2.png')"></div>
-          <div class="stats-avatar" style="background-image: url('./assets/man.png')"></div>
-        </div>
-        <div class="stat-number">400+</div>
-        <div class="stat-label">Traders</div>
-      </div>
-      <!-- 2: Hours of video -->
-      <div class="stat">
-        <div class="icon-badge" title="video hours">
-          <!-- small camera icon (SVG) -->
-          <svg viewBox="0 0 24 24" fill="none" aria-hidden="true">
-            <rect x="3" y="6" width="12" height="12" rx="2" stroke="#2e2f45" stroke-width="1.4" fill="#f5f5f7"/>
-            <path d="M15 10l5-3v10l-5-3" stroke="#d44" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round" fill="#ffefef"/>
-          </svg>
-        </div>
-        <div class="stat-number">200+</div>
-        <div class="stat-label">Hours of video</div>
-      </div>
-      <!-- 3: Weekly livestreams -->
-      <div class="stat small-number">
-        <div class="icon-badge" title="livestreams">
-          <!-- small play icon -->
-          <svg viewBox="0 0 24 24" fill="none" aria-hidden="true">
-            <circle cx="12" cy="12" r="8" stroke="#2e2f45" stroke-width="1" fill="#f5f5f7"/>
-            <path d="M10 9.5v5l4-2.5-4-2.5z" fill="#d43c3c"/>
-          </svg>
-        </div>
-        <div class="stat-number">9</div>
-        <div class="stat-label">Weekly Livestreams</div>
-      </div>
-      <!-- 4: Mentors -->
-      <div class="stat">
-        <div class="icon-badge" title="mentors">
-          <!-- group icon -->
-          <svg viewBox="0 0 24 24" fill="none" aria-hidden="true">
-            <path d="M7 11a3 3 0 100-6 3 3 0 000 6zM17 11a3 3 0 100-6 3 3 0 000 6z" stroke="#2e2f45" stroke-width="1" fill="#f5f5f7"/>
-            <path d="M4 18a6 6 0 0112 0" stroke="#2e2f45" stroke-width="1" fill="none"/>
-          </svg>
-        </div>
-        <div class="stat-number">2</div>
-        <div class="stat-label">Mentors</div>
-      </div>
+    <div class="mentorship-points" style="margin-top: 24px; text-align: center;">
+      <p style="margin: 8px 0; font-size: 14px; color: #666; display: flex; align-items: center; justify-content: center; gap: 8px;">
+        <span style="color: #FFD700; font-weight: 600;">👉</span>
+        <span>Join the PrimeVerse Today</span>
+      </p>
+      <p style="margin: 8px 0; font-size: 14px; color: #666; display: flex; align-items: center; justify-content: center; gap: 8px;">
+        <span style="color: #FFD700; font-weight: 600;">👉</span>
+        <span>Start Your Prop Firm Journey</span>
+      </p>
     </div>
-  </div>
-  <!-- ANIMATED BENEFITS SECTION -->
-  <section class="benefits-container" style="background-color: #000717; color: #ffffff; padding: 40px 20px; min-height: 100vh; display: flex; flex-direction: column; align-items: center; background-image: linear-gradient(0deg, transparent 98%, #464646 100%), linear-gradient(90deg, transparent 98%, #464646 100%); background-size: 25px 25px; border-radius: 25px;">
-    <div class="container">
-      <h1 class="main-heading">Benefits That Keep You Consistent</h1>
-      <p class="sub-heading">We Got You Covered, Sit Back And Relax</p>
-      <!-- Feature Cards Container -->
-      <div class="grid-container">
-        <!-- CARD 1: Livestream Sessions (Animated Chart) -->
-        <div class="feature-card card-livestream">
-          <div class="card-visual-container">
-            <div class="live-badge">
-              <span style="display:inline-block; width:6px; height:6px; border-radius:50%; background-color:white; opacity:0.9;"></span>
-              LIVE
-            </div>
-            <!-- Canvas is centered inside the visual container -->
-            <canvas id="chartCanvas" style="margin: 0 auto;"></canvas>
-            <div class="control-buttons-group">
-              <div class="control-button">
-                <svg class="icon-svg" style="width:20px; height:20px;" viewBox="0 0 24 24"><rect x="2" y="5" width="20" height="14" rx="2" ry="2"/><line x1="17" y1="10" x2="17" y2="14"/></svg>
-              </div>
-              <div class="control-button">
-                <svg class="icon-svg" style="width:20px; height:20px;" viewBox="0 0 24 24"><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/><path d="M3 21v-2a4 4 0 0 1 4-4h4"/></svg>
-              </div>
-            </div>
+  </section>
+
+  <!-- WHY PRIMEVERSE SECTION -->
+  <section style="padding: 80px 40px; background: linear-gradient(135deg, #f5f5f7 0%, #ffffff 100%); max-width: 1200px; margin: 0 auto;">
+    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 60px; align-items: center;">
+      <!-- Left Column: Why PrimeVerse -->
+      <div>
+        <h2 style="font-size: 28px; font-weight: 700; color: #000717; margin-bottom: 16px;">
+          <span style="color: #FFD700;">💠</span> Why PrimeVerse?
+        </h2>
+        <p style="font-size: 14px; color: #666; line-height: 1.6; margin-bottom: 24px; font-weight: 500;">
+          A System That Works — A Community That Supports You
+        </p>
+        <p style="font-size: 13px; color: #333; margin-bottom: 20px; line-height: 1.8;">
+          PrimeVerse stands apart because we focus on:
+        </p>
+        <ul style="list-style: none; padding: 0; margin-bottom: 28px;">
+          <li style="font-size: 13px; color: #333; margin-bottom: 10px; display: flex; align-items: flex-start; gap: 12px;">
+            <span style="color: #FFD700; font-weight: 700; flex-shrink: 0;">✔</span>
+            <span>Step-by-Step Frameworks for every phase</span>
+          </li>
+          <li style="font-size: 13px; color: #333; margin-bottom: 10px; display: flex; align-items: flex-start; gap: 12px;">
+            <span style="color: #FFD700; font-weight: 700; flex-shrink: 0;">✔</span>
+            <span>Accountability & Live Support when you need it</span>
+          </li>
+          <li style="font-size: 13px; color: #333; margin-bottom: 10px; display: flex; align-items: flex-start; gap: 12px;">
+            <span style="color: #FFD700; font-weight: 700; flex-shrink: 0;">✔</span>
+            <span>Consistent Results backed by proven systems</span>
+          </li>
+          <li style="font-size: 13px; color: #333; margin-bottom: 10px; display: flex; align-items: flex-start; gap: 12px;">
+            <span style="color: #FFD700; font-weight: 700; flex-shrink: 0;">✔</span>
+            <span>Advanced Roadmaps for both beginners & experienced traders</span>
+          </li>
+          <li style="font-size: 13px; color: #333; margin-bottom: 10px; display: flex; align-items: flex-start; gap: 12px;">
+            <span style="color: #FFD700; font-weight: 700; flex-shrink: 0;">✔</span>
+            <span>Long-Term Scaling Strategy designed for funded growth</span>
+          </li>
+          <li style="font-size: 13px; color: #333; margin-bottom: 10px; display: flex; align-items: flex-start; gap: 12px;">
+            <span style="color: #FFD700; font-weight: 700; flex-shrink: 0;">✔</span>
+            <span>Tamil Nadu's Most Active Trading Community</span>
+          </li>
+        </ul>
+        <p style="font-size: 13px; color: #333; font-style: italic; line-height: 1.8;">
+          <strong>You're not trading alone —</strong><br/>
+          You're trading with a system created for success.
+        </p>
+      </div>
+
+      <!-- Right Column: The Community -->
+      <div style="background: linear-gradient(135deg, #000717 0%, #1a1f3a 100%); padding: 40px; border-radius: 20px; color: white;">
+        <h3 style="font-size: 24px; font-weight: 700; margin-bottom: 16px; text-align: center;">
+          <span style="color: #FFD700;">🏆</span> The PrimeVerse Community
+        </h3>
+        <p style="font-size: 13px; color: #e0e0e0; line-height: 1.8; margin-bottom: 28px; text-align: center;">
+          Join a powerful community of determined traders from Tamil Nadu who share the same goals:
+        </p>
+        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-bottom: 28px;">
+          <div style="background: rgba(255, 215, 0, 0.1); padding: 16px; border-radius: 12px; border-left: 3px solid #FFD700;">
+            <p style="font-size: 12px; color: #FFD700; font-weight: 600;">✔ Funding</p>
           </div>
-          
-          <h2>Livestream Sessions</h2>
-          <p>Live London & New York session streams (FOREX & US Futures - Tue, Wed, Thu, Fri) with real-time market analysis and doubt clearing.</p>
+          <div style="background: rgba(255, 215, 0, 0.1); padding: 16px; border-radius: 12px; border-left: 3px solid #FFD700;">
+            <p style="font-size: 12px; color: #FFD700; font-weight: 600;">✔ Payouts</p>
+          </div>
+          <div style="background: rgba(255, 215, 0, 0.1); padding: 16px; border-radius: 12px; border-left: 3px solid #FFD700;">
+            <p style="font-size: 12px; color: #FFD700; font-weight: 600;">✔ Consistency</p>
+          </div>
+          <div style="background: rgba(255, 215, 0, 0.1); padding: 16px; border-radius: 12px; border-left: 3px solid #FFD700;">
+            <p style="font-size: 12px; color: #FFD700; font-weight: 600;">✔ Growth</p>
+          </div>
         </div>
-        <!-- CARD 2: Weekend Doubt Sessions (Calendar/Weekend) -->
-        <div class="feature-card card-weekend">
-          <div class="card-visual-container">
-            
-            <!-- Floating Bell Icon with Dot (Top Left) -->
-            <div class="bell-icon-container">
-              <!-- Bell Icon SVG -->
-              <svg class="bell-icon-svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                <path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"/>
-                <path d="M13.73 21a2 2 0 0 1-3.46 0"/>
-              </svg>
-              <!-- Notification Dot (Animated) -->
-              <div class="notification-dot"></div>
-            </div>
-            
-            <!-- Main Calendar Widget (Central Element) -->
-            <div class="calendar-visual">
-              
-              <!-- Three Dots Menu -->
-              <div class="three-dots-menu-icon">...</div>
-              
-              <p class="weekend-title">Weekend</p>
-              
-              <div class="weekend-days">
-                <span>SAT</span>
-                <span>SUN</span>
-              </div>
-              
-              <!-- Progress Bars (Animated) -->
-              <div class="progress-bars-wrapper">
-                <!-- Bar 1 (Wider/Longer) -->
-                <div class="progress-bar-base h-2-5">
-                  <div class="progress-fill" style="height:100%;"></div>
-                  <div class="progress-fill-animate" style="animation-delay: 0s;"></div>
-                </div>
-                <!-- Bar 2 (Narrower/Shorter) -->
-                <div class="progress-bar-base h-2">
-                  <div class="progress-fill" style="height:100%;"></div>
-                  <div class="progress-fill-animate" style="animation-delay: 0.5s;"></div>
-                </div>
-              </div>
-            </div>
-          </div>
-          <h2>Weekend Doubt Sessions</h2>
-          <p>Special sessions for working professionals to clarify concepts and stay consistent.</p>
-        </div>
-        <!-- CARD 3: Direct Mentor Guidance (Network Graph) -->
-        <div class="feature-card card-mentor">
-          <div class="card-visual-container" id="mentor-visual-container">
-            
-            <!-- Top Left Menu -->
-            <div class="mentor-three-dots-menu">
-                  <span class="dot-menu-icon-blue"></span>
-                  <span class="dot-menu-icon-blue"></span>
-                  <span class="dot-menu-icon-blue"></span>
-            </div>
-            <!-- Central Node (Animated Glowing Bubble) -->
-            <div class="central-network-elements">
-              <div class="network-node central-node"></div>
-            </div>
-            
-            <!-- Person Icon (Static, placed over the bubble) -->
-            <div class="person-icon-container">
-              <svg viewBox="0 0 24 24" fill="currentColor">
-                <path d="M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z"/>
-              </svg>
-            </div>
-          </div>
-          
-          <h2>Direct Mentor Guidance</h2>
-          <p>Ask any doubt anytime - we explain it simply and clearly until you get it.</p>
+        <div style="padding: 20px; background: rgba(255, 255, 255, 0.05); border-radius: 12px; text-align: center;">
+          <p style="font-size: 13px; color: #ffffff; line-height: 1.8; margin-bottom: 12px;">
+            Inside the community, you'll never feel stuck again.
+          </p>
+          <p style="font-size: 13px; color: #FFD700; font-weight: 600;">
+            We're here to guide, support, and push you to the next level.
+          </p>
         </div>
       </div>
     </div>
   </section>
-  
-  <!-- NEW: What Makes Primeverse Different Section -->
-  <section class="differentiators-section">
-    <div class="differentiators-container">
-      <div class="differentiators-header">
-        <div class="differentiators-header-top">
-          <p>Wanna Know More?</p>
-          <hr />
-        </div>
-        <div class="differentiators-header-content">
-            
-          <h1 class="differentiators-title">What Makes Primeverse Different?</h1>
-          <div class="differentiators-description">
-            <p>At Primeverse, we mentor you live in the markets, clear every doubt, support you on weekends, reward top performers, and encourage discipline in both trading and health. Our approach is practical, community-driven, and focused on building real skill - not shortcuts or hype.</p>
-          </div>
-        </div>
-      </div>
 
-      <div class="differentiators-cards">
-        <!-- Card 1: Top Performer Reward -->
-        <div class="differentiators-card card-gradient hover-glow">
-          <div>
-            <div class="card-visual">
-              <div class="card-visual-base-line"></div>
-              <div class="card-visual-star icon-badge">⭐</div>
-              <div class="bar-chart-container">
-                <!-- Bar 1 (25%) -->
-                <div class="bar-column">
-                  <div class="bar-avatar"><img src="./assets/man.png" alt="Avatar 1"></div>
-                  <div class="bar-segment bar" data-height="25"></div>
-                </div>
-                <!-- Bar 2 (40%) -->
-                <div class="bar-column">
-                  <div class="bar-avatar"><img src="./assets/girl.png" alt="Avatar 2"></div>
-                  <div class="bar-segment bar" data-height="40"></div>
-                </div>
-                <!-- Bar 3 (75%) -->
-                <div class="bar-column">
-                  <div class="bar-avatar"><img src="./assets/man2.png" alt="Avatar 3"></div>
-                  <div class="bar-segment bar" data-height="75"></div>
-                </div>
-                <!-- Bar 4 (100%) -->
-                <div class="bar-column">
-                  <div class="bar-avatar"><img src="./assets/girl2.png" alt="Avatar 4"></div>
-                  <div class="bar-segment bar bar-highlight" data-height="100"></div>
-                </div>
-                <!-- Bar 5 (33%) -->
-                <div class="bar-column">
-                  <div class="bar-avatar"><img src="./assets/girl.png" alt="Avatar 5"></div>
-                  <div class="bar-segment bar" data-height="33"></div>
-                </div>
-              </div>
-            </div>
-            <div class="card-content">
-              <div class="card-highlight">
-                <p>Top Performer Reward</p>
-                <p>$10,000 Funded Account</p>
-              </div>
-            </div>
+  <!-- Trader's Loop Problem Section -->
+  <section style="padding: 80px 40px; background: linear-gradient(135deg, #fafbfc 0%, #ffffff 100%); position: relative; overflow: hidden;">
+    <div style="max-width: 1400px; margin: 0 auto; position: relative; z-index: 1;">
+      <div class="traders-loop-container">
+        <h2 class="traders-loop-title">Are You Stuck In The Trader's Loop?</h2>
+        <div class="traders-loop-grid">
+          <!-- Problem 1 -->
+          <div class="trader-problem-card">
+            <div class="problem-icon">✓</div>
+            <h3 class="problem-title">Inconsistency</h3>
+            <p class="problem-description">You have a few great days, but the next wipes out your gains. You lack a defined, repeatable process.</p>
           </div>
-          <div class="card-footer">
-            <h3>We pay for</h3>
-            <p>Best Performers</p>
-          </div>
-        </div>
 
-        <!-- Card 2: Guidance in Cracking Funded Accounts -->
-        <div class="differentiators-card card-gradient hover-glow">
-          <div>
-            <div class="phase-container">
-              <!-- Phase 1 Complete -->
-              <div class="phase-item">
-                <div class="icon-badge phase-badge">✓</div>
-                <div class="phase-content">
-                  <p>Phase 1 Complete</p>
-                  <div class="phase-progress">
-                    <div class="phase-progress-fill"></div>
-                  </div>
-                </div>
-              </div>
-              <!-- Phase 2 Active -->
-              <div class="phase-item">
-                <div class="icon-badge phase-badge-yellow">2</div>
-                <div class="phase-content">
-                  <p>Phase 2 Active</p>
-                  <div class="phase-progress phase-progress-yellow">
-                    <div class="progress-fill phase-progress-fill-yellow" data-width="66.67"></div>
-                  </div>
-                </div>
-              </div>
-              <!-- Funded Account -->
-              <div class="phase-item">
-                <div class="icon-badge phase-badge-gray">💰</div>
-                <div class="phase-content">
-                  <p class="phase-gray">Funded Account</p>
-                </div>
-              </div>
-            </div>
-
-            <div class="live-guidance">
-              <div class="icon-badge live-guidance-badge">★</div>
-              <div class="live-guidance-content">
-                <p>Live Guidance Active</p>
-                <p>Real-time mentor support</p>
-              </div>
-            </div>
+          <!-- Problem 2 -->
+          <div class="trader-problem-card">
+            <div class="problem-icon">⚡</div>
+            <h3 class="problem-title">Emotional Trades</h3>
+            <p class="problem-description">Fear and greed control your entries and exits. You chase momentum and suffer from revenge trading.</p>
           </div>
-          <div class="card-footer">
-            <h3>Guidance in Cracking</h3>
-            <p>Funded Accounts</p>
-          </div>
-        </div>
 
-        <!-- Card 3: More Than Just Charts -->
-        <div class="differentiators-card card-gradient hover-glow">
-          <div>
-            <div class="skills-container">
-              <div class="skill-item">
-                <div class="icon-badge skill-badge">📈</div>
-                <p>Trading Skills</p>
-              </div>
-              <div class="skill-item">
-                <div class="icon-badge skill-badge-green">💚</div>
-                <p>Fitness Health</p>
-              </div>
-              <div class="skill-item">
-                <div class="icon-badge skill-badge-pink">⌘</div>
-                <p>Mindset Growth</p>
-              </div>
-            </div>
-            
-            <div class="overall-progress">
-              <div class="overall-progress-header">
-                <p>Overall Progress</p>
-                <span>85%</span>
-              </div>
-              <div class="overall-progress-bar">
-                <div class="progress-fill overall-progress-fill" data-width="85"></div>
-              </div>
-            </div>
-
-            <div class="discipline-rewards">
-              <div class="icon-badge discipline-rewards-badge">★</div>
-              <div class="discipline-rewards-content">
-                <p>Discipline Rewards</p>
-                <p>Stay consistent, get recognized</p>
-              </div>
-            </div>
-          </div>
-          <div class="card-footer">
-            <h3>More Than Just</h3>
-            <p>Charts</p>
+          <!-- Problem 3 -->
+          <div class="trader-problem-card">
+            <div class="problem-icon">📋</div>
+            <h3 class="problem-title">No Clear Plan</h3>
+            <p class="problem-description">You jump between strategies or rely on signals. You need a simple, proven system tailored to "you".</p>
           </div>
         </div>
       </div>
@@ -3391,204 +3809,133 @@ Not Just Strategies.</h1>
   </section>
 
   <!-- PRICING SECTION -->
-  <section class="pricing-section">
+  <section class="pricing-section" id="services">
     <div class="center-text-container">
-  <p>PRICING</p>
-</div>
+      <p>PRICING</p>
+    </div>
     <div class="pricing-container">
       <!-- Plan Selection Header -->
       <div class="plan-selection-header">
-       
         <h2>Choose the plan that fits your goals</h2>
         <p>Our flexible plans provide the support and knowledge you need to become a profitable trader</p>
-        <h1>   </h1>
       </div>
       
-      <div class="pricing-flex">
-        <!-- 1. PURPLE CARD (Smallest) -->
-        <div class="pricing-card purple">
-          <!-- Continuous Scanning Overlay -->
-          <div class="animate-scanner"></div>
-
-          <!-- Header -->
-          <div class="pricing-header">
-            <div class="pricing-icon">
-              <i class="fa-brands fa-discord text-2xl"></i>
-            </div>
-            <h3 class="pricing-title">Discord Subscription</h3>
-          </div>
-
-          <!-- Price -->
-          <div class="pricing-price">
-            <span class="price-amount">₹3000</span>
-            <span class="price-period">per month</span>
-          </div>
-
-          <!-- Description -->
-          <p class="pricing-description">
-            The Primeverse Discord Subscription Gives You Access To Our Private Trading Community - Built For Traders Who Want To Level Up Every Single Day Through Real-Time Learning And Mentorship.
-          </p>
-
-          <!-- Buy Button (Right-to-Left Fill) -->
-          <button class="pricing-button">
-            <!-- Fill Layer (Starts at right, fills left) -->
-            <span class="fill-layer"></span>
+      <!-- Pyramid Layout: Discord on top, other two below -->
+      <div class="pricing-pyramid">
+        <!-- TOP - PrimeStart Program -->
+        <div class="pricing-card-wrapper top">
+          <div class="pricing-card discord-card">
+            <div class="card-badge">Most Popular</div>
             
-            <!-- Text -->
-            <span class="button-text">Buy Now</span>
-            
-            <!-- Icon -->
-            <div class="button-icon">
-              <i class="fa-solid fa-arrow-right text-black text-sm"></i>
+            <!-- Header -->
+            <div class="pricing-header">
+              <div class="pricing-icon">
+                <i class="fa-brands fa-discord"></i>
+              </div>
+              <h3 class="pricing-title">PrimeStart Program</h3>
             </div>
-          </button>
 
-          <!-- Features List -->
-          <ul class="pricing-features">
-            <li class="feature-item">
-              <i class="fa-solid fa-plus feature-icon"></i>
-              <span>Live NY Sessions (Real-Time Analysis)</span>
-            </li>
-            <li class="feature-item">
-              <i class="fa-solid fa-plus feature-icon"></i>
-              <span>Daily Mentor Q&A</span>
-            </li>
-            <li class="feature-item">
-              <i class="fa-solid fa-plus feature-icon"></i>
-              <span>Trade Breakdowns – Real Setups</span>
-            </li>
-            <li class="feature-item">
-              <i class="fa-solid fa-plus feature-icon"></i>
-              <span>Bi-Weekly Giveaways For Top Traders</span>
-            </li>
-            <li class="feature-item">
-              <i class="fa-solid fa-plus feature-icon"></i>
-              <span>Community Of 400+ Traders</span>
-            </li>
-          </ul>
+            <!-- Price -->
+            <div class="pricing-price">
+              <span class="price-original"> ₹10,000 </span>
+              <span class="price-amount">₹5,000</span>
+            </div>
+
+            <!-- Description -->
+            <p class="pricing-description">
+              The PrimeStart Program is built for traders beginning their prop firm journey. Designed for $5K and $10K accounts, this package gives you the perfect foundation to pass challenges with confidence, structure, and proven strategies.
+            </p>
+
+            <!-- Buy Button -->
+            <button class="pricing-button" onclick="navigateToBuyPrimeStart()">
+              <span class="button-text">Buy Now</span>
+              <span class="button-icon">→</span>
+            </button>
+
+            <!-- Features List -->
+            <ul class="pricing-features">
+              <li class="feature-item">⭐ Trade Analysis (Daily Market Insights)</li>
+              <li class="feature-item">⭐ Personal Mentorship Support</li>
+              <li class="feature-item">⭐ Complete Step-by-Step Roadmap</li>
+              <li class="feature-item">⭐ 24/7 Call Support for Guidance</li>
+            </ul>
+          </div>
         </div>
 
-        <!-- 2. GREEN CARD (Biggest) -->
-        <div class="pricing-card green">
-          <!-- Continuous Scanning Overlay -->
-          <div class="animate-scanner"></div>
+        <!-- BOTTOM ROW - Two Cards Side by Side -->
+        <div class="pricing-bottom-row">
+          <!-- LEFT - PrimeAdvance -->
+          <div class="pricing-card-wrapper bottom">
+            <div class="pricing-card advance-card">
+              <!-- Header -->
+              <div class="pricing-header">
+                <h3 class="pricing-title">PrimeAdvance Program</h3>
+              </div>
 
-          <!-- Header -->
-          <div class="pricing-header">
-            <div class="bg-black p-2 rounded-full">
-              <span class="text-[#00b87a] font-bold text-lg px-1">Ax</span>
+              <!-- Price -->
+              <div class="pricing-price">
+                <span class="price-amount">Contact Us</span>
+              </div>
+
+              <!-- Description -->
+              <p class="pricing-description">
+                The PrimeAdvance Program is tailored for $25K & $50K traders who are ready to scale and perform at a higher level. This package prepares you to clear challenges with precision, consistency, and advanced tools.
+              </p>
+
+              <!-- Contact Button -->
+              <button class="pricing-button" onclick="contactPrimeAdvance()">
+                <span class="button-text">Contact Us</span>
+                <span class="button-icon">→</span>
+              </button>
+
+              <!-- Features List -->
+              <ul class="pricing-features">
+                <li class="feature-item">⭐ Trade Analysis (Advanced Market Review)</li>
+                <li class="feature-item">⭐ Personal Mentorship Support</li>
+                <li class="feature-item">⭐ Complete Step-by-Step Roadmap</li>
+                <li class="feature-item">⭐ 24/7 Call Support</li>
+                <li class="feature-item">⭐ Profit Split: 40%</li>
+              </ul>
             </div>
-            <h3 class="pricing-title">Alchemyx Trading Program</h3>
           </div>
 
-          <!-- Price -->
-          <div class="pricing-price">
-            <span class="price-amount">₹20000</span>
-            <span class="price-period">per year</span>
-          </div>
+          <!-- RIGHT - PrimeElite -->
+          <div class="pricing-card-wrapper bottom">
+            <div class="pricing-card elite-card">
+              <div class="card-badge elite-badge">Premium</div>
+              
+              <!-- Header -->
+              <div class="pricing-header">
+                <h3 class="pricing-title">PrimeElite Program</h3>
+              </div>
 
-          <!-- Description -->
-          <p class="pricing-description">
-            The AlchemyX Trading Program Helps Traders Master Forex And US Futures Through Structured, Pre-Recorded Lessons And 1-Year Discord Mentorship. Learn, Apply, And Grow With Real-Time Market Experience And Expert Guidance.
-          </p>
+              <!-- Price -->
+              <div class="pricing-price">
+                <span class="price-amount">Contact Us</span>
+              </div>
 
-          <!-- Buy Button (Right-to-Left Fill) -->
-          <button class="pricing-button">
-            <!-- Fill Layer (Starts at right, fills left) -->
-            <span class="fill-layer"></span>
-            
-            <!-- Text -->
-            <span class="button-text">Buy Now</span>
-            
-            <!-- Icon -->
-            <div class="button-icon">
-              <i class="fa-solid fa-arrow-right text-black"></i>
+              <!-- Description -->
+              <p class="pricing-description">
+                The PrimeElite Program is the premium solution designed for $100K & $200K funded traders. Built for serious, long-term growth, this package includes elite-level strategies, account scaling systems, and payout-focused execution.
+              </p>
+
+              <!-- Contact Button -->
+              <button class="pricing-button" onclick="contactPrimeElite()">
+                <span class="button-text">Contact Us</span>
+                <span class="button-icon">→</span>
+              </button>
+
+              <!-- Features List -->
+              <ul class="pricing-features">
+                <li class="feature-item">⭐ Trade Analysis (In-Depth Elite-Level Review)</li>
+                <li class="feature-item">⭐ Personal Mentorship Support</li>
+                <li class="feature-item">⭐ Complete Step-by-Step Roadmap</li>
+                <li class="feature-item">⭐ 24/7 Call Support</li>
+                <li class="feature-item">⭐ Personalized Team Support</li>
+                <li class="feature-item">⭐ Profit Split: 50%</li>
+              </ul>
             </div>
-          </button>
-
-          <!-- Features List -->
-          <ul class="pricing-features">
-            <li class="feature-item">
-              <i class="fa-solid fa-plus feature-icon"></i>
-              <span>Pre-Recorded HD Lessons On Forex & US Futures</span>
-            </li>
-            <li class="feature-item">
-              <i class="fa-solid fa-plus feature-icon"></i>
-              <span>1-Year Discord Mentorship & Daily Support</span>
-            </li>
-            <li class="feature-item">
-              <i class="fa-solid fa-plus feature-icon"></i>
-              <span>Weekly Live NY Sessions For Real-Time Learning</span>
-            </li>
-            <li class="feature-item">
-              <i class="fa-solid fa-plus feature-icon"></i>
-              <span>Bi-Weekly Giveaways For Top Traders</span>
-            </li>
-            <li class="feature-item">
-              <i class="fa-solid fa-plus feature-icon"></i>
-              <span>Active Community To Learn And Grow</span>
-            </li>
-          </ul>
-        </div>
-
-        <!-- 3. GOLD CARD (Medium) -->
-        <div class="pricing-card gold">
-          <!-- Continuous Scanning Overlay -->
-          <div class="animate-scanner"></div>
-
-          <!-- Header -->
-          <div class="pricing-header">
-            <h3 class="pricing-title">Personal Mentorship</h3>
           </div>
-
-          <!-- Price -->
-          <div class="pricing-price">
-            <span class="price-amount">₹80000</span>
-            <span class="price-period">per year</span>
-          </div>
-
-          <!-- Description -->
-          <p class="pricing-description">
-            Experience Personalized 1-On-1 Mentorship Designed To Match Your Learning Pace. Every Concept Is Taught In Depth With Assigned Tasks For Each Topic, Ensuring True Understanding Before Moving Forward.
-          </p>
-
-          <!-- Buy Button (Right-to-Left Fill) -->
-          <button class="pricing-button">
-            <!-- Fill Layer (Starts at right, fills left) -->
-            <span class="fill-layer"></span>
-            
-            <!-- Text -->
-            <span class="button-text">Buy Now</span>
-            
-            <!-- Icon -->
-            <div class="button-icon">
-              <i class="fa-solid fa-arrow-right text-black text-sm"></i>
-            </div>
-          </button>
-
-          <!-- Features List -->
-          <ul class="pricing-features">
-            <li class="feature-item">
-              <i class="fa-solid fa-plus feature-icon"></i>
-              <span>1-On-1 Personalized Mentorship Sessions</span>
-            </li>
-            <li class="feature-item">
-              <i class="fa-solid fa-plus feature-icon"></i>
-              <span>Task-Based Learning For Every Topic</span>
-            </li>
-            <li class="feature-item">
-              <i class="fa-solid fa-plus feature-icon"></i>
-              <span>Repeated Sessions Until Full Understanding</span>
-            </li>
-            <li class="feature-item">
-              <i class="fa-solid fa-plus feature-icon"></i>
-              <span>Step-By-Step Progress Tracking And Feedback</span>
-            </li>
-            <li class="feature-item">
-              <i class="fa-solid fa-plus feature-icon"></i>
-              <span>Customized Roadmap For Your Trading Goals</span>
-            </li>
-          </ul>
         </div>
       </div>
     </div>
@@ -3606,7 +3953,7 @@ Not Just Strategies.</h1>
         <!-- Image Card -->
         <div class="about-image">
           <img 
-            src="./assets/man2.png" 
+            src="./assets/logo.png" 
             alt="Ganesh" 
             onerror="this.onerror=null; this.src='https://placehold.co/400x500/A0A0A0/ffffff?text=Image+Not+Found'"
           >
@@ -3614,17 +3961,191 @@ Not Just Strategies.</h1>
 
         <!-- Text Card -->
         <div class="about-text">
-          <h2>Ganesh. V</h2>
+          <h2>PRIMEVERSE</h2>
           <p>
-            I'm Ganesh - a trader who learned the hard way that success isn't built from signals or fancy
-            indicators. It comes from mindset, discipline, and understanding how the market truly
-            moves. At Primeverse, we mentor traders through structured lessons, market breakdowns,
-            and daily live sessions where you learn how to think, plan, and execute with clarity - not guesswork.
+            Welcome to PrimeVerse, Tamil Nadu’s most trusted prop-firm development community.
+We help traders pass Phase 1, Phase 2, and Master Accounts with precision, discipline, and system-driven frameworks.
+Start your journey toward consistent funding, payouts, and long-term account scaling.
           </p>
           <p>
             Our focus is helping you grow with clarity, confidence, and consistency.
           </p>
         </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- TRADING PROOF GALLERY SECTION -->
+  <section style="padding: 100px 40px; background: linear-gradient(135deg, #ffffff 0%, #f5f5f7 100%); position: relative; overflow: hidden;">
+    <!-- Decorative background elements -->
+    <div style="position: absolute; top: 0; left: 0; width: 300px; height: 300px; background: radial-gradient(circle, rgba(255, 215, 0, 0.1) 0%, transparent 70%); border-radius: 50%; pointer-events: none;"></div>
+    <div style="position: absolute; bottom: 0; right: 0; width: 400px; height: 400px; background: radial-gradient(circle, rgba(0, 7, 23, 0.05) 0%, transparent 70%); border-radius: 50%; pointer-events: none;"></div>
+    
+
+
+      <div style="text-align: center; margin-bottom: 60px; margin-top: 0px;">
+        <p style="font-size: 14px; color: #FFD700; font-weight: 600; letter-spacing: 2px; margin-bottom: 12px;">📈 REAL RESULTS</p>
+        <h2 style="font-size: 42px; font-weight: 800; color: #000717; margin-bottom: 16px; line-height: 1.2;">
+          Proof of Trading Excellence
+        </h2>
+        <p style="font-size: 16px; color: #666; max-width: 600px; margin: 0 auto; line-height: 1.6;">
+          See actual trading screenshots from our community members. These are real trades showing consistent profits and successful strategy implementation.
+        </p>
+      </div>
+
+      <!-- Gallery Grid with Animated Background -->
+      <div style="position: relative; margin-bottom: 40px;">
+        <!-- Enhanced Gallery Wrapper with Animations -->
+        <div class="trading-gallery-wrapper">
+          <!-- Animated Gradient Background -->
+          <!-- Floating Particles -->
+          <div class="trading-gallery-particles">
+            <div class="particle"></div>
+            <div class="particle"></div>
+            <div class="particle"></div>
+            <div class="particle"></div>
+            <div class="particle"></div>
+          </div>
+
+          <!-- Animated Background Boxes -->
+          <div class="trading-gallery-bg-box"></div>
+          <div class="trading-gallery-bg-box"></div>
+          <div class="trading-gallery-bg-box"></div>
+
+          <!-- Gallery Container -->
+          <div class="trading-gallery-container">
+          <!-- Image 1 -->
+          <div class="trading-gallery-card">
+            <img src="./assets/trade1.jpg" alt="Trading Proof 1">
+            <div class="trading-gallery-overlay">
+              <div class="trading-gallery-overlay-text">
+                <p>✓ Verified Trade</p>
+                <p>Real Account Screenshot</p>
+              </div>
+            </div>
+        </div>
+
+        <!-- Image 2 -->
+        <div class="trading-gallery-card">
+          <img src="./assets/trade2.jpg" alt="Trading Proof 2">
+          <div class="trading-gallery-overlay">
+            <div class="trading-gallery-overlay-text">
+              <p>✓ Verified Trade</p>
+              <p>Real Account Screenshot</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Image 3 -->
+        <div class="trading-gallery-card">
+          <img src="./assets/trade3.jpg" alt="Trading Proof 3">
+          <div class="trading-gallery-overlay">
+            <div class="trading-gallery-overlay-text">
+              <p>✓ Verified Trade</p>
+              <p>Real Account Screenshot</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Image 4 -->
+        <div class="trading-gallery-card">
+          <img src="./assets/trade4.jpg" alt="Trading Proof 4">
+          <div class="trading-gallery-overlay">
+            <div class="trading-gallery-overlay-text">
+              <p>✓ Verified Trade</p>
+              <p>Real Account Screenshot</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Image 5 -->
+        <div class="trading-gallery-card">
+          <img src="./assets/trade5.jpg" alt="Trading Proof 5">
+          <div class="trading-gallery-overlay">
+            <div class="trading-gallery-overlay-text">
+              <p>✓ Verified Trade</p>
+              <p>Real Account Screenshot</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Image 6 -->
+        <div class="trading-gallery-card">
+          <img src="./assets/trade6.jpg" alt="Trading Proof 6">
+          <div class="trading-gallery-overlay">
+            <div class="trading-gallery-overlay-text">
+              <p>✓ Verified Trade</p>
+              <p>Real Account Screenshot</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Image 7 -->
+        <div class="trading-gallery-card">
+          <img src="./assets/trade7.jpg" alt="Trading Proof 7">
+          <div class="trading-gallery-overlay">
+            <div class="trading-gallery-overlay-text">
+              <p>✓ Verified Trade</p>
+              <p>Real Account Screenshot</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Image 8 -->
+        <div class="trading-gallery-card">
+          <img src="./assets/trade8.jpg" alt="Trading Proof 8">
+          <div class="trading-gallery-overlay">
+            <div class="trading-gallery-overlay-text">
+              <p>✓ Verified Trade</p>
+              <p>Real Account Screenshot</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Image 9 -->
+        <div class="trading-gallery-card">
+          <img src="./assets/trade9.jpg" alt="Trading Proof 9">
+          <div class="trading-gallery-overlay">
+            <div class="trading-gallery-overlay-text">
+              <p>✓ Verified Trade</p>
+              <p>Real Account Screenshot</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Image 10 -->
+        <div class="trading-gallery-card">
+          <img src="./assets/trade10.jpg" alt="Trading Proof 10">
+          <div class="trading-gallery-overlay">
+            <div class="trading-gallery-overlay-text">
+              <p>✓ Verified Trade</p>
+              <p>Real Account Screenshot</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Image 11 -->
+        <div class="trading-gallery-card">
+          <img src="./assets/trade11.jpg" alt="Trading Proof 11">
+          <div class="trading-gallery-overlay">
+            <div class="trading-gallery-overlay-text">
+              <p>✓ Verified Trade</p>
+              <p>Real Account Screenshot</p>
+            </div>
+          </div>
+        </div>
+          </div>
+        <!-- End Trading Gallery Wrapper -->
+      </div>
+
+      <!-- CTA -->
+      <div style="text-align: center;">
+        <p style="font-size: 16px; color: #666; margin-bottom: 20px;">
+          Join hundreds of traders who've already achieved their goals
+        </p>
+        <button style="padding: 14px 40px; background: linear-gradient(135deg, #FFD700 0%, #f0c000 100%); color: #000; border: none; border-radius: 25px; font-weight: 700; font-size: 15px; cursor: pointer; transition: all 0.3s ease; box-shadow: 0 8px 25px rgba(255, 215, 0, 0.3);">
+          Start Your Journey Today
+        </button>
       </div>
     </div>
   </section>
@@ -3671,21 +4192,22 @@ Not Just Strategies.</h1>
             <div class="testimonials-feed">
               <!-- Testimonial Card 1 -->
               <div class="testimonial-card animate-fadeInUp animation-delay-100">
-                <img src="./assets/man.png" alt="Vedhatri T" class="testimonial-avatar">
+                <img src="./assets/man.png" alt="Harish R" class="testimonial-avatar">
                 <div class="testimonial-content">
-                  <p class="testimonial-name">Vedhatri T</p>
-                  <p class="testimonial-location">TENKASI</p>
+                  <p class="testimonial-name">Harish R</p>
+                  <p class="testimonial-location">Pondy</p>
                   <p class="testimonial-text">
-                    Daily live sessions help us trade real markets with confidence and patience. Mentors explain every step clearly, making learning practical and effective. The community offers strong guidance in trading systems and strategies. It helps traders at every level grow with clarity and discipline.
+                  Hi bro, na ethu varikum 5+ funded account ku mala buy pani eruka. But first time 100$ ku mala profit book panathu eptha first time.naraya paid and free group signal use pani eruka no profit. First time funded account la profit book pani eruka for first trade.
+Thank full for this group and mentor guidance for affordable price.  
                   </p>
                 </div>
               </div>
 
               <!-- Testimonial Card 2 -->
               <div class="testimonial-card animate-fadeInUp animation-delay-200">
-                <img src="./assets/girl.png" alt="Mohammed Javid" class="testimonial-avatar">
+                <img src="./assets/girl.png" alt="Selvi M" class="testimonial-avatar">
                 <div class="testimonial-content">
-                  <p class="testimonial-name">Mohammed Javid</p>
+                  <p class="testimonial-name">Selvi M/p>
                   <p class="testimonial-location">COIMBATORE</p>
                   <p class="testimonial-text">
                     The focus on psychology helped me stay patient, control emotions, and trade with clarity. Live streams by Sri bro are next level - real-time insights you won't find anywhere else. Thanks to Ganesh bro for building this amazing community and to everyone for the constant support. It truly feels like a family of traders growing together.
@@ -3707,9 +4229,9 @@ Not Just Strategies.</h1>
 
               <!-- Testimonial Card 4 -->
               <div class="testimonial-card animate-fadeInUp animation-delay-400">
-                <img src="./assets/girl2.png" alt="Pradeep Srinivasan" class="testimonial-avatar">
+                <img src="./assets/girl2.png" alt="PHaasini R class="testimonial-avatar">
                 <div class="testimonial-content">
-                  <p class="testimonial-name">Pradeep Srinivasan</p>
+                  <p class="testimonial-name">PHaasini R/p>
                   <p class="testimonial-location">KUMBAKONAM</p>
                   <p class="testimonial-text">
                     Joining AlchemyX is one of my best trading decisions. The course is well-structured and makes ICT concepts easy to grasp. Live sessions offer real market experience and deepen understanding. The Discord community keeps me motivated and learning every day.
@@ -3717,23 +4239,12 @@ Not Just Strategies.</h1>
                 </div>
               </div>
             
-              <!-- Testimonial Card 5 -->
-              <div class="testimonial-card animate-fadeInUp animation-delay-500">
-                <img src="./assets/man.png" alt="Anitha J" class="testimonial-avatar">
-                <div class="testimonial-content">
-                  <p class="testimonial-name">Anitha J</p>
-                  <p class="testimonial-location">CHENNAI</p>
-                  <p class="testimonial-text">
-                    The mentorship here is unparalleled. I finally understood how to size my positions correctly and manage risk without fear. The weekly analysis sessions are invaluable for predicting market moves. Highly recommend to anyone serious about trading!
-                  </p>
-                </div>
-              </div>
 
               <!-- Testimonial Card 6 -->
               <div class="testimonial-card animate-fadeInUp animation-delay-600">
-                <img src="./assets/girl.png" alt="Srinivasan K" class="testimonial-avatar">
+                <img src="./assets/girl.png" alt="SrinivK" class="testimonial-avatar">
                 <div class="testimonial-content">
-                  <p class="testimonial-name">Srinivasan K</p>
+                  <p class="testimonial-name">Sriini K/p>
                   <p class="testimonial-location">BANGALORE</p>
                   <p class="testimonial-text">
                     From a struggling beginner to consistently profitable in just six months. The focus on mindset combined with clear, repeatable strategies is the secret sauce. This is more than a course; it's a complete shift in how you view the financial markets.
@@ -3761,79 +4272,6 @@ Not Just Strategies.</h1>
                   <p class="testimonial-text">
                     As a working professional, I needed a flexible learning schedule. Primeverse's recorded sessions and active Discord community made it possible to learn at my own pace while getting real-time support.
                   </p>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-
-    <!-- Student Video/Image Gallery Section -->
-    <div class="testimonials-gallery">
-      <div class="testimonials-container">
-        <div style="text-align:center; margin-bottom:3rem;">
-          <h2 class="gallery-title">Student Success Stories</h2>
-          <p class="gallery-subtitle">Watch real students share their journey from beginners to profitable traders with Primeverse</p>
-        </div>
-        
-        <!-- Image/Video Gallery: 3-column layout -->
-        <div class="gallery-grid">
-          <!-- Placeholder 1: Image of a woman in red sweater -->
-          <div class="video-card" data-video-id="video-1">
-            <div class="video-thumbnail">
-              <img class="thumbnail-image" src="./assets/man.png" alt="Student Testimonial">
-              <img class="hover-image" src="./assets/man.png" alt="Thumbnail" style="display: none;">
-              <video id="video-1" width="100%" height="100%" style="display: none;">
-                <!-- CHANGE VIDEO HERE: Replace ./assets/video.mp4 with your actual video file path -->
-                <source src="./assets/video.mp4" type="video/mp4">
-                Your browser does not support the video tag.
-              </video>
-              <div class="video-play-button">
-                <div class="play-icon">
-                  <svg fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
-                    <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zM9.555 7.168A1 1 0 008 8v4a1 1 0 001.555.832l3-2a1 1 0 000-1.664l-3-2z" clip-rule="evenodd"></path>
-                  </svg>
-                </div>
-              </div>
-            </div>
-          </div>
-
-          <!-- Placeholder 2: Image of a man in white shirt -->
-          <div class="video-card" data-video-id="video-2">
-            <div class="video-thumbnail">
-              <img class="thumbnail-image" src="./assets/girl.png" alt="Student Testimonial">
-              <img class="hover-image" src="./assets/girl.png" alt="Thumbnail" style="display: none;">
-              <video id="video-2" width="100%" height="100%" style="display: none;">
-                <!-- CHANGE VIDEO HERE: Replace ./assets/video.mp4 with your actual video file path -->
-                <source src="./assets/video.mp4" type="video/mp4">
-                Your browser does not support the video tag.
-              </video>
-              <div class="video-play-button">
-                <div class="play-icon">
-                  <svg fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
-                    <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zM9.555 7.168A1 1 0 008 8v4a1 1 0 001.555.832l3-2a1 1 0 000-1.664l-3-2z" clip-rule="evenodd"></path>
-                  </svg>
-                </div>
-              </div>
-            </div>
-          </div>
-
-          <!-- Placeholder 3: Image of a man holding a camera -->
-          <div class="video-card" data-video-id="video-3">
-            <div class="video-thumbnail">
-              <img class="thumbnail-image" src="./assets/man2.png" alt="Student Testimonial">
-              <img class="hover-image" src="./assets/man2.png" alt="Thumbnail" style="display: none;">
-              <video id="video-3" width="100%" height="100%" style="display: none;">
-                <!-- CHANGE VIDEO HERE: Replace ./assets/video.mp4 with your actual video file path -->
-                <source src="./assets/video.mp4" type="video/mp4">
-                Your browser does not support the video tag.
-              </video>
-              <div class="video-play-button">
-                <div class="play-icon">
-                  <svg fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
-                    <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zM9.555 7.168A1 1 0 008 8v4a1 1 0 001.555.832l3-2a1 1 0 000-1.664l-3-2z" clip-rule="evenodd"></path>
-                  </svg>
                 </div>
               </div>
             </div>
@@ -3893,59 +4331,6 @@ Not Just Strategies.</h1>
     </div>
 
     <!-- ----------------------------------- -->
-    <!-- FAQ SECTION -->
-    <!-- ----------------------------------- -->
-    <div class="propfirms-faq-section">
-        <div class="faq-inner-container">
-            <div class="propfirms-header">
-                <h1>We know you have <span class="emoji">🤔</span> questions,<br>and we come with answers.</h1>
-            </div>
-
-            <div class="propfirms-faq-container">
-                <div class="propfirms-faq-item">
-                    <div class="propfirms-faq-question">
-                        <span>What language is the program in?</span>
-                        <div class="propfirms-faq-icon">+</div>
-                    </div>
-                    <div class="propfirms-faq-answer">
-                        <p>The program is conducted in English with comprehensive materials and video tutorials to ensure you understand every concept clearly.</p>
-                    </div>
-                </div>
-
-                <div class="propfirms-faq-item">
-                    <div class="propfirms-faq-question">
-                        <span>Can I renew the program after the duration ends?</span>
-                        <div class="propfirms-faq-icon">+</div>
-                    </div>
-                    <div class="propfirms-faq-answer">
-                        <p>Yes, you can renew your access to the program. We offer flexible renewal options to continue your learning journey with updated content.</p>
-                    </div>
-                </div>
-
-                <div class="propfirms-faq-item">
-                    <div class="propfirms-faq-question">
-                        <span>Will I learn both Forex and US Futures?</span>
-                        <div class="propfirms-faq-icon">+</div>
-                    </div>
-                    <div class="propfirms-faq-answer">
-                        <p>Absolutely! The program covers both Forex and US Futures markets, giving you a comprehensive understanding of multiple trading instruments.</p>
-                    </div>
-                </div>
-
-                <div class="propfirms-faq-item">
-                    <div class="propfirms-faq-question">
-                        <span>Are the sessions live or recorded?</span>
-                        <div class="propfirms-faq-icon">+</div>
-                    </div>
-                    <div class="propfirms-faq-answer">
-                        <p>We offer a combination of live interactive sessions and recorded content, allowing you to learn at your own pace while also engaging in real-time discussions.</p>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-    
-    <!-- ----------------------------------- -->
     <!-- NEW CTA SECTION -->
     <!-- ----------------------------------- -->
     <div class="propfirms-cta-section">
@@ -3992,20 +4377,19 @@ Not Just Strategies.</h1>
                 <div class="propfirms-divider-footer"></div>
 
                 <div class="propfirms-social-icons">
-                    <a href="#" class="propfirms-social-icon">
+                    <a href="https://www.instagram.com/prime_verse_official?igsh=dGV3YWh5ZXR4bWk2" target="_blank" rel="noopener noreferrer" class="propfirms-social-icon" title="Instagram">
                         <i class="fab fa-instagram"></i>
                     </a>
-                    <a href="#" class="propfirms-social-icon">
+                    <a href="https://youtube.com/@primeverseofficial_04?si=eWBS6aTwHkoC0O68" target="_blank" rel="noopener noreferrer" class="propfirms-social-icon" title="YouTube">
                         <i class="fab fa-youtube"></i>
                     </a>
-                    <a href="#" class="propfirms-social-icon">
-                        <i class="fab fa-twitter"></i>
+                    <a href="https://discord.gg/XAZNThBVhF" target="_blank" rel="noopener noreferrer" class="propfirms-social-icon" title="Discord">
+                        <i class="fab fa-discord"></i>
                     </a>
                 </div>
 
                 <div class="propfirms-contact-info">
-                    <a href="mailto:support@primeverse.in">support@primeverse.in</a>
-                    <a href="tel:+919994992753">+91 1234567890</a>
+                    <a href="mailto:primeverseofficial04@gmail.com">primeverseofficial04@gmail.com</a>
                 </div>
             </div>
 
@@ -4034,7 +4418,7 @@ Not Just Strategies.</h1>
                 <div class="propfirms-footer-column">
                     <h3>COURSES</h3>
                     <ul>
-                        <li><a href="#">Discord Subscription</a></li>
+                        <li><a href="#">PrimeStart Program</a></li>
                         <li><a href="#">AlchemyX Trading Program</a></li>
                         <li><a href="#">Personal Mentorship</a></li>
                     </ul>
@@ -4408,8 +4792,193 @@ Not Just Strategies.</h1>
   // CTA SECTION JS LOGIC
   // -----------------------------------
   function joinDiscord() {
-      // NOTE: Replace 'your-invite-link' with the actual Discord invitation link.
-      window.open('https://discord.gg/your-invite-link', '_blank');
+      window.open('https://discord.gg/XAZNThBVhF', '_blank');
+  }
+
+  // -----------------------------------
+  // SMOOTH SCROLL ANIMATIONS
+  // -----------------------------------
+  const observerOptions = {
+    threshold: 0.1,
+    rootMargin: '0px 0px -50px 0px'
+  };
+
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.style.opacity = '1';
+        entry.target.style.animation = entry.target.dataset.animation || 'fadeInUp 0.8s ease-out forwards';
+        observer.unobserve(entry.target);
+      }
+    });
+  }, observerOptions);
+
+  // Observe all sections for scroll animation
+  document.querySelectorAll('section, .pricing-card, .trader-problem-card, .testimonial-card').forEach(el => {
+    el.style.opacity = '0';
+    observer.observe(el);
+  });
+
+  // Navbar scroll effect
+  window.addEventListener('scroll', () => {
+    const nav = document.querySelector('nav');
+    if (window.scrollY > 50) {
+      nav.style.boxShadow = '0 10px 30px rgba(0, 0, 0, 0.1)';
+      nav.style.background = 'rgba(0, 7, 23, 0.95)';
+      nav.style.backdropFilter = 'blur(10px)';
+    } else {
+      nav.style.boxShadow = '0 1px 3px rgba(0,0,0,0.05)';
+      nav.style.background = '#000717';
+      nav.style.backdropFilter = 'none';
+    }
+  });
+</script>
+
+<!-- Supabase Integration -->
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script>
+  // Initialize Supabase
+  const SUPABASE_URL = 'https://nbsxbdaewkzutvdnlgmz.supabase.co';
+  const SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Im5ic3hiZGFld2t6dXR2ZG5sZ216Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3NjM4OTE3NjUsImV4cCI6MjA3OTQ2Nzc2NX0.Vq-r9QlFDvkUfU-90rK6m3UfxogsF3gA3FFY7Y01d_A';
+
+  const { createClient } = window.supabase;
+  const supabase = createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
+
+  // Test Supabase connection
+  console.log('Supabase initialized successfully');
+  console.log('URL:', SUPABASE_URL);
+
+  // Example: Function to fetch data from a table
+  async function fetchData(tableName) {
+    try {
+      const { data, error } = await supabase
+        .from(tableName)
+        .select('*');
+      
+      if (error) {
+        console.error('Error fetching data:', error);
+        return null;
+      }
+      console.log(`Data from ${tableName}:`, data);
+      return data;
+    } catch (error) {
+      console.error('Unexpected error:', error);
+    }
+  }
+
+  // Example: Function to insert data into a table
+  async function insertData(tableName, data) {
+    try {
+      const { data: insertedData, error } = await supabase
+        .from(tableName)
+        .insert([data]);
+      
+      if (error) {
+        console.error('Error inserting data:', error);
+        return null;
+      }
+      console.log(`Data inserted into ${tableName}:`, insertedData);
+      return insertedData;
+    } catch (error) {
+      console.error('Unexpected error:', error);
+    }
+  }
+
+  // Example: Function to update data in a table
+  async function updateData(tableName, id, updates) {
+    try {
+      const { data: updatedData, error } = await supabase
+        .from(tableName)
+        .update(updates)
+        .eq('id', id);
+      
+      if (error) {
+        console.error('Error updating data:', error);
+        return null;
+      }
+      console.log(`Data in ${tableName} updated:`, updatedData);
+      return updatedData;
+    } catch (error) {
+      console.error('Unexpected error:', error);
+    }
+  }
+
+  // Example: Function to delete data from a table
+  async function deleteData(tableName, id) {
+    try {
+      const { error } = await supabase
+        .from(tableName)
+        .delete()
+        .eq('id', id);
+      
+      if (error) {
+        console.error('Error deleting data:', error);
+        return false;
+      }
+      console.log(`Data with id ${id} deleted from ${tableName}`);
+      return true;
+    } catch (error) {
+      console.error('Unexpected error:', error);
+    }
+  }
+
+  // Make functions globally available
+  window.supabaseDB = {
+    fetchData,
+    insertData,
+    updateData,
+    deleteData,
+    client: supabase
+  };
+
+  // ===== PAYMENT FUNCTIONS =====
+  function navigateToBuyPrimeStart() {
+    window.location.href = './payment.html';
+  }
+
+  // Contact numbers for other programs
+  const PRIME_ADVANCE_CONTACT = '+91-9876543210'; // Replace with actual number
+  const PRIME_ELITE_CONTACT = '+91-8765432109';   // Replace with actual number
+  const WHATSAPP_LINK_ADVANCE = 'https://wa.me/919876543210?text=I%20am%20interested%20in%20PrimeAdvance%20Program';
+  const WHATSAPP_LINK_ELITE = 'https://wa.me/918765432109?text=I%20am%20interested%20in%20PrimeElite%20Program';
+
+  function contactPrimeAdvance() {
+    const userChoice = confirm(
+      'Contact PrimeAdvance Program\n\n' +
+      'Choose your preferred contact method:\n\n' +
+      'OK = Call Us\n' +
+      'Cancel = WhatsApp Chat'
+    );
+
+    if (userChoice) {
+      // Call
+      window.location.href = `tel:${PRIME_ADVANCE_CONTACT}`;
+    } else {
+      // WhatsApp
+      window.open(WHATSAPP_LINK_ADVANCE, '_blank');
+    }
+  }
+
+  function contactPrimeElite() {
+    const userChoice = confirm(
+      'Contact PrimeElite Program\n\n' +
+      'Choose your preferred contact method:\n\n' +
+      'OK = Call Us\n' +
+      'Cancel = WhatsApp Chat'
+    );
+
+    if (userChoice) {
+      // Call
+      window.location.href = `tel:${PRIME_ELITE_CONTACT}`;
+    } else {
+      // WhatsApp
+      window.open(WHATSAPP_LINK_ELITE, '_blank');
+    }
+  }
+
+  // Navigate to PrimeStart payment page
+  function navigateToBuyPrimeStart() {
+    window.location.href = './payment.html';
   }
 </script>
 </body>
