@@ -641,37 +641,135 @@
     }
     @media (max-width: 768px) {
       nav {
-        padding: 15px 20px;
+        padding: 12px 15px;
+        flex-wrap: wrap;
       }
       .nav-links {
         display: none;
       }
+      .logo {
+        font-size: 14px;
+        padding: 6px 12px;
+      }
+      .logo img {
+        height: 32px;
+      }
+      .logo-text {
+        font-size: 13px;
+      }
       h1 {
-        font-size: 48px;
-        padding: 30px 20px;
+        font-size: 38px;
+        padding: 25px 15px;
+        margin-bottom: -30px;
       }
       .hero {
-        padding: 60px 20px;
+        padding: 50px 15px;
+        text-align: center;
+      }
+      .subtitle {
+        font-size: 15px;
+        margin-bottom: 35px;
+      }
+      .social-proof {
+        margin-bottom: 35px;
       }
       
       .dot-arrow-button {
-        width: 320px;
-        height: 55px;
+        width: 90%;
+        max-width: 340px;
+        height: 56px;
+        margin: 0 auto;
+      }
+      .button-text {
+        font-size: 0.95rem;
+      }
+      .text-area {
+        padding: 0 8px;
+      }
+      .mentorship-points {
+        margin-top: 20px;
+      }
+      .mentorship-points p {
+        font-size: 13px;
+        margin: 6px 0;
+      }
+    }
+    @media (max-width: 480px){
+      nav {
+        padding: 10px 12px;
+      }
+      .logo {
+        font-size: 12px;
+        padding: 5px 10px;
+      }
+      .logo img {
+        height: 28px;
+      }
+      .logo-text {
+        font-size: 11px;
+      }
+      h1 {
+        font-size: 32px;
+        padding: 20px 12px;
+        margin-bottom: -25px;
+      }
+      .hero {
+        padding: 40px 12px;
+      }
+      .subtitle {
+        font-size: 14px;
+        margin-bottom: 28px;
+      }
+      .social-proof {
+        font-size: 12px;
+        margin-bottom: 28px;
+        padding: 4px 5px;
+      }
+      .avatar {
+        width: 26px;
+        height: 26px;
+      }
+      .dot-arrow-button {
+        width: 100%;
+        max-width: 300px;
+        height: 50px;
+      }
+      .button-text {
+        font-size: 0.85rem;
+      }
+      .icon-area {
+        width: 50px;
+      }
+      .mentorship-points p {
+        font-size: 12px;
+        margin: 5px 0;
       }
     }
     @media (max-width: 420px){
       .stat{ flex: 0 1 100%; }
-      .stat-number{ font-size: 30px; }
-      .icon-badge{ width: 48px; height: 48px; border-radius: 10px; }
-      .stats-avatars{ height: 48px; } /* Match reduced icon-badge height */
+      .stat-number{ font-size: 26px; }
+      .icon-badge{ width: 44px; height: 44px; border-radius: 10px; }
+      .stats-avatars{ height: 44px; }
       
       .dot-arrow-button {
-        width: 280px;
-        height: 50px;
+        width: 100%;
+        max-width: 280px;
+        height: 48px;
       }
       
       .button-text {
-        font-size: 1rem;
+        font-size: 0.8rem;
+      }
+      .slide-layer {
+        width: 48px;
+      }
+      h1 {
+        font-size: 28px;
+        padding: 15px 10px;
+        margin-bottom: -20px;
+      }
+      .stats-wrap {
+        padding: 20px 12px;
       }
     }
     /* --- ANIMATED BENEFITS SECTION STYLES --- */
@@ -3651,6 +3749,523 @@
     .propfirms-copyright-container {
         max-width: 1200px;
         width: 100%;
+    }
+
+    /* ========== COMPREHENSIVE MOBILE IMPROVEMENTS ========== */
+    
+    /* Tablet & Large Mobile (max-width: 768px) */
+    @media (max-width: 768px) {
+      /* Why PrimeVerse Section */
+      section[style*="grid-template-columns: 1fr 1fr"] {
+        grid-template-columns: 1fr !important;
+        gap: 30px !important;
+        padding: 50px 20px !important;
+      }
+      
+      section[style*="grid-template-columns: 1fr 1fr"] div[style*="background: linear-gradient(135deg, #000717"] {
+        padding: 25px !important;
+      }
+      
+      section[style*="grid-template-columns: 1fr 1fr"] h2 {
+        font-size: 24px !important;
+      }
+      
+      section[style*="grid-template-columns: 1fr 1fr"] h3 {
+        font-size: 20px !important;
+      }
+      
+      /* Trader's Loop Problem Section */
+      section[style*="padding: 80px 40px"] {
+        padding: 50px 20px !important;
+      }
+      
+      .traders-loop-title {
+        font-size: 28px !important;
+      }
+      
+      .traders-loop-grid {
+        grid-template-columns: 1fr !important;
+        gap: 20px !important;
+      }
+      
+      /* Pricing Section */
+      .pricing-pyramid {
+        flex-direction: column;
+        gap: 24px;
+      }
+      
+      .pricing-bottom-row {
+        flex-direction: column;
+        gap: 24px;
+        width: 100%;
+      }
+      
+      .pricing-card-wrapper {
+        width: 100%;
+        margin: 0 auto;
+      }
+      
+      .pricing-card {
+        min-height: auto;
+        padding: 20px;
+      }
+      
+      .pricing-title {
+        font-size: 18px;
+      }
+      
+      .price-amount {
+        font-size: 28px;
+      }
+      
+      .pricing-description {
+        font-size: 13px;
+        line-height: 1.5;
+      }
+      
+      .pricing-features {
+        font-size: 12px;
+        gap: 8px;
+      }
+      
+      /* About Section */
+      .about-content {
+        gap: 1.5rem;
+      }
+      
+      .about-image {
+        max-width: 100%;
+        height: 350px;
+      }
+      
+      .about-text {
+        padding: 1.5rem;
+        min-height: auto;
+      }
+      
+      .about-text h2 {
+        font-size: 1.25rem;
+      }
+      
+      .about-text p {
+        font-size: 0.875rem;
+      }
+      
+      /* Testimonials Section */
+      .testimonials-grid {
+        gap: 2rem;
+      }
+      
+      .testimonials-title {
+        font-size: 2rem;
+      }
+      
+      .testimonial-card {
+        padding: 1rem;
+      }
+      
+      .video-card {
+        max-width: 100%;
+        aspect-ratio: 16/9;
+      }
+      
+      .gallery-grid {
+        gap: 1rem;
+      }
+      
+      /* Feature Cards / Benefits */
+      .grid-container {
+        grid-template-columns: 1fr;
+        gap: 1.5rem;
+      }
+      
+      .feature-card {
+        padding: 15px;
+      }
+      
+      .feature-card h2 {
+        font-size: 1rem;
+      }
+      
+      .feature-card p {
+        font-size: 0.75rem;
+      }
+      
+      .card-visual-container {
+        height: 200px;
+        padding: 8px;
+      }
+      
+      /* Differentiators Cards */
+      .differentiators-section {
+        padding: 50px 20px;
+      }
+      
+      .differentiators-title {
+        font-size: 1.75rem;
+      }
+      
+      .differentiators-cards {
+        grid-template-columns: 1fr;
+        gap: 20px;
+      }
+      
+      .differentiators-card {
+        padding: 20px;
+      }
+      
+      .card-footer h3 {
+        font-size: 1rem;
+      }
+      
+      .card-footer p {
+        font-size: 1.25rem;
+      }
+    }
+    
+    /* Small Mobile (max-width: 480px) */
+    @media (max-width: 480px) {
+      /* General text sizing */
+      h1 {
+        font-size: 24px !important;
+      }
+      
+      h2 {
+        font-size: 20px !important;
+      }
+      
+      h3 {
+        font-size: 16px !important;
+      }
+      
+      p {
+        font-size: 12px;
+      }
+      
+      /* Navigation */
+      nav {
+        padding: 8px 10px;
+      }
+      
+      /* Hero section */
+      .hero {
+        padding: 30px 10px;
+      }
+      
+      .social-proof {
+        font-size: 11px;
+        gap: 6px;
+      }
+      
+      /* Button adjustments */
+      .dot-arrow-button {
+        width: 100%;
+        max-width: 260px;
+        height: 46px;
+        font-size: 0.7rem;
+      }
+      
+      .button-text {
+        font-size: 0.75rem;
+      }
+      
+      .icon-area {
+        width: 45px;
+      }
+      
+      /* Why PrimeVerse Section */
+      section[style*="grid-template-columns: 1fr 1fr"] h2 {
+        font-size: 20px !important;
+      }
+      
+      section[style*="grid-template-columns: 1fr 1fr"] h3 {
+        font-size: 16px !important;
+      }
+      
+      section[style*="grid-template-columns: 1fr 1fr"] p {
+        font-size: 11px !important;
+      }
+      
+      section[style*="grid-template-columns: 1fr 1fr"] li {
+        font-size: 11px !important;
+        gap: 8px !important;
+        margin-bottom: 8px !important;
+      }
+      
+      section[style*="grid-template-columns: 1fr 1fr"] div[style*="grid-template-columns: 1fr 1fr"] {
+        grid-template-columns: 1fr !important;
+        gap: 12px !important;
+      }
+      
+      section[style*="grid-template-columns: 1fr 1fr"] div[style*="background: rgba(255, 215, 0, 0.1)"] {
+        padding: 12px !important;
+      }
+      
+      section[style*="grid-template-columns: 1fr 1fr"] div[style*="background: rgba(255, 215, 0, 0.1)"] p {
+        font-size: 10px !important;
+      }
+      
+      /* Traders Loop */
+      .trader-problem-card {
+        padding: 15px;
+      }
+      
+      .problem-icon {
+        font-size: 1.5rem;
+      }
+      
+      .problem-title {
+        font-size: 14px;
+      }
+      
+      .problem-description {
+        font-size: 11px;
+      }
+      
+      /* Pricing Cards */
+      .pricing-card {
+        padding: 15px;
+        min-height: 400px;
+      }
+      
+      .pricing-title {
+        font-size: 16px;
+      }
+      
+      .price-amount {
+        font-size: 24px;
+      }
+      
+      .price-original {
+        font-size: 16px;
+      }
+      
+      .pricing-description {
+        font-size: 12px;
+      }
+      
+      .pricing-button {
+        padding: 10px 18px;
+        font-size: 12px;
+      }
+      
+      .pricing-features {
+        font-size: 11px;
+      }
+      
+      /* About Section */
+      .about-section {
+        padding: 40px 15px;
+      }
+      
+      .about-header h1 {
+        font-size: 1.5rem;
+      }
+      
+      .about-image {
+        height: 250px;
+      }
+      
+      .about-text {
+        padding: 1rem;
+        min-height: auto;
+      }
+      
+      .about-text h2 {
+        font-size: 1.1rem;
+      }
+      
+      .about-text p {
+        font-size: 0.8rem;
+      }
+      
+      /* Testimonials */
+      .testimonials-title {
+        font-size: 1.5rem;
+      }
+      
+      .testimonials-subtitle {
+        font-size: 0.875rem;
+      }
+      
+      .testimonial-card {
+        padding: 0.75rem;
+      }
+      
+      .testimonial-avatar {
+        width: 2.5rem;
+        height: 2.5rem;
+      }
+      
+      .testimonial-name {
+        font-size: 0.95rem;
+      }
+      
+      .testimonial-location {
+        font-size: 0.75rem;
+      }
+      
+      .testimonial-text {
+        font-size: 0.75rem;
+      }
+      
+      .gallery-title {
+        font-size: 1.25rem;
+      }
+      
+      .gallery-subtitle {
+        font-size: 0.75rem;
+      }
+      
+      /* Features / Benefits Cards */
+      .benefits-container {
+        padding-top: 1.5rem;
+        padding-bottom: 1.5rem;
+        padding-left: 0.75rem;
+        padding-right: 0.75rem;
+      }
+      
+      .main-heading {
+        font-size: 1.5rem;
+      }
+      
+      .sub-heading {
+        font-size: 0.75rem;
+      }
+      
+      .feature-card {
+        padding: 12px;
+        border-radius: 12px;
+      }
+      
+      .feature-card h2 {
+        font-size: 0.95rem;
+      }
+      
+      .feature-card p {
+        font-size: 0.7rem;
+      }
+      
+      .card-visual-container {
+        height: 150px;
+        margin-bottom: 0.75rem;
+        padding: 5px;
+      }
+      
+      /* Differentiators */
+      .differentiators-section {
+        padding: 40px 15px;
+      }
+      
+      .differentiators-header {
+        margin-bottom: 30px;
+      }
+      
+      .differentiators-title {
+        font-size: 1.25rem;
+      }
+      
+      .differentiators-description p {
+        font-size: 0.75rem;
+      }
+      
+      .differentiators-cards {
+        grid-template-columns: 1fr;
+        gap: 15px;
+      }
+      
+      .differentiators-card {
+        padding: 15px;
+        border-radius: 16px;
+      }
+      
+      .card-visual {
+        height: 120px;
+      }
+      
+      .card-highlight {
+        padding: 8px;
+        max-width: 100%;
+      }
+      
+      .card-highlight p:first-child {
+        font-size: 0.75rem;
+      }
+      
+      .card-highlight p:last-child {
+        font-size: 1rem;
+      }
+      
+      .card-footer {
+        margin-top: 20px;
+      }
+      
+      .card-footer h3 {
+        font-size: 0.9rem;
+      }
+      
+      .card-footer p {
+        font-size: 1rem;
+      }
+      
+      /* Stats section */
+      .stat {
+        min-width: 120px;
+      }
+      
+      .stat-number {
+        font-size: 24px;
+      }
+      
+      .stat-label {
+        font-size: 12px;
+      }
+      
+      /* Video section */
+      .propfirms-video-container {
+        margin-top: -80px;
+      }
+      
+      .propfirms-world-video {
+        border-radius: 10px;
+      }
+    }
+    
+    /* Extra Small Devices (max-width: 360px) */
+    @media (max-width: 360px) {
+      h1 {
+        font-size: 20px !important;
+      }
+      
+      .hero {
+        padding: 20px 8px;
+      }
+      
+      .dot-arrow-button {
+        max-width: 240px;
+        height: 44px;
+      }
+      
+      .button-text {
+        font-size: 0.65rem;
+      }
+      
+      .pricing-card {
+        padding: 12px;
+        min-height: 350px;
+      }
+      
+      .about-text {
+        padding: 0.75rem;
+      }
+      
+      .feature-card {
+        padding: 10px;
+      }
+      
+      .differentiators-card {
+        padding: 12px;
+      }
     }
   </style>
 </head>
