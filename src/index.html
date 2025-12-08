@@ -3807,6 +3807,139 @@
         width: 100%;
     }
 
+    /* ----------------------------------- */
+    /* POLICIES SECTION STYLES */
+    /* ----------------------------------- */
+    .policies-section {
+        background: linear-gradient(135deg, #0a0e27 0%, #1a1f3a 100%);
+        color: #ffffff;
+        padding: 60px 20px;
+        margin-top: 40px;
+        border-top: 1px solid rgba(255, 215, 0, 0.2);
+    }
+
+    .policies-container {
+        max-width: 1000px;
+        margin: 0 auto;
+    }
+
+    .policies-header {
+        text-align: center;
+        margin-bottom: 50px;
+    }
+
+    .policies-header h2 {
+        font-size: 32px;
+        font-weight: 700;
+        color: #FFD700;
+        margin-bottom: 15px;
+    }
+
+    .policies-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+        gap: 30px;
+        margin-bottom: 40px;
+    }
+
+    .policy-card {
+        background: rgba(255, 215, 0, 0.05);
+        border: 1px solid rgba(255, 215, 0, 0.2);
+        border-radius: 12px;
+        padding: 30px;
+        transition: all 0.3s ease;
+        cursor: pointer;
+    }
+
+    .policy-card:hover {
+        background: rgba(255, 215, 0, 0.1);
+        border-color: rgba(255, 215, 0, 0.4);
+        transform: translateY(-5px);
+    }
+
+    .policy-card h3 {
+        font-size: 20px;
+        font-weight: 700;
+        color: #FFD700;
+        margin-bottom: 15px;
+        display: flex;
+        align-items: center;
+        gap: 10px;
+    }
+
+    .policy-card h3::before {
+        content: '✅';
+        font-size: 24px;
+    }
+
+    .policy-card ul,
+    .policy-card ol {
+        margin: 15px 0;
+        padding-left: 20px;
+    }
+
+    .policy-card li {
+        margin: 10px 0;
+        line-height: 1.8;
+        font-size: 14px;
+        color: #e0e0e0;
+    }
+
+    .policy-card p {
+        margin: 10px 0;
+        line-height: 1.8;
+        font-size: 14px;
+        color: #e0e0e0;
+    }
+
+    .disclaimer-banner {
+        background: rgba(255, 215, 0, 0.1);
+        border-left: 4px solid #FFD700;
+        padding: 20px;
+        border-radius: 8px;
+        margin-top: 30px;
+    }
+
+    .disclaimer-banner h4 {
+        color: #FFD700;
+        margin-bottom: 10px;
+        font-weight: 700;
+    }
+
+    .disclaimer-banner p {
+        font-size: 13px;
+        line-height: 1.8;
+        color: #d0d0d0;
+    }
+
+    @media (max-width: 768px) {
+        .policies-section {
+            padding: 40px 16px;
+        }
+
+        .policies-header h2 {
+            font-size: 24px;
+        }
+
+        .policies-grid {
+            grid-template-columns: 1fr;
+            gap: 20px;
+        }
+
+        .policy-card {
+            padding: 20px;
+        }
+
+        .policy-card h3 {
+            font-size: 18px;
+        }
+
+        .policy-card li,
+        .policy-card p {
+            font-size: 13px;
+        }
+    }
+
     /* ========== COMPREHENSIVE MOBILE IMPROVEMENTS ========== */
     
     /* Tablet & Large Mobile (max-width: 768px) */
@@ -5092,10 +5225,10 @@ Thank full for this group and mentor guidance for affordable price.
                 <div class="propfirms-footer-column">
                     <h3>PRIVACY POLICY</h3>
                     <ul>
-                        <li><a href="#">Terms And Conditions</a></li>
-                        <li><a href="#">Responsible Risk Disclosure Policy</a></li>
-                        <li><a href="#">Refund Policy</a></li>
-                        <li><a href="#">Disclaimer</a></li>
+                        <li><a href="terms-and-conditions.html">Terms And Conditions</a></li>
+                        <li><a href="risk-disclosure.html">Responsible Risk Disclosure Policy</a></li>
+                        <li><a href="refund-policy.html">Refund Policy</a></li>
+                        <li><a href="disclaimer.html">Disclaimer</a></li>
                     </ul>
                 </div>
 
@@ -5617,7 +5750,8 @@ Thank full for this group and mentor guidance for affordable price.
 
   // ===== PAYMENT FUNCTIONS =====
   function navigateToBuyPrimeStart() {
-    window.location.href = './payment.html';
+    // window.location.href = './payment.html';
+    window.location.href = 'https://rzp.io/rzp/bZ8JrsO';
   }
 
   // Contact numbers for other programs
@@ -5662,7 +5796,8 @@ Thank full for this group and mentor guidance for affordable price.
 
   // Navigate to PrimeStart payment page
   function navigateToBuyPrimeStart() {
-    window.location.href = './payment.html';
+    // window.location.href = './payment.html';
+    window.location.href = 'https://rzp.io/rzp/bZ8JrsO';
   }
 </script>
 </body>
