@@ -2,537 +2,971 @@
 <html lang="en">
 <head>
   <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>PrimeStart Payment - Primeverse</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=5, user-scalable=yes" />
+  <meta name="description" content="PrimeStart Program - Payment Options">
+  <meta name="theme-color" content="#000717">
+  <title>PrimeStart Program - Payment - PrimeVerse</title>
   <link rel="icon" href="./assets/logo.png">
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
   <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
   <style>
     * { box-sizing: border-box; margin: 0; padding: 0; }
+    
+    html {
+      scroll-behavior: smooth;
+      -webkit-text-size-adjust: 100%;
+      -ms-text-size-adjust: 100%;
+    }
+    
     body {
-      font-family: Inter, system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
-      background: linear-gradient(135deg, #000717 0%, #1a1a2e 100%);
-      color: #333;
+      font-family: 'Inter', system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+      background: linear-gradient(135deg, #0a0e27 0%, #1a1f3a 50%, #0f1629 100%);
+      color: #ffffff;
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
       min-height: 100vh;
-    }
-
-    nav {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      padding: 12px 40px;
-      background: #000717;
-      box-shadow: 0 1px 3px rgba(0,0,0,0.05);
-      position: sticky;
-      top: 0;
-      z-index: 1000;
-    }
-
-    .logo {
-      font-size: 18px;
-      font-weight: 700;
-      color: #FFD700;
-      cursor: pointer;
-    }
-
-    .container {
-      max-width: 1200px;
-      margin: 0 auto;
-      padding: 60px 40px;
-    }
-
-    .payment-wrapper {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 60px;
-      align-items: center;
-    }
-
-    .payment-left {
-      display: flex;
-      flex-direction: column;
-    }
-
-    .payment-title {
-      font-size: 42px;
-      font-weight: 800;
-      color: #ffffff;
-      margin-bottom: 20px;
-    }
-
-    .payment-subtitle {
       font-size: 16px;
-      color: #e0e0e0;
-      margin-bottom: 30px;
       line-height: 1.6;
+      overflow-x: hidden;
+      position: relative;
     }
 
-    .payment-details {
-      background: rgba(255, 215, 0, 0.1);
-      border: 2px solid #FFD700;
-      border-radius: 16px;
-      padding: 30px;
-      margin-bottom: 30px;
-    }
-
-    .detail-row {
-      display: flex;
-      justify-content: space-between;
-      padding: 12px 0;
-      border-bottom: 1px solid rgba(255, 215, 0, 0.2);
-    }
-
-    .detail-row:last-child {
-      border-bottom: none;
-    }
-
-    .detail-label {
-      color: #FFD700;
-      font-weight: 600;
-      font-size: 14px;
-    }
-
-    .detail-value {
-      color: #ffffff;
-      font-weight: 700;
-      font-size: 16px;
-    }
-
-    .features-list {
-      background: rgba(99, 114, 255, 0.05);
-      border-left: 4px solid #6372ff;
-      padding: 20px;
-      border-radius: 8px;
-      margin-bottom: 30px;
-    }
-
-    .features-list h4 {
-      color: #FFD700;
-      font-size: 14px;
-      margin-bottom: 12px;
-      font-weight: 600;
-    }
-
-    .feature-item {
-      color: #e0e0e0;
-      font-size: 14px;
-      padding: 6px 0;
-    }
-
-    .feature-item:before {
-      content: "✓ ";
-      color: #6372ff;
-      font-weight: 700;
-      margin-right: 8px;
-    }
-
-    .payment-right {
-      background: linear-gradient(135deg, rgba(255, 255, 255, 0.95) 0%, rgba(245, 245, 247, 1) 100%);
-      border-radius: 20px;
-      padding: 50px;
-      box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
-    }
-
-    .qr-container {
-      background: #ffffff;
-      border-radius: 16px;
-      padding: 30px;
-      text-align: center;
-      margin-bottom: 30px;
-      border: 2px dashed #e0e0e0;
-    }
-
-    .qr-image {
-      max-width: 280px;
-      width: 100%;
-      height: 280px;
-      margin: 0 auto;
-      background: #f5f5f7;
-      border-radius: 12px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 14px;
-      color: #999;
-    }
-
-    .qr-image img {
-      max-width: 100%;
-      height: auto;
-    }
-
-    .qr-label {
-      font-size: 14px;
-      color: #666;
-      margin-top: 16px;
-      font-weight: 500;
-    }
-
-    .payment-form {
-      display: flex;
-      flex-direction: column;
-      gap: 16px;
-    }
-
-    .form-group {
-      display: flex;
-      flex-direction: column;
-    }
-
-    .form-label {
-      font-size: 13px;
-      font-weight: 600;
-      color: #333;
-      margin-bottom: 6px;
-    }
-
-    .form-input {
-      padding: 12px 16px;
-      border: 2px solid #e0e0e0;
-      border-radius: 8px;
-      font-size: 14px;
-      font-family: Inter, system-ui;
-      transition: all 0.3s ease;
-    }
-
-    .form-input:focus {
-      outline: none;
-      border-color: #FFD700;
-      box-shadow: 0 0 0 3px rgba(255, 215, 0, 0.1);
-    }
-
-    .submit-button {
-      padding: 14px 30px;
-      background: linear-gradient(135deg, #FFD700 0%, #f0c000 100%);
-      color: #000;
-      border: none;
-      border-radius: 8px;
-      font-weight: 700;
-      font-size: 15px;
-      cursor: pointer;
-      transition: all 0.3s ease;
-      margin-top: 10px;
-    }
-
-    .submit-button:hover {
-      transform: translateY(-2px);
-      box-shadow: 0 10px 25px rgba(255, 215, 0, 0.3);
-    }
-
-    .submit-button:disabled {
-      opacity: 0.6;
-      cursor: not-allowed;
-      transform: none;
-    }
-
-    /* Success Modal */
-    .modal {
-      display: none;
+    /* Animated Background Elements */
+    body::before {
+      content: '';
       position: fixed;
       top: 0;
       left: 0;
       width: 100%;
       height: 100%;
-      background: rgba(0, 0, 0, 0.7);
-      z-index: 2000;
-      align-items: center;
-      justify-content: center;
+      background: 
+        radial-gradient(circle at 20% 50%, rgba(255, 215, 0, 0.05) 0%, transparent 50%),
+        radial-gradient(circle at 80% 80%, rgba(100, 150, 255, 0.05) 0%, transparent 50%);
+      pointer-events: none;
+      z-index: 0;
     }
 
-    .modal.show {
+    /* Navigation */
+    nav {
       display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 18px 24px;
+      background: rgba(0, 7, 23, 0.8);
+      backdrop-filter: blur(20px);
+      box-shadow: 0 8px 32px rgba(0, 0, 0, 0.4);
+      position: sticky;
+      top: 0;
+      z-index: 1001;
+      border-bottom: 1px solid rgba(255, 215, 0, 0.15);
     }
 
-    .modal-content {
-      background: white;
-      border-radius: 20px;
-      padding: 60px 40px;
-      text-align: center;
-      max-width: 500px;
-      animation: modalPop 0.5s ease-out;
-    }
-
-    @keyframes modalPop {
-      0% {
-        transform: scale(0.3);
-        opacity: 0;
-      }
-      50% {
-        transform: scale(1.05);
-      }
-      100% {
-        transform: scale(1);
-        opacity: 1;
-      }
-    }
-
-    .success-icon {
-      font-size: 80px;
-      color: #4CAF50;
-      margin-bottom: 20px;
-      animation: successCheck 0.8s ease-out;
-    }
-
-    @keyframes successCheck {
-      0% {
-        transform: scale(0) rotate(-45deg);
-      }
-      100% {
-        transform: scale(1) rotate(0);
-      }
-    }
-
-    .modal-title {
-      font-size: 32px;
+    .logo {
+      font-size: 22px;
       font-weight: 800;
-      color: #000717;
-      margin-bottom: 16px;
-    }
-
-    .modal-message {
-      font-size: 16px;
-      color: #666;
-      margin-bottom: 30px;
-      line-height: 1.6;
-    }
-
-    .modal-button {
-      padding: 14px 40px;
       background: linear-gradient(135deg, #FFD700 0%, #f0c000 100%);
-      color: #000;
-      border: none;
-      border-radius: 8px;
-      font-weight: 700;
-      font-size: 15px;
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      text-decoration: none;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
       cursor: pointer;
-      transition: all 0.3s ease;
+      position: relative;
+      z-index: 1;
     }
 
-    .modal-button:hover {
-      transform: translateY(-2px);
-      box-shadow: 0 10px 25px rgba(255, 215, 0, 0.3);
+    .logo:hover {
+      transform: translateY(-3px) scale(1.05);
+      filter: drop-shadow(0 8px 16px rgba(255, 215, 0, 0.3));
     }
 
-    .loading {
-      display: none;
-      position: fixed;
-      top: 50%;
-      left: 50%;
-      transform: translate(-50%, -50%);
-      z-index: 1500;
+    .logo i {
+      font-size: 26px;
+      animation: spin 3s linear infinite;
     }
 
-    .spinner {
-      width: 50px;
-      height: 50px;
-      border: 5px solid rgba(255, 215, 0, 0.3);
-      border-top: 5px solid #FFD700;
-      border-radius: 50%;
-      animation: spin 1s linear infinite;
+    .logo:hover i {
+      animation: spin 1.5s linear infinite;
     }
 
     @keyframes spin {
-      0% { transform: rotate(0deg); }
-      100% { transform: rotate(360deg); }
+      from { transform: rotate(0deg); }
+      to { transform: rotate(360deg); }
     }
 
+    .nav-links {
+      display: flex;
+      gap: 35px;
+      list-style: none;
+    }
+
+    .nav-links a {
+      text-decoration: none;
+      color: #FFD700;
+      font-weight: 700;
+      font-size: 13px;
+      transition: all 0.4s ease;
+      position: relative;
+      letter-spacing: 0.5px;
+    }
+
+    .nav-links a::before {
+      content: '';
+      position: absolute;
+      bottom: -8px;
+      left: 0;
+      width: 0;
+      height: 3px;
+      background: linear-gradient(90deg, #FFD700, #f0c000);
+      transition: width 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+      border-radius: 2px;
+    }
+
+    .nav-links a:hover {
+      color: #f0c000;
+      transform: translateY(-2px);
+    }
+
+    .nav-links a:hover::before {
+      width: 100%;
+    }
+
+    /* Main Container */
+    .container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 80px 20px;
+      position: relative;
+      z-index: 1;
+    }
+
+    /* Header Section */
+    .payment-header {
+      text-align: center;
+      margin-bottom: 80px;
+      animation: fadeInDown 1s ease-out;
+    }
+
+    .payment-header h1 {
+      font-size: 56px;
+      font-weight: 900;
+      margin-bottom: 20px;
+      background: linear-gradient(135deg, #FFD700 0%, #f0c000 50%, #FFD700 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      background-size: 200% auto;
+      animation: gradientShift 3s linear infinite;
+      letter-spacing: -1px;
+    }
+
+    @keyframes gradientShift {
+      0% { background-position: 0% center; }
+      50% { background-position: 100% center; }
+      100% { background-position: 0% center; }
+    }
+
+    .payment-header p {
+      font-size: 22px;
+      color: #b0d0ff;
+      margin-bottom: 25px;
+      font-weight: 300;
+      letter-spacing: 0.3px;
+    }
+
+    .payment-subtext {
+      display: inline-block;
+      background: linear-gradient(135deg, rgba(255, 215, 0, 0.15) 0%, rgba(255, 215, 0, 0.05) 100%);
+      border: 2px solid rgba(255, 215, 0, 0.4);
+      padding: 14px 28px;
+      border-radius: 50px;
+      color: #FFD700;
+      font-size: 14px;
+      font-weight: 600;
+      letter-spacing: 0.5px;
+      box-shadow: 0 8px 32px rgba(255, 215, 0, 0.15);
+      transition: all 0.4s ease;
+    }
+
+    .payment-subtext:hover {
+      background: linear-gradient(135deg, rgba(255, 215, 0, 0.2) 0%, rgba(255, 215, 0, 0.1) 100%);
+      border-color: rgba(255, 215, 0, 0.6);
+      transform: translateY(-3px);
+      box-shadow: 0 12px 48px rgba(255, 215, 0, 0.25);
+    }
+
+    .payment-subtext i {
+      margin-right: 8px;
+      animation: bounce 2s ease-in-out infinite;
+    }
+
+    @keyframes bounce {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(-5px); }
+    }
+
+    /* Payment Options Grid */
+    .payment-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(340px, 1fr));
+      gap: 40px;
+      margin-bottom: 80px;
+      animation: fadeInUp 1s ease-out 0.3s both;
+    }
+
+    .payment-card {
+      background: linear-gradient(135deg, rgba(255, 215, 0, 0.08) 0%, rgba(255, 215, 0, 0.02) 100%);
+      border: 2px solid rgba(255, 215, 0, 0.25);
+      border-radius: 20px;
+      padding: 45px 35px;
+      position: relative;
+      overflow: hidden;
+      transition: all 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+      cursor: pointer;
+      display: flex;
+      flex-direction: column;
+      backdrop-filter: blur(10px);
+      box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2);
+    }
+
+    .payment-card::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: -100%;
+      right: 0;
+      height: 100%;
+      background: linear-gradient(90deg, transparent, rgba(255, 215, 0, 0.1), transparent);
+      transition: left 0.6s ease;
+    }
+
+    .payment-card:hover::before {
+      left: 100%;
+    }
+
+    .payment-card::after {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 5px;
+      background: linear-gradient(90deg, #FFD700, #f0c000);
+      opacity: 0;
+      transition: opacity 0.4s ease;
+    }
+
+    .payment-card:hover {
+      border-color: #FFD700;
+      background: linear-gradient(135deg, rgba(255, 215, 0, 0.18) 0%, rgba(255, 215, 0, 0.08) 100%);
+      transform: translateY(-20px);
+      box-shadow: 0 30px 60px rgba(255, 215, 0, 0.25), inset 0 1px 1px rgba(255, 215, 0, 0.15);
+    }
+
+    .payment-card:hover::after {
+      opacity: 1;
+    }
+
+    /* Badge */
+    .payment-badge {
+      position: absolute;
+      top: 25px;
+      right: 25px;
+      padding: 10px 18px;
+      border-radius: 25px;
+      font-size: 12px;
+      font-weight: 800;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      backdrop-filter: blur(10px);
+      box-shadow: 0 8px 24px rgba(0, 0, 0, 0.3);
+      animation: slideInRight 0.6s ease-out;
+    }
+
+    @keyframes slideInRight {
+      from {
+        opacity: 0;
+        transform: translateX(30px) rotateZ(10deg);
+      }
+      to {
+        opacity: 1;
+        transform: translateX(0) rotateZ(0);
+      }
+    }
+
+    .badge-special {
+      background: linear-gradient(135deg, #ff6b6b 0%, #ff5252 100%);
+      color: #ffffff;
+      box-shadow: 0 8px 24px rgba(255, 82, 82, 0.4);
+    }
+
+    .badge-partial {
+      background: linear-gradient(135deg, #4ecdc4 0%, #44af94 100%);
+      color: #ffffff;
+      box-shadow: 0 8px 24px rgba(78, 205, 196, 0.4);
+    }
+
+    .badge-custom {
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      color: #ffffff;
+      box-shadow: 0 8px 24px rgba(102, 126, 234, 0.4);
+    }
+
+    /* Icon */
+    .payment-icon {
+      font-size: 56px;
+      margin-bottom: 25px;
+      transition: all 0.5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+      display: inline-block;
+      filter: drop-shadow(0 4px 12px rgba(255, 215, 0, 0.2));
+    }
+
+    .payment-card:hover .payment-icon {
+      transform: scale(1.2) rotate(8deg) translateY(-10px);
+      filter: drop-shadow(0 12px 24px rgba(255, 215, 0, 0.4));
+    }
+
+    /* Content */
+    .payment-title {
+      font-size: 24px;
+      font-weight: 800;
+      margin-bottom: 15px;
+      color: #FFD700;
+      letter-spacing: -0.5px;
+    }
+
+    .payment-description {
+      font-size: 15px;
+      color: #d0e0ff;
+      margin-bottom: 25px;
+      line-height: 1.8;
+      flex-grow: 1;
+    }
+
+    /* Features List */
+    .payment-features {
+      list-style: none;
+      margin-bottom: 30px;
+    }
+
+    .payment-features li {
+      font-size: 14px;
+      color: #b8d0ff;
+      margin-bottom: 13px;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      transition: all 0.3s ease;
+    }
+
+    .payment-features li::before {
+      content: '✓';
+      color: #FFD700;
+      font-weight: 900;
+      font-size: 18px;
+      width: 24px;
+      height: 24px;
+      background: rgba(255, 215, 0, 0.1);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+      border: 1px solid rgba(255, 215, 0, 0.3);
+      box-shadow: 0 4px 12px rgba(255, 215, 0, 0.15);
+    }
+
+    .payment-card:hover .payment-features li {
+      color: #e0f0ff;
+      transform: translateX(5px);
+    }
+
+    /* Price Section */
+    .payment-price {
+      background: linear-gradient(135deg, rgba(255, 215, 0, 0.12) 0%, rgba(255, 215, 0, 0.05) 100%);
+      padding: 20px;
+      border-radius: 14px;
+      margin-bottom: 30px;
+      text-align: center;
+      border: 1px solid rgba(255, 215, 0, 0.2);
+      backdrop-filter: blur(10px);
+      transition: all 0.4s ease;
+    }
+
+    .payment-card:hover .payment-price {
+      background: linear-gradient(135deg, rgba(255, 215, 0, 0.18) 0%, rgba(255, 215, 0, 0.08) 100%);
+      border-color: rgba(255, 215, 0, 0.4);
+    }
+
+    .price-label {
+      font-size: 12px;
+      color: #b0b0d0;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      margin-bottom: 8px;
+      font-weight: 700;
+    }
+
+    .price-amount {
+      font-size: 36px;
+      font-weight: 900;
+      background: linear-gradient(135deg, #FFD700 0%, #f0c000 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      margin-bottom: 5px;
+    }
+
+    .payment-price small {
+      color: #b0b0d0;
+      font-size: 13px;
+      display: block;
+      margin-top: 8px;
+    }
+
+    /* Button */
+    .payment-btn {
+      width: 100%;
+      padding: 16px 24px;
+      background: linear-gradient(135deg, #FFD700 0%, #f0c000 100%);
+      color: #000717;
+      border: none;
+      border-radius: 12px;
+      font-size: 16px;
+      font-weight: 800;
+      cursor: pointer;
+      transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      box-shadow: 0 10px 30px rgba(255, 215, 0, 0.3);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .payment-btn::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: -100%;
+      width: 100%;
+      height: 100%;
+      background: rgba(255, 255, 255, 0.2);
+      transition: left 0.5s ease;
+      z-index: 0;
+    }
+
+    .payment-btn:hover::before {
+      left: 100%;
+    }
+
+    .payment-btn:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 20px 50px rgba(255, 215, 0, 0.45);
+      background: linear-gradient(135deg, #f0c000 0%, #FFD700 100%);
+    }
+
+    .payment-btn:active {
+      transform: translateY(-1px);
+    }
+
+    .payment-btn i {
+      position: relative;
+      z-index: 1;
+      transition: all 0.3s ease;
+    }
+
+    .payment-btn span {
+      position: relative;
+      z-index: 1;
+    }
+
+    .payment-btn:hover i {
+      transform: translateX(5px);
+    }
+
+    /* Info Banner */
+    .info-banner {
+      background: linear-gradient(135deg, rgba(255, 215, 0, 0.12) 0%, rgba(255, 215, 0, 0.05) 100%);
+      border-left: 4px solid #FFD700;
+      padding: 25px;
+      border-radius: 14px;
+      margin-bottom: 60px;
+      animation: fadeInUp 1s ease-out 0.4s both;
+      border: 1px solid rgba(255, 215, 0, 0.2);
+      backdrop-filter: blur(10px);
+      box-shadow: 0 8px 32px rgba(255, 215, 0, 0.1);
+    }
+
+    .info-banner h3 {
+      color: #FFD700;
+      margin-bottom: 12px;
+      font-size: 18px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      font-weight: 800;
+    }
+
+    .info-banner h3 i {
+      animation: pulse 2s ease-in-out infinite;
+    }
+
+    @keyframes pulse {
+      0%, 100% { transform: scale(1); }
+      50% { transform: scale(1.15); }
+    }
+
+    .info-banner p {
+      color: #d0e0ff;
+      font-size: 15px;
+      line-height: 1.8;
+      margin: 0;
+    }
+
+    /* FAQ Section */
+    .faq-section {
+      max-width: 850px;
+      margin: 0 auto;
+      animation: fadeInUp 1s ease-out 0.6s both;
+    }
+
+    .faq-title {
+      text-align: center;
+      font-size: 36px;
+      font-weight: 900;
+      color: #FFD700;
+      margin-bottom: 50px;
+      background: linear-gradient(135deg, #FFD700 0%, #f0c000 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      letter-spacing: -0.5px;
+    }
+
+    .faq-item {
+      background: linear-gradient(135deg, rgba(255, 215, 0, 0.06) 0%, rgba(255, 215, 0, 0.02) 100%);
+      border: 1.5px solid rgba(255, 215, 0, 0.15);
+      border-radius: 14px;
+      margin-bottom: 16px;
+      overflow: hidden;
+      transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+      backdrop-filter: blur(10px);
+      box-shadow: 0 4px 16px rgba(0, 0, 0, 0.1);
+    }
+
+    .faq-item:hover {
+      border-color: rgba(255, 215, 0, 0.35);
+      background: linear-gradient(135deg, rgba(255, 215, 0, 0.12) 0%, rgba(255, 215, 0, 0.05) 100%);
+      box-shadow: 0 12px 32px rgba(255, 215, 0, 0.15);
+    }
+
+    .faq-question {
+      padding: 20px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      cursor: pointer;
+      font-weight: 700;
+      color: #FFD700;
+      user-select: none;
+      transition: all 0.3s ease;
+      font-size: 16px;
+      letter-spacing: 0.3px;
+    }
+
+    .faq-item:hover .faq-question {
+      color: #f0c000;
+    }
+
+    .faq-icon {
+      font-size: 20px;
+      transition: transform 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+      color: #FFD700;
+    }
+
+    .faq-item.active .faq-icon {
+      transform: rotate(180deg) scale(1.2);
+      color: #f0c000;
+    }
+
+    .faq-answer {
+      padding: 0 20px;
+      max-height: 0;
+      overflow: hidden;
+      transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+      color: #d0e0ff;
+      font-size: 15px;
+      line-height: 1.8;
+      font-weight: 400;
+    }
+
+    .faq-item.active .faq-answer {
+      padding: 0 20px 20px 20px;
+      max-height: 600px;
+    }
+
+    .faq-answer a {
+      color: #FFD700;
+      text-decoration: none;
+      font-weight: 700;
+      transition: all 0.3s ease;
+    }
+
+    .faq-answer a:hover {
+      color: #f0c000;
+      text-shadow: 0 0 10px rgba(255, 215, 0, 0.3);
+    }
+
+    /* Footer */
+    footer {
+      background: linear-gradient(135deg, rgba(0, 7, 23, 0.95) 0%, rgba(10, 14, 39, 0.95) 100%);
+      color: #FFD700;
+      text-align: center;
+      padding: 50px 20px;
+      margin-top: 100px;
+      border-top: 1px solid rgba(255, 215, 0, 0.15);
+      box-shadow: 0 -8px 32px rgba(0, 0, 0, 0.3);
+      position: relative;
+      z-index: 1;
+    }
+
+    footer p {
+      margin: 12px 0;
+      font-size: 14px;
+      color: #b0d0ff;
+      font-weight: 500;
+    }
+
+    footer a {
+      color: #FFD700;
+      text-decoration: none;
+      transition: all 0.3s ease;
+      font-weight: 600;
+    }
+
+    footer a:hover {
+      color: #f0c000;
+      text-shadow: 0 0 10px rgba(255, 215, 0, 0.3);
+      text-decoration: underline;
+    }
+
+    /* Animations */
+    @keyframes fadeInDown {
+      from {
+        opacity: 0;
+        transform: translateY(-40px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    @keyframes fadeInUp {
+      from {
+        opacity: 0;
+        transform: translateY(40px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    /* Responsive */
     @media (max-width: 768px) {
-      .payment-wrapper {
+      .payment-header h1 {
+        font-size: 40px;
+      }
+
+      .payment-header p {
+        font-size: 18px;
+      }
+
+      .payment-grid {
         grid-template-columns: 1fr;
-        gap: 30px;
+        gap: 25px;
+        margin-bottom: 60px;
+      }
+
+      .payment-card {
+        padding: 35px 25px;
+      }
+
+      .payment-badge {
+        font-size: 11px;
+        padding: 8px 14px;
+        top: 18px;
+        right: 18px;
+      }
+
+      .payment-icon {
+        font-size: 48px;
+        margin-bottom: 18px;
       }
 
       .payment-title {
-        font-size: 32px;
+        font-size: 20px;
       }
 
-      .payment-right {
-        padding: 30px;
+      .price-amount {
+        font-size: 28px;
       }
 
-      .qr-image {
-        max-width: 200px;
-        height: 200px;
+      .container {
+        padding: 60px 16px;
+      }
+
+      .nav-links {
+        gap: 15px;
+        font-size: 12px;
+      }
+
+      .payment-subtext {
+        font-size: 12px;
+        padding: 10px 20px;
+      }
+
+      .faq-title {
+        font-size: 28px;
+        margin-bottom: 35px;
+      }
+
+      footer {
+        padding: 40px 16px;
       }
     }
   </style>
+  </style>
+</head>
 </head>
 <body>
+  <!-- Navigation -->
   <nav>
-    <div class="logo" onclick="window.history.back()">← Back</div>
-    <span style="color: #FFD700; font-weight: 600;">PrimeStart Payment</span>
+    <a href="index.html" class="logo">
+      <i class="fas fa-star"></i> PrimeVerse
+    </a>
+    <ul class="nav-links">
+      <li><a href="index.html">Home</a></li>
+      <li><a href="index.html#courses">Courses</a></li>
+      <li><a href="index.html#testimonials">Testimonials</a></li>
+    </ul>
   </nav>
 
+  <!-- Main Container -->
   <div class="container">
-    <div class="payment-wrapper">
-      <!-- Left Side - Payment Info -->
-      <div class="payment-left">
-        <h1 class="payment-title">Complete Your Payment</h1>
-        <p class="payment-subtitle">
-          Join thousands of successful traders. Your PrimeStart Program access will be activated immediately after payment confirmation.
+    <!-- Header -->
+    <div class="payment-header">
+      <h1>🚀 PrimeStart Program</h1>
+      <p>Choose Your Payment Plan</p>
+      <div class="payment-subtext">
+        <i class="fas fa-lock"></i> Secure Payment - Razorpay
+      </div>
+    </div>
+
+    <!-- Info Banner -->
+    <div class="info-banner">
+      <h3>
+        <i class="fas fa-info-circle"></i> How to Choose Your Plan
+      </h3>
+      <p>Select the payment option that best suits your needs. All plans provide immediate access to the PrimeStart Program with full mentorship, Discord community, and trading frameworks.</p>
+    </div>
+
+    <!-- Payment Options -->
+    <div class="payment-grid">
+      <!-- Option 1: Special Offer -->
+      <div class="payment-card">
+        <span class="payment-badge badge-special">🔥 LIMITED</span>
+        <div class="payment-icon">🎁</div>
+        <h2 class="payment-title">Special Offer</h2>
+        <p class="payment-description">
+          Grab one of the <strong>first 5 exclusive slots</strong> at a limited-time special rate. This offer is only available for the first 5 registrations.
         </p>
-
-        <div class="payment-details">
-          <div class="detail-row">
-            <span class="detail-label">Program:</span>
-            <span class="detail-value">PrimeStart Program</span>
-          </div>
-          <div class="detail-row">
-            <span class="detail-label">Original Price:</span>
-            <span class="detail-value" style="text-decoration: line-through; opacity: 0.7;">₹10,000</span>
-          </div>
-          <div class="detail-row">
-            <span class="detail-label">Your Price:</span>
-            <span class="detail-value" style="font-size: 24px; color: #4CAF50;">₹5,000</span>
-          </div>
-          <div class="detail-row" style="border-bottom: 2px solid #FFD700;">
-            <span class="detail-label">Discount:</span>
-            <span class="detail-value" style="color: #FFD700;">50% OFF 🎉</span>
-          </div>
+        <ul class="payment-features">
+          <li>Full PrimeStart Program Access</li>
+          <li>24/7 Mentorship Support</li>
+          <li>Discord Community</li>
+          <li>Trading Frameworks & Analysis</li>
+          <li>Special Price for First 5</li>
+        </ul>
+        <div class="payment-price">
+          <div class="price-label">Limited Time Offer</div>
+          <div class="price-amount">₹3,999</div>
         </div>
+        <button class="payment-btn" onclick="redirectToPayment('https://rzp.io/rzp/mLgNHqjh')">
+          <i class="fas fa-credit-card"></i> Pay Now
+        </button>
+      </div>
 
-        <div class="features-list">
-          <h4>You'll Get Instant Access To:</h4>
-          <div class="feature-item">Trade Analysis (Daily Market Insights)</div>
-          <div class="feature-item">Personal Mentorship Support</div>
-          <div class="feature-item">Complete Step-by-Step Roadmap</div>
-          <div class="feature-item">24/7 Call Support for Guidance</div>
-          <div class="feature-item">Private Discord Community</div>
-          <div class="feature-item">Lifetime Updates</div>
+      <!-- Option 2: Partial Payment -->
+      <div class="payment-card">
+        <span class="payment-badge badge-partial">💡 FLEXIBLE</span>
+        <div class="payment-icon">💳</div>
+        <h2 class="payment-title">Partial Payment</h2>
+        <p class="payment-description">
+          Start your journey with a flexible payment plan. Pay in installments and get immediate access to all program materials and mentorship.
+        </p>
+        <ul class="payment-features">
+          <li>Full PrimeStart Program Access</li>
+          <li>Pay in Easy Installments</li>
+          <li>Immediate Access</li>
+          <li>24/7 Discord Support</li>
+          <li>Lifetime Framework Access</li>
+        </ul>
+        <div class="payment-price">
+          <div class="price-label">First Payment</div>
+          <div class="price-amount">₹2,500</div>
+          <small style="color: #b0b0b0;">+ Future Installments</small>
+        </div>
+        <button class="payment-btn" onclick="redirectToPayment('https://rzp.io/rzp/bZ8JrsO')">
+          <i class="fas fa-calendar-alt"></i> Pay Installment
+        </button>
+      </div>
+
+      <!-- Option 3: Custom Program -->
+      <div class="payment-card">
+        <span class="payment-badge badge-custom">👥 CUSTOM</span>
+        <div class="payment-icon">⚙️</div>
+        <h2 class="payment-title">Custom Program</h2>
+        <p class="payment-description">
+          Create a personalized learning path tailored to your experience level and trading goals. Ideal for advanced traders seeking specialized guidance.
+        </p>
+        <ul class="payment-features">
+          <li>Personalized Curriculum</li>
+          <li>One-on-One Mentorship</li>
+          <li>Advanced Strategies</li>
+          <li>Priority Support</li>
+          <li>Custom Trading Plans</li>
+        </ul>
+        <div class="payment-price">
+          <div class="price-label">Custom Pricing</div>
+          <div class="price-amount">Flexible</div>
+          <small style="color: #b0b0b0;">Based on Your Needs</small>
+        </div>
+        <button class="payment-btn" onclick="redirectToPayment('https://rzp.io/rzp/U2kPFQr')">
+          <i class="fas fa-handshake"></i> Customize
+        </button>
+      </div>
+    </div>
+
+    <!-- FAQ Section -->
+    <div class="faq-section">
+      <h2 class="faq-title">Frequently Asked Questions</h2>
+
+      <div class="faq-item" onclick="toggleFAQ(this)">
+        <div class="faq-question">
+          <span>What's included in the PrimeStart Program?</span>
+          <i class="fas fa-chevron-down faq-icon"></i>
+        </div>
+        <div class="faq-answer">
+          The PrimeStart Program includes complete trading education, step-by-step frameworks, daily live trading sessions, Discord community access, 24/7 mentorship support, trade analysis, and psychology coaching. You'll get everything needed to prepare for prop firm challenges.
         </div>
       </div>
 
-      <!-- Right Side - QR and Form -->
-      <div class="payment-right">
-        <div class="qr-container">
-          <div class="qr-label">Scan to Pay</div>
-          <div class="qr-image" id="qrCodeContainer">
-            <img src="./assets/q_r.png" alt="Payment QR Code" style="max-width: 100%; height: auto; border-radius: 8px;">
+      <div class="faq-item" onclick="toggleFAQ(this)">
+        <div class="faq-question">
+          <span>Can I change my payment plan later?</span>
+          <div class="faq-icon">
+            <i class="fas fa-chevron-down"></i>
           </div>
-          <div class="qr-label">₹5,000</div>
         </div>
+        <div class="faq-answer">
+          Yes, you can upgrade or modify your plan after enrollment. Contact our support team at primeverseofficial04@gmail.com or use the Discord support channel for plan adjustments.
+        </div>
+      </div>
 
-        <form class="payment-form" id="paymentForm" onsubmit="handlePayment(event)">
-          <div class="form-group">
-            <label class="form-label">Full Name *</label>
-            <input type="text" class="form-input" id="fullName" placeholder="Enter your full name" required>
+      <div class="faq-item" onclick="toggleFAQ(this)">
+        <div class="faq-question">
+          <span>How long is the program?</span>
+          <div class="faq-icon">
+            <i class="fas fa-chevron-down"></i>
           </div>
+        </div>
+        <div class="faq-answer">
+          The PrimeStart Program is self-paced with lifetime access to materials. Most traders complete the core curriculum in 8-12 weeks, but you can progress at your own speed. Discord community and mentorship support remain available indefinitely.
+        </div>
+      </div>
 
-          <div class="form-group">
-            <label class="form-label">Email Address *</label>
-            <input type="email" class="form-input" id="email" placeholder="Enter your email" required>
+      <div class="faq-item" onclick="toggleFAQ(this)">
+        <div class="faq-question">
+          <span>Is there a refund policy?</span>
+          <div class="faq-icon">
+            <i class="fas fa-chevron-down"></i>
           </div>
+        </div>
+        <div class="faq-answer">
+          PrimeVerse offers a non-refundable policy on digital programs. However, refunds are available only for duplicate charges or confirmed technical billing errors within 48 hours. Please refer to our <a href="refund-policy.html" style="color: #FFD700; text-decoration: underline;">Refund Policy</a> for more details.
+        </div>
+      </div>
 
-          <div class="form-group">
-            <label class="form-label">Phone Number *</label>
-            <input type="tel" class="form-input" id="phone" placeholder="Enter your phone number" required>
+      <div class="faq-item" onclick="toggleFAQ(this)">
+        <div class="faq-question">
+          <span>When will I get access?</span>
+          <div class="faq-icon">
+            <i class="fas fa-chevron-down"></i>
           </div>
+        </div>
+        <div class="faq-answer">
+          After successful payment, you'll receive immediate access to all program materials. Our team will add you to the Discord community within 24 hours, and your mentorship will begin right away.
+        </div>
+      </div>
 
-          <div class="form-group">
-            <label class="form-label">Transaction ID (After Paying via UPI) *</label>
-            <input type="text" class="form-input" id="transactionId" placeholder="Enter your UPI transaction ID" required>
+      <div class="faq-item" onclick="toggleFAQ(this)">
+        <div class="faq-question">
+          <span>What's the difference between Partial Payment and Custom Program?</span>
+          <div class="faq-icon">
+            <i class="fas fa-chevron-down"></i>
           </div>
-
-          <button type="submit" class="submit-button" id="submitBtn">Confirm Payment & Complete</button>
-        </form>
-
-        <div style="margin-top: 20px; padding: 16px; background: rgba(100, 200, 255, 0.1); border-left: 4px solid #6472ff; border-radius: 8px;">
-          <p style="font-size: 12px; color: #666;">
-            <strong>📱 How to pay:</strong> Scan the QR code with your UPI app (Google Pay, PhonePe, Paytm, etc.), complete the payment, and enter the transaction ID above.
-          </p>
+        </div>
+        <div class="faq-answer">
+          Partial Payment offers the standard PrimeStart curriculum in installments. Custom Program is tailored to advanced traders with personalized one-on-one mentorship and specialized strategies. Choose based on your current experience level.
         </div>
       </div>
     </div>
   </div>
 
-  <!-- Success Modal -->
-  <div class="modal" id="successModal">
-    <div class="modal-content">
-      <div class="success-icon">✓</div>
-      <h2 class="modal-title">Payment Successful!</h2>
-      <p class="modal-message">
-        Your payment has been confirmed. Your PrimeStart Program access is now active. Check your email for login credentials and get started with your journey!
-      </p>
-      <button class="modal-button" onclick="goToHome()">Go to Home</button>
-    </div>
-  </div>
+  <!-- Footer -->
+  <footer>
+    <p>&copy; 2024 PrimeVerse. All rights reserved.</p>
+    <p style="margin-top: 15px;">
+      <a href="terms-and-conditions.html">Terms & Conditions</a> | 
+      <a href="refund-policy.html">Refund Policy</a> | 
+      <a href="risk-disclosure.html">Risk Disclosure</a> | 
+      <a href="disclaimer.html">Disclaimer</a>
+    </p>
+    <p style="margin-top: 10px; font-size: 12px;">
+      Questions? Contact us: <a href="mailto:primeverseofficial04@gmail.com">primeverseofficial04@gmail.com</a> | 
+      <a href="tel:+918754221678">+91-8754221678</a>
+    </p>
+  </footer>
 
-  <!-- Loading Spinner -->
-  <div class="loading" id="loadingSpinner">
-    <div class="spinner"></div>
-  </div>
-
-  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
   <script>
-    // Supabase Configuration
-    const SUPABASE_URL = 'https://nbsxbdaewkzutvdnlgmz.supabase.co';
-    const SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Im5ic3hiZGFld2t6dXR2ZG5sZ216Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3NjM4OTE3NjUsImV4cCI6MjA3OTQ2Nzc2NX0.Vq-r9QlFDvkUfU-90rK6m3UfxogsF3gA3FFY7Y01d_A';
+    // Toggle FAQ items
+    function toggleFAQ(element) {
+      element.classList.toggle('active');
+    }
 
-    const { createClient } = window.supabase;
-    const supabase = createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
+    // Redirect to payment
+    function redirectToPayment(url) {
+      window.location.href = url;
+    }
 
-    async function handlePayment(event) {
-      event.preventDefault();
-
-      const fullName = document.getElementById('fullName').value.trim();
-      const email = document.getElementById('email').value.trim();
-      const phone = document.getElementById('phone').value.trim();
-      const transactionId = document.getElementById('transactionId').value.trim();
-
-      if (!fullName || !email || !phone || !transactionId) {
-        alert('Please fill in all fields');
-        return;
+    // Close FAQ when clicking outside
+    document.addEventListener('click', function(event) {
+      if (!event.target.closest('.faq-item')) {
+        const activeItems = document.querySelectorAll('.faq-item.active');
+        activeItems.forEach(item => {
+          item.classList.remove('active');
+        });
       }
-
-      // Show loading
-      document.getElementById('loadingSpinner').style.display = 'block';
-      document.getElementById('submitBtn').disabled = true;
-
-      try {
-        // Save payment data to Supabase (NO AUTHENTICATION REQUIRED)
-        const { data, error } = await supabase
-          .from('payments')
-          .insert([{
-            program: 'PrimeStart',
-            full_name: fullName,
-            email: email,
-            phone: phone,
-            transaction_id: transactionId,
-            amount: 5000,
-            currency: 'INR',
-            payment_method: 'UPI',
-            status: 'completed',
-            created_at: new Date().toISOString()
-          }]);
-
-        if (error) {
-          console.error('Error saving payment:', error);
-          alert('Payment saved but there was a sync issue. Please check your email for confirmation.');
-          showSuccessModal();
-          return;
-        }
-
-        console.log('Payment saved successfully:', data);
-        
-        // Hide loading and show success modal
-        document.getElementById('loadingSpinner').style.display = 'none';
-        showSuccessModal();
-
-      } catch (error) {
-        console.error('Unexpected error:', error);
-        alert('An error occurred. Please contact support.');
-        document.getElementById('loadingSpinner').style.display = 'none';
-        document.getElementById('submitBtn').disabled = false;
-      }
-    }
-
-    function showSuccessModal() {
-      document.getElementById('successModal').classList.add('show');
-    }
-
-    function goToHome() {
-      window.location.href = './index.html';
-    }
+    });
   </script>
 </body>
 </html>
