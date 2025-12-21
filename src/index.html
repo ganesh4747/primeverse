@@ -4690,10 +4690,10 @@
             </p>
 
             <!-- Buy Button -->
-            <button class="pricing-button" onclick="navigateToBuyPrimeStart()">
+            <a href="./payment.html" class="pricing-button" style="text-decoration: none;">
               <span class="button-text">Buy Now</span>
               <span class="button-icon">→</span>
-            </button>
+            </a>
 
             <!-- Features List -->
             <ul class="pricing-features">
@@ -4726,10 +4726,10 @@
               </p>
 
               <!-- Contact Button -->
-              <button class="pricing-button" onclick="contactPrimeAdvance()">
+              <a href="https://wa.me/918754221678?text=I%20am%20interested%20in%20PrimeAdvance%20Program" target="_blank" class="pricing-button" style="text-decoration: none;">
                 <span class="button-text">Contact Us</span>
                 <span class="button-icon">→</span>
-              </button>
+              </a>
 
               <!-- Features List -->
               <ul class="pricing-features">
@@ -4763,10 +4763,10 @@
               </p>
 
               <!-- Contact Button -->
-              <button class="pricing-button" onclick="contactPrimeElite()">
+              <a href="https://wa.me/918754221678?text=I%20am%20interested%20in%20PrimeElite%20Program" target="_blank" class="pricing-button" style="text-decoration: none;">
                 <span class="button-text">Contact Us</span>
                 <span class="button-icon">→</span>
-              </button>
+              </a>
 
               <!-- Features List -->
               <ul class="pricing-features">
@@ -5747,56 +5747,6 @@ Thank full for this group and mentor guidance for affordable price.
     deleteData,
     client: supabase
   };
-
-  // ===== PAYMENT FUNCTIONS =====
-  function navigateToBuyPrimeStart() {
-    window.location.href = './payment.html';
-  }
-
-  // Contact numbers for other programs
-  const PRIME_ADVANCE_CONTACT = '+91-8754221678'; // Updated phone number
-  const PRIME_ELITE_CONTACT = '+91-8754221678';   // Updated phone number
-  const WHATSAPP_LINK_ADVANCE = 'https://wa.me/918754221678?text=I%20am%20interested%20in%20PrimeAdvance%20Program';
-  const WHATSAPP_LINK_ELITE = 'https://wa.me/918754221678?text=I%20am%20interested%20in%20PrimeElite%20Program';
-
-  function contactPrimeAdvance() {
-    const userChoice = confirm(
-      'Contact PrimeAdvance Program\n\n' +
-      'Choose your preferred contact method:\n\n' +
-      'OK = Call Us\n' +
-      'Cancel = WhatsApp Chat'
-    );
-
-    if (userChoice) {
-      // Call
-      window.location.href = `tel:${PRIME_ADVANCE_CONTACT}`;
-    } else {
-      // WhatsApp
-      window.open(WHATSAPP_LINK_ADVANCE, '_blank');
-    }
-  }
-
-  function contactPrimeElite() {
-    const userChoice = confirm(
-      'Contact PrimeElite Program\n\n' +
-      'Choose your preferred contact method:\n\n' +
-      'OK = Call Us\n' +
-      'Cancel = WhatsApp Chat'
-    );
-
-    if (userChoice) {
-      // Call
-      window.location.href = `tel:${PRIME_ELITE_CONTACT}`;
-    } else {
-      // WhatsApp
-      window.open(WHATSAPP_LINK_ELITE, '_blank');
-    }
-  }
-
-  // Navigate to PrimeStart payment page
-  function navigateToBuyPrimeStart() {
-    window.location.href = './payment.html';
-  }
 </script>
 </body>
 </html>
