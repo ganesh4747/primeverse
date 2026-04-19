@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Privacy Policy | PrimeVerse</title>
+
+    <!-- Tailwind CSS Play CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&family=Montserrat:wght@700;800;900&display=swap" rel="stylesheet">
+
+    <!-- Tailwind Configuration -->
+
+
+
+    
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        navy: '#050A18',
+                        dark: '#0B1426',
+                        gold: '#D4AF37',
+                    },
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                        heading: ['Montserrat', 'sans-serif'],
+                    }
+                }
+            }
+        }
+    </script>
+
+    <style type="text/tailwindcss">
+        @layer base {
+            body {
+                @apply bg-navy text-gray-200 font-sans antialiased selection:bg-gold selection:text-navy;
+            }
+        }
+    </style>
+</head>
+<body class="min-h-screen flex flex-col pt-10 pb-20">
+    <!-- Simple Header Navbar -->
+    <header class="w-full max-w-4xl mx-auto px-6 mb-12 flex justify-between items-center">
+        <a href="index.html" class="hover:opacity-80 transition-opacity">
+            <img src="/logo.png" alt="PrimeVerse Logo" class="h-10">
+        </a>
+        <a href="index.html" class="text-gray-400 hover:text-gold transition-colors text-sm font-bold uppercase tracking-widest">&larr; Back to Home</a>
+    </header>
+
+    <main class="w-full max-w-4xl mx-auto px-6">
+        <div class="bg-dark/40 border border-white/5 rounded-2xl p-8 md:p-14 shadow-2xl relative overflow-hidden">
+            <!-- decorative glow -->
+            <div class="absolute top-0 right-0 w-64 h-64 bg-gold/5 blur-[100px] rounded-full point-events-none"></div>
+
+            <div class="relative z-10">
+                <h1 class="text-4xl md:text-5xl font-black mb-4 font-heading text-white">Privacy Policy</h1>
+                <p class="text-gold font-bold mb-10 pb-6 border-b border-white/10 uppercase tracking-widest text-sm">Effective Date: April 2026</p>
+
+                <div class="space-y-10 text-gray-400 leading-relaxed text-sm md:text-base">
+                    <p class="text-white">At PrimeVerse, we respect your privacy and are committed to protecting your personal information.</p>
+
+                    <div>
+                        <h2 class="text-xl font-bold font-heading text-white mb-4 flex items-center gap-3">
+                            <span class="text-gold">🔹</span> 1. Information We Collect
+                        </h2>
+                        <p class="mb-4">We may collect the following information when you fill out forms on our website:</p>
+                        <ul class="list-disc pl-8 space-y-2 text-gray-300">
+                            <li>Full Name</li>
+                            <li>Mobile Number</li>
+                            <li>Email Address (if applicable)</li>
+                            <li>Trading Experience &amp; Preferences</li>
+                        </ul>
+                    </div>
+
+                    <div>
+                        <h2 class="text-xl font-bold font-heading text-white mb-4 flex items-center gap-3">
+                            <span class="text-gold">🔹</span> 2. How We Use Your Information
+                        </h2>
+                        <p class="mb-4">We use your information to:</p>
+                        <ul class="list-disc pl-8 space-y-2 text-gray-300">
+                            <li>Contact you regarding your 1:1 consultation</li>
+                            <li>Understand your trading background</li>
+                            <li>Improve our services and user experience</li>
+                            <li>Provide relevant updates (only if necessary)</li>
+                        </ul>
+                    </div>
+
+                    <div>
+                        <h2 class="text-xl font-bold font-heading text-white mb-4 flex items-center gap-3">
+                            <span class="text-gold">🔹</span> 3. Data Protection
+                        </h2>
+                        <p>Your information is secure and confidential.</p>
+                        <p>We do not sell, share, or rent your personal data to third parties.</p>
+                    </div>
+
+                    <div>
+                        <h2 class="text-xl font-bold font-heading text-white mb-4 flex items-center gap-3">
+                            <span class="text-gold">🔹</span> 4. Third-Party Services
+                        </h2>
+                        <p>We may use tools (like forms, scheduling platforms, or payment gateways) that securely process your data.</p>
+                    </div>
+
+                    <div>
+                        <h2 class="text-xl font-bold font-heading text-white mb-4 flex items-center gap-3">
+                            <span class="text-gold">🔹</span> 5. Your Consent
+                        </h2>
+                        <p>By using our website and submitting your information, you agree to this Privacy Policy.</p>
+                    </div>
+
+                    <div class="pt-6 border-t border-white/10">
+                        <h2 class="text-xl font-bold font-heading text-white mb-4 flex items-center gap-3">
+                            <span class="text-gold">🔹</span> 6. Contact
+                        </h2>
+                        <p>If you have any questions, contact us at:</p>
+                        <p class="text-gold font-bold mt-2 text-lg">👉 mr.ganeshkumar999@gmail.com</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+</body>
+</html>
