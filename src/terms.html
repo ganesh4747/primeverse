@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Terms of Service | PrimeVerse</title>
+
+    <!-- Tailwind CSS Play CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&family=Montserrat:wght@700;800;900&display=swap" rel="stylesheet">
+
+    <!-- Tailwind Configuration -->
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        navy: '#050A18',
+                        dark: '#0B1426',
+                        gold: '#D4AF37',
+                    },
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                        heading: ['Montserrat', 'sans-serif'],
+                    }
+                }
+            }
+        }
+    </script>
+
+    <style type="text/tailwindcss">
+        @layer base {
+            body {
+                @apply bg-navy text-gray-200 font-sans antialiased selection:bg-gold selection:text-navy;
+            }
+        }
+    </style>
+</head>
+<body class="min-h-screen flex flex-col pt-10 pb-20">
+    <!-- Simple Header Navbar -->
+    <header class="w-full max-w-4xl mx-auto px-6 mb-12 flex justify-between items-center">
+        <a href="index.html" class="hover:opacity-80 transition-opacity">
+            <img src="/logo.png" alt="PrimeVerse Logo" class="h-10">
+        </a>
+        <a href="index.html" class="text-gray-400 hover:text-gold transition-colors text-sm font-bold uppercase tracking-widest">&larr; Back to Home</a>
+    </header>
+
+    <main class="w-full max-w-4xl mx-auto px-6">
+        <div class="bg-dark/40 border border-white/5 rounded-2xl p-8 md:p-14 shadow-2xl relative overflow-hidden">
+            <!-- decorative glow -->
+            <div class="absolute top-0 right-0 w-64 h-64 bg-gold/5 blur-[100px] rounded-full point-events-none"></div>
+
+            <div class="relative z-10">
+                <h1 class="text-4xl md:text-5xl font-black mb-4 font-heading text-white">Terms of Service</h1>
+                <p class="text-gold font-bold mb-10 pb-6 border-b border-white/10 uppercase tracking-widest text-sm">Effective Date: April 2026</p>
+
+                <div class="space-y-10 text-gray-400 leading-relaxed text-sm md:text-base">
+                    <p class="text-white">By accessing this website and applying for the PrimeVerse consultation, you agree to the following terms:</p>
+
+                    <div>
+                        <h2 class="text-xl font-bold font-heading text-white mb-4 flex items-center gap-3">
+                            <span class="text-gold">🔹</span> 1. Educational Purpose Only
+                        </h2>
+                        <p>PrimeVerse provides trading education and guidance only.</p>
+                        <p>We do not provide signals, financial advice, or guaranteed profits.</p>
+                    </div>
+
+                    <div>
+                        <h2 class="text-xl font-bold font-heading text-white mb-4 flex items-center gap-3">
+                            <span class="text-gold">🔹</span> 2. No Guarantee of Results
+                        </h2>
+                        <p class="mb-4">Trading involves risk.<br/>Results vary based on:</p>
+                        <ul class="list-disc pl-8 space-y-2 text-gray-300 mb-4">
+                            <li>Your discipline</li>
+                            <li>Risk management</li>
+                            <li>Execution</li>
+                        </ul>
+                        <p>We do not guarantee any profits or outcomes.</p>
+                    </div>
+
+                    <div>
+                        <h2 class="text-xl font-bold font-heading text-white mb-4 flex items-center gap-3">
+                            <span class="text-gold">🔹</span> 3. User Responsibility
+                        </h2>
+                        <p>You are fully responsible for your trading decisions.</p>
+                        <p>PrimeVerse is not liable for any financial losses.</p>
+                    </div>
+
+                    <div>
+                        <h2 class="text-xl font-bold font-heading text-white mb-4 flex items-center gap-3">
+                            <span class="text-gold">🔹</span> 4. Consultation Policy
+                        </h2>
+                        <ul class="list-disc pl-8 space-y-2 text-gray-300">
+                            <li>The session is for educational clarity purposes only</li>
+                            <li>We reserve the right to accept or reject applications</li>
+                            <li>Limited slots are available each week</li>
+                        </ul>
+                    </div>
+
+                    <div>
+                        <h2 class="text-xl font-bold font-heading text-white mb-4 flex items-center gap-3">
+                            <span class="text-gold">🔹</span> 5. Intellectual Property
+                        </h2>
+                        <p>All content (videos, materials, frameworks) belongs to PrimeVerse<br/>and cannot be copied or distributed without permission.</p>
+                    </div>
+                    
+                    <div>
+                        <h2 class="text-xl font-bold font-heading text-white mb-4 flex items-center gap-3">
+                            <span class="text-gold">🔹</span> 6. Changes to Terms
+                        </h2>
+                        <p>We may update these terms at any time without prior notice.</p>
+                    </div>
+
+                    <div class="pt-6 border-t border-white/10">
+                        <h2 class="text-xl font-bold font-heading text-white mb-4 flex items-center gap-3">
+                            <span class="text-gold">🔹</span> 7. Contact
+                        </h2>
+                        <p>For any questions:</p>
+                        <p class="text-gold font-bold mt-2 text-lg">👉 mr.ganeshkumar999@gmail.com</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+</body>
+</html>
