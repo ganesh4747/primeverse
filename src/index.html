@@ -1055,6 +1055,34 @@
 
                     if (error) throw error;
 
+                    // Send Email Notification to Admin via Backend API
+                    try {
+                        await fetch('/api/send-email', {
+                            method: 'POST',
+                            headers: {
+                                'Content-Type': 'application/json'
+                            },
+                            body: JSON.stringify({
+                                fullName: name,
+                                whatsapp: whatsapp,
+                                email: email,
+                                city: city,
+                                age: parseInt(age, 10),
+                                status: status,
+                                income: income,
+                                experience: experience,
+                                purchasedCourse: purchasedCourse.value,
+                                problems: problems,
+                                goal: goal,
+                                invest: invest.value,
+                                source: source.value,
+                                availability: availability.value
+                            })
+                        });
+                    } catch (emailErr) {
+                        console.error('Failed to send email notification to admin:', emailErr);
+                    }
+
                     showSuccessModal();
                     form.reset();
 
