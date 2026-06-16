@@ -17,14 +17,38 @@ app.use(express.json());
 // Serve static files from the 'src' directory
 app.use(express.static(path.join(__dirname, 'src')));
 
+// Helper to sanitize environment variables (removes potential duplicated prefix e.g. "SMTP_HOST=smtp.gmail.com")
+function getEnv(key) {
+    let val = process.env[key];
+    if (!val) return '';
+    val = val.trim();
+    const prefix = `${key}=`;
+    if (val.startsWith(prefix)) {
+        return val.substring(prefix.length).trim();
+    }
+    const prefixWithSpace = `${key} =`;
+    if (val.startsWith(prefixWithSpace)) {
+        const parts = val.split('=');
+        parts.shift();
+        return parts.join('=').trim();
+    }
+    return val;
+}
+
+const smtpHost = getEnv('SMTP_HOST');
+const smtpPort = parseInt(getEnv('SMTP_PORT') || '587', 10);
+const smtpUser = getEnv('SMTP_USER');
+const smtpPass = getEnv('SMTP_PASS');
+const adminEmail = getEnv('ADMIN_EMAIL') || 'mr.ganeshkumar999@gmail.com';
+
 // Transporter configuration for nodemailer
 const transporter = nodemailer.createTransport({
-    host: process.env.SMTP_HOST,
-    port: parseInt(process.env.SMTP_PORT || '587', 10),
+    host: smtpHost,
+    port: smtpPort,
     secure: false, // true for 465, false for other ports
     auth: {
-        user: process.env.SMTP_USER,
-        pass: process.env.SMTP_PASS
+        user: smtpUser,
+        pass: smtpPass
     }
 });
 
@@ -66,8 +90,8 @@ app.post('/api/send-email', async (req, res) => {
         `;
 
         const mailOptions = {
-            from: `"PrimeVerse Portal" <${process.env.SMTP_USER}>`,
-            to: process.env.ADMIN_EMAIL || 'mr.ganeshkumar999@gmail.com',
+            from: `"PrimeVerse Portal" <${smtpUser}>`,
+            to: adminEmail,
             subject: `🚨 A user has requested a 1:1 Clarity Session`,
             html: htmlContent
         };
