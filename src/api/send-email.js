@@ -65,7 +65,7 @@ module.exports = async (req, res) => {
         const transporter = nodemailer.createTransport({
             host: smtpHost,
             port: smtpPort,
-            secure: false, // true for 465, false for other ports
+            secure: smtpPort === 465, // true for 465, false for other ports
             auth: {
                 user: smtpUser,
                 pass: smtpPass

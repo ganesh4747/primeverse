@@ -45,7 +45,7 @@ const adminEmail = getEnv('ADMIN_EMAIL') || 'mr.ganeshkumar999@gmail.com';
 const transporter = nodemailer.createTransport({
     host: smtpHost,
     port: smtpPort,
-    secure: false, // true for 465, false for other ports
+    secure: smtpPort === 465, // true for 465, false for other ports
     auth: {
         user: smtpUser,
         pass: smtpPass
