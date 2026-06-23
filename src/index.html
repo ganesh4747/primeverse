@@ -363,6 +363,24 @@
         </div>
     </section>
 
+    <!-- Testimonials Section -->
+    <section class="relative z-20 pb-20 bg-navy">
+        <div class="max-w-4xl mx-auto px-6 reveal">
+            <div class="grid grid-cols-2 gap-4 md:gap-6 group/grid">
+                <!-- Testimonial 1 -->
+                <div class="testimonial-card relative aspect-[3/4] bg-[#0b1221] rounded-l-[40px] md:rounded-l-[60px] overflow-hidden shadow-[0_20px_50px_rgba(0,0,0,0.6)] border border-white/5 cursor-pointer hover:shadow-[0_0_40px_rgba(212,175,55,0.3)] hover:border-gold/40 group-hover/grid:scale-[0.96] hover:!scale-[1.04] transition-all duration-500">
+                    <img src="assets/jay.jpeg" alt="Testimonial 1" class="testimonial-image w-full h-full object-cover transition-opacity duration-300">
+                    <video src="assets/jay.mp4" class="testimonial-video absolute inset-0 w-full h-full object-contain opacity-0 transition-opacity duration-300 pointer-events-none" loop playsinline></video>
+                </div>
+                <!-- Testimonial 2 -->
+                <div class="testimonial-card relative aspect-[3/4] bg-[#0b1221] rounded-r-[40px] md:rounded-r-[60px] overflow-hidden shadow-[0_20px_50px_rgba(0,0,0,0.6)] border border-white/5 cursor-pointer hover:shadow-[0_0_40px_rgba(212,175,55,0.3)] hover:border-gold/40 group-hover/grid:scale-[0.96] hover:!scale-[1.04] transition-all duration-500">
+                    <img src="assets/Ritheesh.jpg" alt="Testimonial 2" class="testimonial-image w-full h-full object-cover transition-opacity duration-300">
+                    <video src="assets/Ritheesh-final-web.mp4" class="testimonial-video absolute inset-0 w-full h-full object-contain opacity-0 transition-opacity duration-300 pointer-events-none" loop playsinline></video>
+                </div>
+            </div>
+        </div>
+    </section>
+
     <!-- Single Page Fully Fillable Application Form Section -->
     <section class="bg-dark/60 py-24 scroll-mt-20" id="application-form">
         <div class="max-w-2xl mx-auto px-6 reveal">
@@ -1199,6 +1217,36 @@
         window.addEventListener('scroll', () => { const winScroll = document.body.scrollTop || document.documentElement.scrollTop; const height = document.documentElement.scrollHeight - document.documentElement.clientHeight; const scrolled = (winScroll / height) * 100; document.getElementById("progress-bar").style.width = scrolled + "%"; });
         const spotlight = document.getElementById('spotlight'); window.addEventListener('mousemove', (e) => { spotlight.style.left = e.clientX + 'px'; spotlight.style.top = e.clientY + 'px'; });
         document.querySelectorAll('.faq-toggle').forEach(button => { button.addEventListener('click', () => { const faqItem = button.parentElement; const content = faqItem.querySelector('.faq-content'); const icon = faqItem.querySelector('.faq-icon'); const isOpen = content.style.maxHeight !== '0px' && content.style.maxHeight !== ''; document.querySelectorAll('.faq-content').forEach(c => c.style.maxHeight = '0px'); document.querySelectorAll('.faq-icon').forEach(i => i.style.transform = 'rotate(0deg)'); if (!isOpen) { content.style.maxHeight = content.scrollHeight + 'px'; icon.style.transform = 'rotate(45deg)'; } else { content.style.maxHeight = '0px'; icon.style.transform = 'rotate(0deg)'; } }); });
+
+        // Testimonials Video Hover Playback
+        document.querySelectorAll('.testimonial-card').forEach(card => {
+            const video = card.querySelector('.testimonial-video');
+            const img = card.querySelector('.testimonial-image');
+            
+            card.addEventListener('mouseenter', () => {
+                if (video) {
+                    video.muted = false;
+                    video.play().catch(err => {
+                        console.log("Audio playback blocked, playing muted: ", err);
+                        video.muted = true;
+                        video.play().catch(e => console.error("Muted playback also failed: ", e));
+                    });
+                    video.classList.remove('opacity-0');
+                    video.classList.add('opacity-100');
+                    if (img) img.classList.add('opacity-0');
+                }
+            });
+            
+            card.addEventListener('mouseleave', () => {
+                if (video) {
+                    video.pause();
+                    video.currentTime = 0;
+                    video.classList.remove('opacity-100');
+                    video.classList.add('opacity-0');
+                    if (img) img.classList.remove('opacity-0');
+                }
+            });
+        });
     </script>
 </body>
 
