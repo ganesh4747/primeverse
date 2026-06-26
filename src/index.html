@@ -1263,8 +1263,11 @@
             
             presentationCard.addEventListener('mouseenter', () => {
                 if (video) {
+                    video.muted = false;
                     video.play().catch(err => {
-                        console.log("Presentation video playback failed: ", err);
+                        console.log("Presentation video playback blocked, playing muted: ", err);
+                        video.muted = true;
+                        video.play().catch(e => console.error("Muted playback also failed: ", e));
                     });
                     video.classList.remove('opacity-0');
                     video.classList.add('opacity-100');
