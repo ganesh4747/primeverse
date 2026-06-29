@@ -224,7 +224,7 @@
                     <!-- Cover Image -->
                     <img src="assets/1-1private-Cover.jpg.jpeg" alt="Presentation Cover" class="presentation-image w-full h-auto object-cover transition-opacity duration-500 block">
                     <!-- Video -->
-                    <video class="presentation-video absolute inset-0 w-full h-full object-cover opacity-0 transition-opacity duration-500 pointer-events-none" loop muted playsinline>
+                    <video class="presentation-video absolute inset-0 w-full h-full object-cover opacity-0 transition-opacity duration-500 pointer-events-none" autoplay loop muted playsinline>
                         <source src="assets/1-private-video1.mp4" type="video/mp4">
                         Your browser does not support the video tag.
                     </video>
@@ -1418,29 +1418,15 @@
             presentationCard.addEventListener('mouseenter', () => {
                 if (video) {
                     video.muted = false; // Ensure sound comes on hover
-                    if (video.paused) {
-                        video.play().catch(err => {
-                            console.log("Audio playback blocked on hover, playing muted: ", err);
-                            video.muted = true;
-                            video.play().catch(e => console.error("Playback failed: ", e));
-                        });
-                    }
                     updateVolumeUI(video.muted);
-                    video.classList.remove('opacity-0');
-                    video.classList.add('opacity-100');
-                    if (img) img.classList.add('opacity-0');
-                    updatePlayPauseUI(!video.paused);
                     showControlsTemporarily();
                 }
             });
 
             presentationCard.addEventListener('mouseleave', () => {
                 if (video && !document.fullscreenElement) {
-                    video.pause();
-                    video.classList.remove('opacity-100');
-                    video.classList.add('opacity-0');
-                    if (img) img.classList.remove('opacity-0');
-                    updatePlayPauseUI(false);
+                    video.muted = true; // Mute when mouse leaves
+                    updateVolumeUI(video.muted);
                     speedMenu.classList.add('hidden');
                     
                     controls.classList.remove('opacity-100', 'pointer-events-auto');
@@ -1610,18 +1596,29 @@
                     fullscreenEnter.classList.remove('hidden');
                     fullscreenExit.classList.add('hidden');
                     if (!presentationCard.matches(':hover')) {
-                        video.pause();
-                        video.classList.remove('opacity-100');
-                        video.classList.add('opacity-0');
-                        if (img) img.classList.remove('opacity-0');
-                        updatePlayPauseUI(false);
+                        // Do not pause or hide on exiting fullscreen
                     }
                 }
             });
 
             // Initialize states
+            video.muted = true;
             updateVolumeUI(video.muted);
-            updatePlayPauseUI(!video.paused);
+
+            // Play the video automatically on load (muted)
+            video.play().then(() => {
+                video.classList.remove('opacity-0');
+                video.classList.add('opacity-100');
+                if (img) img.classList.add('opacity-0');
+                updatePlayPauseUI(true);
+            }).catch(err => {
+                console.log("Autoplay blocked or failed:", err);
+                // If autoplay fails, we keep the cover image visible
+                video.classList.add('opacity-0');
+                video.classList.remove('opacity-100');
+                if (img) img.classList.remove('opacity-0');
+                updatePlayPauseUI(false);
+            });
         }
     </script>
 </body>
