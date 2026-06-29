@@ -224,7 +224,7 @@
                     <!-- Cover Image -->
                     <img src="assets/1-1private-Cover.jpg.jpeg" alt="Presentation Cover" class="presentation-image w-full h-auto object-cover transition-opacity duration-500 block">
                     <!-- Video -->
-                    <video class="presentation-video absolute inset-0 w-full h-full object-cover opacity-0 transition-opacity duration-500 pointer-events-none" autoplay loop muted playsinline>
+                    <video class="presentation-video absolute inset-0 w-full h-full object-cover opacity-0 transition-opacity duration-500 pointer-events-none" autoplay loop playsinline>
                         <source src="assets/1-private-video1.mp4" type="video/mp4">
                         Your browser does not support the video tag.
                     </video>
@@ -1417,16 +1417,12 @@
             // Mouse hover/leave playback behavior
             presentationCard.addEventListener('mouseenter', () => {
                 if (video) {
-                    video.muted = false; // Ensure sound comes on hover
-                    updateVolumeUI(video.muted);
                     showControlsTemporarily();
                 }
             });
 
             presentationCard.addEventListener('mouseleave', () => {
                 if (video && !document.fullscreenElement) {
-                    video.muted = true; // Mute when mouse leaves
-                    updateVolumeUI(video.muted);
                     speedMenu.classList.add('hidden');
                     
                     controls.classList.remove('opacity-100', 'pointer-events-auto');
@@ -1602,22 +1598,43 @@
             });
 
             // Initialize states
-            video.muted = true;
+            video.muted = false;
             updateVolumeUI(video.muted);
 
-            // Play the video automatically on load (muted)
+            // Play the video automatically on load (unmuted)
             video.play().then(() => {
                 video.classList.remove('opacity-0');
                 video.classList.add('opacity-100');
                 if (img) img.classList.add('opacity-0');
                 updatePlayPauseUI(true);
             }).catch(err => {
-                console.log("Autoplay blocked or failed:", err);
-                // If autoplay fails, we keep the cover image visible
-                video.classList.add('opacity-0');
-                video.classList.remove('opacity-100');
-                if (img) img.classList.remove('opacity-0');
-                updatePlayPauseUI(false);
+                console.log("Autoplay with sound blocked, trying muted:", err);
+                // Fallback 1: Play muted
+                video.muted = true;
+                updateVolumeUI(video.muted);
+                video.play().then(() => {
+                    video.classList.remove('opacity-0');
+                    video.classList.add('opacity-100');
+                    if (img) img.classList.add('opacity-0');
+                    updatePlayPauseUI(true);
+                    
+                    // Fallback 2: Unmute on first user interaction
+                    const unmuteOnInteraction = () => {
+                        video.muted = false;
+                        updateVolumeUI(video.muted);
+                        document.removeEventListener('click', unmuteOnInteraction);
+                        document.removeEventListener('touchstart', unmuteOnInteraction);
+                    };
+                    document.addEventListener('click', unmuteOnInteraction);
+                    document.addEventListener('touchstart', unmuteOnInteraction);
+                }).catch(err2 => {
+                    console.log("Muted autoplay also failed:", err2);
+                    // If all autoplay fails, we keep the cover image visible
+                    video.classList.add('opacity-0');
+                    video.classList.remove('opacity-100');
+                    if (img) img.classList.remove('opacity-0');
+                    updatePlayPauseUI(false);
+                });
             });
         }
     </script>
