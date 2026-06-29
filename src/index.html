@@ -1414,23 +1414,27 @@
                 }
             }
 
-            // Function to unmute the video on first user interaction
-            const unmuteVideo = () => {
-                video.muted = false;
-                updateVolumeUI(false);
-                if (video.paused) {
-                    video.play().catch(e => console.error("Play on interaction failed:", e));
-                }
-                // Remove one-time document listeners
+            // Function to remove one-time interaction listeners
+            const removeInteractionListeners = () => {
                 document.removeEventListener('click', unmuteVideo);
                 document.removeEventListener('touchstart', unmuteVideo);
                 document.removeEventListener('keydown', unmuteVideo);
             };
 
+            // Function to unmute the video on first user interaction
+            const unmuteVideo = (isHover = false) => {
+                video.muted = false;
+                updateVolumeUI(false);
+                if (video.paused && !isHover) {
+                    video.play().catch(e => console.error("Play on interaction failed:", e));
+                }
+                removeInteractionListeners();
+            };
+
             // Mouse hover/leave playback behavior
             presentationCard.addEventListener('mouseenter', () => {
                 if (video) {
-                    unmuteVideo();
+                    unmuteVideo(true);
                     showControlsTemporarily();
                 }
             });
@@ -1450,6 +1454,7 @@
             // Play/Pause button
             playPauseBtn.addEventListener('click', (e) => {
                 e.stopPropagation();
+                removeInteractionListeners();
                 if (video.paused) {
                     video.muted = false;
                     video.play().catch(err => {
@@ -1534,6 +1539,7 @@
             // Volume/Mute controls
             volumeBtn.addEventListener('click', (e) => {
                 e.stopPropagation();
+                removeInteractionListeners();
                 video.muted = !video.muted;
                 updateVolumeUI(video.muted);
             });
@@ -1605,9 +1611,6 @@
                 } else {
                     fullscreenEnter.classList.remove('hidden');
                     fullscreenExit.classList.add('hidden');
-                    if (!presentationCard.matches(':hover')) {
-                        // Do not pause or hide on exiting fullscreen
-                    }
                 }
             });
 
