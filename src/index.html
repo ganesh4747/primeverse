@@ -214,7 +214,7 @@
 
     <!-- Video Presentation Section with Cover Image and Hover Playback -->
     <section class="relative z-20 pb-20 px-6 mt-4 md:mt-8 bg-navy">
-        <div class="max-w-4xl mx-auto reveal relative">
+        <div class="max-w-4xl mx-auto relative">
             <div
                 class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[80%] h-[80%] bg-gold/10 rounded-full blur-[100px] z-0 pointer-events-none">
             </div>
@@ -223,8 +223,8 @@
                 <div class="relative w-full overflow-hidden">
                     <!-- Cover Image -->
                     <img src="assets/1-1private-Cover.jpg.jpeg" alt="Presentation Cover" class="presentation-image w-full h-auto object-cover transition-opacity duration-500 block">
-                    <!-- Video -->
-                    <video class="presentation-video absolute inset-0 w-full h-full object-cover opacity-0 transition-opacity duration-500 pointer-events-none" autoplay loop playsinline>
+                    <!-- Video (visible immediately for autoplay) -->
+                    <video class="presentation-video absolute inset-0 w-full h-full object-cover opacity-100 transition-opacity duration-500 pointer-events-none" autoplay loop playsinline muted>
                         <source src="assets/1-private-video1.mp4" type="video/mp4">
                         Your browser does not support the video tag sorry.
                     </video>
@@ -299,6 +299,13 @@
                                 <svg class="fullscreen-exit w-5 h-5 hidden" fill="currentColor" viewBox="0 0 24 24"><path d="M5 16h3v3h2v-5H5v2zm3-8H5v2h5V5H8v3zm6 11h2v-3h3v-2h-5v5zm2-11V5h-2v5h5V8h-3z"/></svg>
                             </button>
                         </div>
+                    </div>
+                    <!-- Unmute Overlay Button -->
+                    <div class="unmute-overlay absolute top-4 right-4 z-30 transition-all duration-500">
+                        <button class="unmute-overlay-btn flex items-center gap-2 bg-black/70 hover:bg-black/90 border border-white/20 hover:border-gold/50 text-white px-4 py-2.5 rounded-full text-xs md:text-sm font-bold backdrop-blur-sm shadow-lg hover:shadow-gold/20 transition-all duration-300 animate-pulse hover:animate-none" type="button">
+                            <svg class="w-4 h-4 md:w-5 md:h-5" fill="currentColor" viewBox="0 0 24 24"><path d="M4.34 2.93L2.93 4.34 7.29 8.7H3v6.6h4.4l5.5 5.5v-6.01l4.02 4.02c-.75.48-1.59.83-2.52 1.01v2.1c1.5-.27 2.86-.88 3.99-1.72l2.36 2.36 1.41-1.41L4.34 2.93zM10.7 15.1l-3.3-3.3H5.2v2.2h2.2l3.3 3.3v-2.2zM12.9 4.1l-2.4 2.4 2.4 2.4V4.1zm4.1 7.9c0-1.77-1.02-3.29-2.5-4.03v2.21l2.45 2.45c.03-.21.05-.42.05-.63zm2.5 0c0 .94-.2 1.82-.54 2.64l1.51 1.51C20.63 14.91 21 13.5 21 12c0-4.28-2.99-7.86-7-8.77v2.06c2.89.86 5 3.54 5 6.71z"/></svg>
+                            <span>🔊 Tap to Unmute</span>
+                        </button>
                     </div>
                 </div>
             </div>
@@ -1434,10 +1441,10 @@
             // Mouse hover/leave playback behavior
             presentationCard.addEventListener('mouseenter', () => {
                 if (video) {
-                    unmuteVideo(true);
                     showControlsTemporarily();
                 }
             });
+
 
             presentationCard.addEventListener('mouseleave', () => {
                 if (video && !document.fullscreenElement) {
@@ -1614,40 +1621,100 @@
                 }
             });
 
-            // Initialize states
-            video.muted = false;
-            updateVolumeUI(video.muted);
+            // Unmute overlay elements
+            const unmuteOverlay = presentationCard.querySelector('.unmute-overlay');
+            const unmuteOverlayBtn = presentationCard.querySelector('.unmute-overlay-btn');
 
-            // Play the video automatically on load (unmuted)
-            video.play().then(() => {
+            // Initialize: start muted so autoplay works in all browsers
+            video.muted = true;
+            updateVolumeUI(true);
+
+            // Function to unmute + hide the overlay
+            const unmuteAndPlay = () => {
+                video.muted = false;
+                updateVolumeUI(false);
+                if (video.paused) {
+                    video.play().catch(e => console.error("Play on unmute failed:", e));
+                }
+                // Fade out the unmute overlay
+                if (unmuteOverlay) {
+                    unmuteOverlay.style.opacity = '0';
+                    unmuteOverlay.style.pointerEvents = 'none';
+                    setTimeout(() => unmuteOverlay.remove(), 500);
+                }
+                // Remove all auto-unmute listeners
+                document.removeEventListener('click', unmuteAndPlay);
+                document.removeEventListener('touchstart', unmuteAndPlay);
+                document.removeEventListener('keydown', unmuteAndPlay);
+                document.removeEventListener('scroll', unmuteAndPlay);
+                removeInteractionListeners();
+            };
+
+            // Clicking the unmute button directly
+            if (unmuteOverlayBtn) {
+                unmuteOverlayBtn.addEventListener('click', (e) => {
+                    e.stopPropagation();
+                    unmuteAndPlay();
+                });
+            }
+
+            // Autoplay muted immediately — multiple fallback mechanisms
+            function startVideoPlayback() {
+                video.muted = true; // ensure muted for autoplay
+                const playPromise = video.play();
+                if (playPromise !== undefined) {
+                    playPromise.then(() => {
+                        onVideoPlaying();
+                    }).catch(err => {
+                        console.log("Autoplay attempt failed, will retry:", err.message);
+                    });
+                }
+            }
+
+            function onVideoPlaying() {
                 video.classList.remove('opacity-0');
                 video.classList.add('opacity-100');
                 if (img) img.classList.add('opacity-0');
                 updatePlayPauseUI(true);
-            }).catch(err => {
-                console.log("Autoplay with sound blocked, trying muted:", err);
-                // Fallback 1: Play muted
-                video.muted = true;
-                updateVolumeUI(video.muted);
-                video.play().then(() => {
-                    video.classList.remove('opacity-0');
-                    video.classList.add('opacity-100');
-                    if (img) img.classList.add('opacity-0');
-                    updatePlayPauseUI(true);
-                    
-                    // Fallback 2: Unmute on first user interaction (click, tap, keypress)
-                    document.addEventListener('click', unmuteVideo);
-                    document.addEventListener('touchstart', unmuteVideo);
-                    document.addEventListener('keydown', unmuteVideo);
-                }).catch(err2 => {
-                    console.log("Muted autoplay also failed:", err2);
-                    // If all autoplay fails, we keep the cover image visible
-                    video.classList.add('opacity-0');
-                    video.classList.remove('opacity-100');
-                    if (img) img.classList.remove('opacity-0');
-                    updatePlayPauseUI(false);
-                });
+                showControlsTemporarily();
+
+                // Auto-unmute on first user interaction ANYWHERE on the page
+                document.addEventListener('click', unmuteAndPlay, { once: true });
+                document.addEventListener('touchstart', unmuteAndPlay, { once: true });
+                document.addEventListener('keydown', unmuteAndPlay, { once: true });
+                document.addEventListener('scroll', unmuteAndPlay, { once: true });
+            }
+
+            // Listen for when the video naturally starts playing (from HTML autoplay attribute)
+            video.addEventListener('playing', function onFirstPlay() {
+                video.removeEventListener('playing', onFirstPlay);
+                onVideoPlaying();
             });
+
+            // Attempt 1: Play immediately
+            startVideoPlayback();
+
+            // Attempt 2: Retry when video has enough data loaded
+            video.addEventListener('canplay', function onCanPlay() {
+                video.removeEventListener('canplay', onCanPlay);
+                if (video.paused) {
+                    startVideoPlayback();
+                }
+            });
+
+            // Attempt 3: Retry after a short delay (covers race conditions)
+            setTimeout(() => {
+                if (video.paused) {
+                    startVideoPlayback();
+                }
+            }, 1000);
+
+            // Attempt 4: Retry after a longer delay
+            setTimeout(() => {
+                if (video.paused) {
+                    startVideoPlayback();
+                }
+            }, 3000);
         }
     </script>
 </body>
