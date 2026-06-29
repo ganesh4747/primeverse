@@ -146,9 +146,29 @@
     </style>
 </head>
 
-<body class="bg-navy overflow-x-hidden">
+<body class="bg-navy overflow-x-hidden overflow-y-hidden">
     <div id="progress-bar" style="width: 0%"></div>
     <div id="spotlight"></div>
+
+    <!-- Click to Enter Splash Overlay -->
+    <div id="splash-overlay" class="fixed inset-0 z-[1000] flex flex-col items-center justify-center bg-black overflow-hidden transition-opacity duration-700">
+        <!-- Background Video (intro.mp4) -->
+        <video class="absolute inset-0 w-full h-full object-cover opacity-30 pointer-events-none" autoplay loop playsinline muted>
+            <source src="./intro.mp4" type="video/mp4">
+        </video>
+        <!-- Dark Overlay -->
+        <div class="absolute inset-0 bg-gradient-to-t from-[#050A18] via-[#050A18]/85 to-transparent z-0 pointer-events-none"></div>
+        
+        <!-- Content Card -->
+        <div class="relative z-10 text-center px-8 py-10 max-w-md bg-[#0B1426]/40 backdrop-blur-md border border-white/10 rounded-xl shadow-[0_30px_100px_rgba(0,0,0,0.8)] hover:border-gold/30 transition-all duration-500">
+            <img src="./logo.png" alt="PrimeVerse Logo" class="h-20 md:h-24 mx-auto mb-6 drop-shadow-[0_0_20px_rgba(212,175,55,0.4)]">
+            <h2 class="text-white text-xl md:text-2xl font-black font-heading mb-3 uppercase tracking-widest bg-clip-text text-transparent bg-gradient-to-br from-white via-white to-gold/40">PrimeVerse</h2>
+            <p class="text-gray-300 text-xs md:text-sm mb-8 leading-relaxed">Welcome to the Ultimate Trading Portal. Click below to enter and watch the private presentation.</p>
+            <button id="enter-site-btn" class="glow-btn px-10 py-4 uppercase tracking-widest text-xs md:text-sm font-black bg-gold text-black hover:bg-gold/90 transition-all rounded-sm shadow-[0_0_30px_rgba(212,175,55,0.4)] animate-pulse" type="button">
+                🔊 Enter Portal
+            </button>
+        </div>
+    </div>
 
     <!-- Hero Section -->
     <header class="relative flex items-center justify-center overflow-hidden pt-24 pb-12">
@@ -300,12 +320,6 @@
                             </button>
                         </div>
                     </div>
-                    <!-- Unmute Overlay Button -->
-                    <div class="unmute-overlay absolute top-4 right-4 z-30 transition-all duration-500">
-                        <button class="unmute-overlay-btn flex items-center gap-2 bg-black/70 hover:bg-black/90 border border-white/20 hover:border-gold/50 text-white px-4 py-2.5 rounded-full text-xs md:text-sm font-bold backdrop-blur-sm shadow-lg hover:shadow-gold/20 transition-all duration-300 animate-pulse hover:animate-none" type="button">
-                            <svg class="w-4 h-4 md:w-5 md:h-5" fill="currentColor" viewBox="0 0 24 24"><path d="M4.34 2.93L2.93 4.34 7.29 8.7H3v6.6h4.4l5.5 5.5v-6.01l4.02 4.02c-.75.48-1.59.83-2.52 1.01v2.1c1.5-.27 2.86-.88 3.99-1.72l2.36 2.36 1.41-1.41L4.34 2.93zM10.7 15.1l-3.3-3.3H5.2v2.2h2.2l3.3 3.3v-2.2zM12.9 4.1l-2.4 2.4 2.4 2.4V4.1zm4.1 7.9c0-1.77-1.02-3.29-2.5-4.03v2.21l2.45 2.45c.03-.21.05-.42.05-.63zm2.5 0c0 .94-.2 1.82-.54 2.64l1.51 1.51C20.63 14.91 21 13.5 21 12c0-4.28-2.99-7.86-7-8.77v2.06c2.89.86 5 3.54 5 6.71z"/></svg>
-                            <span>🔊 Tap to Unmute</span>
-                        </button>
                     </div>
                 </div>
             </div>
@@ -1370,6 +1384,7 @@
             const volumeBtn = presentationCard.querySelector('.volume-btn');
             const muteIcon = volumeBtn.querySelector('.mute-icon');
             const unmuteIcon = volumeBtn.querySelector('.unmute-icon');
+
             const settingsBtn = presentationCard.querySelector('.settings-btn');
             const speedMenu = presentationCard.querySelector('.speed-menu');
             const pipBtn = presentationCard.querySelector('.pip-btn');
@@ -1421,23 +1436,6 @@
                 }
             }
 
-            // Function to remove one-time interaction listeners
-            const removeInteractionListeners = () => {
-                document.removeEventListener('click', unmuteVideo);
-                document.removeEventListener('touchstart', unmuteVideo);
-                document.removeEventListener('keydown', unmuteVideo);
-            };
-
-            // Function to unmute the video on first user interaction
-            const unmuteVideo = (isHover = false) => {
-                video.muted = false;
-                updateVolumeUI(false);
-                if (video.paused && !isHover) {
-                    video.play().catch(e => console.error("Play on interaction failed:", e));
-                }
-                removeInteractionListeners();
-            };
-
             // Mouse hover/leave playback behavior
             presentationCard.addEventListener('mouseenter', () => {
                 if (video) {
@@ -1445,6 +1443,27 @@
                 }
             });
 
+            // Add click listener to presentation card to toggle play/pause
+            presentationCard.addEventListener('click', (e) => {
+                // If the user clicked on controls or its children, let them handle it
+                if (controls.contains(e.target)) return;
+                
+                if (video.muted) {
+                    unmuteAndPlay();
+                } else {
+                    if (video.paused) {
+                        video.play().then(() => {
+                            updatePlayPauseUI(true);
+                            showControlsTemporarily();
+                        }).catch(err => {
+                            console.error("Playback failed: ", err);
+                        });
+                    } else {
+                        video.pause();
+                        updatePlayPauseUI(false);
+                    }
+                }
+            });
 
             presentationCard.addEventListener('mouseleave', () => {
                 if (video && !document.fullscreenElement) {
@@ -1461,18 +1480,31 @@
             // Play/Pause button
             playPauseBtn.addEventListener('click', (e) => {
                 e.stopPropagation();
-                removeInteractionListeners();
-                if (video.paused) {
-                    video.muted = false;
-                    video.play().catch(err => {
-                        video.muted = true;
-                        video.play().catch(e => console.error("Playback failed: ", e));
-                    });
-                    updatePlayPauseUI(true);
-                    updateVolumeUI(video.muted);
+                if (video.muted) {
+                    unmuteAndPlay();
                 } else {
-                    video.pause();
-                    updatePlayPauseUI(false);
+                    if (video.paused) {
+                        video.play().then(() => {
+                            updatePlayPauseUI(true);
+                            showControlsTemporarily();
+                        }).catch(err => {
+                            console.error("Playback failed: ", err);
+                        });
+                    } else {
+                        video.pause();
+                        updatePlayPauseUI(false);
+                    }
+                }
+            });
+
+            // Volume/Mute controls
+            volumeBtn.addEventListener('click', (e) => {
+                e.stopPropagation();
+                if (video.muted) {
+                    unmuteAndPlay();
+                } else {
+                    video.muted = !video.muted;
+                    updateVolumeUI(video.muted);
                 }
             });
 
@@ -1541,14 +1573,6 @@
 
             timelineContainer.addEventListener('mouseleave', () => {
                 timeTooltip.style.opacity = '0';
-            });
-
-            // Volume/Mute controls
-            volumeBtn.addEventListener('click', (e) => {
-                e.stopPropagation();
-                removeInteractionListeners();
-                video.muted = !video.muted;
-                updateVolumeUI(video.muted);
             });
 
             // Speed Settings
@@ -1621,100 +1645,46 @@
                 }
             });
 
-            // Unmute overlay elements
-            const unmuteOverlay = presentationCard.querySelector('.unmute-overlay');
-            const unmuteOverlayBtn = presentationCard.querySelector('.unmute-overlay-btn');
+            // Initialize states: starts unmuted
+            video.muted = false;
 
-            // Initialize: start muted so autoplay works in all browsers
-            video.muted = true;
-            updateVolumeUI(true);
+            // Splash overlay controls
+            const splashOverlay = document.getElementById('splash-overlay');
+            const enterSiteBtn = document.getElementById('enter-site-btn');
 
-            // Function to unmute + hide the overlay
-            const unmuteAndPlay = () => {
+            const enterSite = () => {
+                // Start playing presentation video unmuted from 0:00
                 video.muted = false;
+                video.currentTime = 0;
                 updateVolumeUI(false);
-                if (video.paused) {
-                    video.play().catch(e => console.error("Play on unmute failed:", e));
+                
+                video.play().then(() => {
+                    showControlsTemporarily();
+                }).catch(e => console.error("Play on enter failed:", e));
+
+                // Hide splash overlay
+                if (splashOverlay) {
+                    splashOverlay.classList.add('opacity-0', 'pointer-events-none');
+                    // Enable body scrolling
+                    document.body.classList.remove('overflow-y-hidden');
+                    // Remove overlay from DOM after transition
+                    setTimeout(() => {
+                        splashOverlay.remove();
+                    }, 700);
                 }
-                // Fade out the unmute overlay
-                if (unmuteOverlay) {
-                    unmuteOverlay.style.opacity = '0';
-                    unmuteOverlay.style.pointerEvents = 'none';
-                    setTimeout(() => unmuteOverlay.remove(), 500);
-                }
-                // Remove all auto-unmute listeners
-                document.removeEventListener('click', unmuteAndPlay);
-                document.removeEventListener('touchstart', unmuteAndPlay);
-                document.removeEventListener('keydown', unmuteAndPlay);
-                document.removeEventListener('scroll', unmuteAndPlay);
-                removeInteractionListeners();
             };
 
-            // Clicking the unmute button directly
-            if (unmuteOverlayBtn) {
-                unmuteOverlayBtn.addEventListener('click', (e) => {
-                    e.stopPropagation();
-                    unmuteAndPlay();
-                });
+            if (enterSiteBtn) {
+                enterSiteBtn.addEventListener('click', enterSite);
             }
 
-            // Autoplay muted immediately — multiple fallback mechanisms
-            function startVideoPlayback() {
-                video.muted = true; // ensure muted for autoplay
-                const playPromise = video.play();
-                if (playPromise !== undefined) {
-                    playPromise.then(() => {
-                        onVideoPlaying();
-                    }).catch(err => {
-                        console.log("Autoplay attempt failed, will retry:", err.message);
-                    });
-                }
-            }
-
-            function onVideoPlaying() {
+            // Listen for playing event to hide cover image and show video
+            video.addEventListener('playing', () => {
                 video.classList.remove('opacity-0');
                 video.classList.add('opacity-100');
                 if (img) img.classList.add('opacity-0');
                 updatePlayPauseUI(true);
-                showControlsTemporarily();
-
-                // Auto-unmute on first user interaction ANYWHERE on the page
-                document.addEventListener('click', unmuteAndPlay, { once: true });
-                document.addEventListener('touchstart', unmuteAndPlay, { once: true });
-                document.addEventListener('keydown', unmuteAndPlay, { once: true });
-                document.addEventListener('scroll', unmuteAndPlay, { once: true });
-            }
-
-            // Listen for when the video naturally starts playing (from HTML autoplay attribute)
-            video.addEventListener('playing', function onFirstPlay() {
-                video.removeEventListener('playing', onFirstPlay);
-                onVideoPlaying();
             });
-
-            // Attempt 1: Play immediately
-            startVideoPlayback();
-
-            // Attempt 2: Retry when video has enough data loaded
-            video.addEventListener('canplay', function onCanPlay() {
-                video.removeEventListener('canplay', onCanPlay);
-                if (video.paused) {
-                    startVideoPlayback();
-                }
-            });
-
-            // Attempt 3: Retry after a short delay (covers race conditions)
-            setTimeout(() => {
-                if (video.paused) {
-                    startVideoPlayback();
-                }
-            }, 1000);
-
-            // Attempt 4: Retry after a longer delay
-            setTimeout(() => {
-                if (video.paused) {
-                    startVideoPlayback();
-                }
-            }, 3000);
         }
     </script>
 </body>
