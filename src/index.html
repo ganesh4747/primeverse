@@ -1414,9 +1414,23 @@
                 }
             }
 
+            // Function to unmute the video on first user interaction
+            const unmuteVideo = () => {
+                video.muted = false;
+                updateVolumeUI(false);
+                if (video.paused) {
+                    video.play().catch(e => console.error("Play on interaction failed:", e));
+                }
+                // Remove one-time document listeners
+                document.removeEventListener('click', unmuteVideo);
+                document.removeEventListener('touchstart', unmuteVideo);
+                document.removeEventListener('keydown', unmuteVideo);
+            };
+
             // Mouse hover/leave playback behavior
             presentationCard.addEventListener('mouseenter', () => {
                 if (video) {
+                    unmuteVideo();
                     showControlsTemporarily();
                 }
             });
@@ -1618,23 +1632,10 @@
                     if (img) img.classList.add('opacity-0');
                     updatePlayPauseUI(true);
                     
-                    // Fallback 2: Unmute and play on first user interaction
-                    const unmuteOnInteraction = () => {
-                        video.muted = false;
-                        updateVolumeUI(video.muted);
-                        if (video.paused) {
-                            video.play().then(() => {
-                                video.classList.remove('opacity-0');
-                                video.classList.add('opacity-100');
-                                if (img) img.classList.add('opacity-0');
-                                updatePlayPauseUI(true);
-                            }).catch(e => console.error("Play on interaction failed:", e));
-                        }
-                        document.removeEventListener('click', unmuteOnInteraction);
-                        document.removeEventListener('touchstart', unmuteOnInteraction);
-                    };
-                    document.addEventListener('click', unmuteOnInteraction);
-                    document.addEventListener('touchstart', unmuteOnInteraction);
+                    // Fallback 2: Unmute on first user interaction (click, tap, keypress)
+                    document.addEventListener('click', unmuteVideo);
+                    document.addEventListener('touchstart', unmuteVideo);
+                    document.addEventListener('keydown', unmuteVideo);
                 }).catch(err2 => {
                     console.log("Muted autoplay also failed:", err2);
                     // If all autoplay fails, we keep the cover image visible
