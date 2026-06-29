@@ -109,6 +109,25 @@
             transform: translateY(0);
         }
 
+        /* Entry Animation for Header Page */
+        .entry-fade-in {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: opacity 1.2s cubic-bezier(0.22, 1, 0.36, 1), transform 1.2s cubic-bezier(0.22, 1, 0.36, 1);
+        }
+
+        body.site-entered .entry-fade-in {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .delay-75 { transition-delay: 75ms; }
+        .delay-150 { transition-delay: 150ms; }
+        .delay-300 { transition-delay: 300ms; }
+        .delay-450 { transition-delay: 450ms; }
+        .delay-600 { transition-delay: 600ms; }
+        .delay-750 { transition-delay: 750ms; }
+
         /* Form Custom Styles */
         .chip-bubble, .problem-box {
             @apply text-base font-normal tracking-wide text-gray-300 opacity-80 cursor-pointer transition-all duration-300 hover:text-white hover:opacity-100 flex items-center justify-center h-full;
@@ -186,18 +205,18 @@
         </div>
 
         <div class="section-container relative z-10 w-full max-w-4xl pt-4">
-            <div class="relative w-full reveal">
+            <div class="relative w-full">
                 <div class="text-center">
                     <img src="./logo.png" alt="PrimeVerse Logo"
-                        class="h-20 md:h-28 mx-auto mb-6 drop-shadow-[0_0_15px_rgba(212,175,55,0.3)] hover:scale-105 transition-transform duration-500">
-                    <div class="inline-block px-5 py-2 border border-gold/30 mb-6">
+                        class="h-20 md:h-28 mx-auto mb-6 drop-shadow-[0_0_15px_rgba(212,175,55,0.3)] hover:scale-105 transition-transform duration-500 entry-fade-in delay-75">
+                    <div class="inline-block px-5 py-2 border border-gold/30 mb-6 entry-fade-in delay-150">
                         <span
                             class="text-[#B28A25] text-[9px] md:text-[10px] font-bold uppercase tracking-[0.2em] opacity-90">
                             Still Confused in Trading?
                         </span>
                     </div>
                     <h1
-                        class="text-2xl md:text-4xl lg:text-5xl font-black leading-[1.1] mb-6 tracking-tight font-heading text-white">
+                        class="text-2xl md:text-4xl lg:text-5xl font-black leading-[1.1] mb-6 tracking-tight font-heading text-white entry-fade-in delay-300">
                         YOU’RE NOT LOSING BECAUSE OF<br />
                         THE MARKET — <br />
                         <span class="text-gold italic drop-shadow-[0_0_15px_rgba(212,175,55,0.3)]">YOU’RE LOSING</span>
@@ -206,13 +225,13 @@
                             class="text-gold italic drop-shadow-[0_0_15px_rgba(212,175,55,0.3)]">SYSTEM</span>
                     </h1>
                     <p
-                        class="text-xs md:text-sm text-gray-400 max-w-2xl mx-auto mb-6 font-medium leading-relaxed tracking-wide">
+                        class="text-xs md:text-sm text-gray-400 max-w-2xl mx-auto mb-6 font-medium leading-relaxed tracking-wide entry-fade-in delay-450">
                         This session will clearly identify your mistakes and guide you with a structured, disciplined
                         <br class="hidden md:block" />trading
                         approach — <span class="text-white font-bold">not signals, but real execution-based
                             clarity.</span>
                     </p>
-                    <div class="flex flex-col items-center gap-5">
+                    <div class="flex flex-col items-center gap-5 entry-fade-in delay-600">
                         <div
                             class="flex flex-wrap items-center justify-center gap-x-4 gap-y-1 text-[8px] md:text-[9px] font-bold uppercase tracking-widest text-[#B28A25]">
                             <span class="flex items-center gap-2">
@@ -234,7 +253,7 @@
 
     <!-- Video Presentation Section with Cover Image and Hover Playback -->
     <section class="relative z-20 pb-20 px-6 mt-4 md:mt-8 bg-navy">
-        <div class="max-w-4xl mx-auto relative">
+        <div class="max-w-4xl mx-auto relative entry-fade-in delay-750">
             <div
                 class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[80%] h-[80%] bg-gold/10 rounded-full blur-[100px] z-0 pointer-events-none">
             </div>
@@ -1653,6 +1672,9 @@
             const enterSiteBtn = document.getElementById('enter-site-btn');
 
             const enterSite = () => {
+                // Trigger entry animation for header page elements
+                document.body.classList.add('site-entered');
+
                 // Start playing presentation video unmuted from 0:00
                 video.muted = false;
                 video.currentTime = 0;
