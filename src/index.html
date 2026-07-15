@@ -784,7 +784,7 @@
                                 <label
                                     class="text-[10px] md:text-xs font-black uppercase tracking-widest text-[#B28A25]">Mobile
                                     Number</label>
-                                <input type="tel" id="whatsapp" placeholder="Enter your mobile number" required
+                                <input type="tel" id="whatsapp" placeholder="Enter your mobile number" required maxlength="10" pattern="[0-9]{10}"
                                     class="w-full bg-[#050A18]/60 backdrop-blur-md border border-white/5 rounded-xl px-4 py-4 text-sm text-white outline-none focus:border-gold/50 focus:ring-1 focus:ring-gold/50 transition-all placeholder-gray-600 shadow-inner">
                             </div>
                         </div>
@@ -1335,14 +1335,19 @@
 
     <script>
         // Supabase Initialization
-        const SUPABASE_URL = 'https://ppjepperakrwumcdqqyj.supabase.co'; // Replace with your actual Supabase URL
-        const SUPABASE_ANON_KEY = 'sb_publishable_fba77tpfgOfrNjBXowv2iQ_i-OwvL3E '; // Replace with your anon key
+        const SUPABASE_URL = 'https://bipenzadmpfqygjrojyj.supabase.co'; // Replace with your actual Supabase URL
+        const SUPABASE_ANON_KEY = 'sb_publishable_57MZrRvvY8LVRVPYKT98lA_Pm4jx2H7'; // Replace with your anon key
         let supabaseClient = null;
         try {
             supabaseClient = supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
         } catch (e) {
             console.warn('Supabase not fully configured yet.');
         }
+
+        // Restrict WhatsApp / Mobile number input to exactly 10 digits
+        document.getElementById('whatsapp')?.addEventListener('input', function (e) {
+            this.value = this.value.replace(/[^0-9]/g, '').slice(0, 10);
+        });
 
         // Smooth scroll
         document.querySelectorAll('a[href^="#"]').forEach(anchor => {
@@ -1376,6 +1381,7 @@
                 const availability = document.querySelector('input[name="availability"]:checked');
 
                 if (!name || !whatsapp || !email || !city || !age) { alert('Please fill in all personal details.'); return; }
+                if (!/^[0-9]{10}$/.test(whatsapp)) { alert('Please enter a valid 10-digit mobile number.'); return; }
                 if (!status) { alert('Please select your current status.'); return; }
                 if (!income) { alert('Please select your monthly income range.'); return; }
                 if (!experience) { alert('Please select your trading experience.'); return; }

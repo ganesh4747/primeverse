@@ -1,8 +1,12 @@
+-- Enable UUID extension if not already enabled
+CREATE EXTENSION IF NOT EXISTS "uuid-ossp";
+
 -- Creates the required table
 CREATE TABLE consultations (
     id UUID DEFAULT uuid_generate_v4() PRIMARY KEY,
     full_name TEXT NOT NULL,
     whatsapp TEXT NOT NULL,
+    email TEXT NOT NULL,
     city TEXT NOT NULL,
     age INTEGER NOT NULL,
     status TEXT NOT NULL,
